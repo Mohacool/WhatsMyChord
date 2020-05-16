@@ -1,8 +1,13 @@
 
+body {
+    overflow:hidden;
+}
+
+
 #fretboard {
     position: absolute;
     padding-top: 20%;
-    padding-left:12%;
+    padding-left:30%;
     width: 680px;
     
     
@@ -93,6 +98,10 @@
     
 }
 
+#nodegrid{
+    position:relative;
+    /* shift everything here*/ 
+}
 
 .note_circle{
     
