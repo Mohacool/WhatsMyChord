@@ -4,7 +4,22 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="icon" href="data:;base64,=">
-    <title>Test</title>
+    <title>Document</title>
+
+    <style>
+        body,
+        
+        .bg {
+          
+          background-image: url("background.png");
+          height: 300%;
+          background-position: center;
+          background-repeat: repeat;
+          background-size: cover;
+          
+          
+        }
+      </style>
 
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -140,6 +155,11 @@
         
 
         $(document).ready(function(){
+
+            let top = $("#fretboard").css('padding-top');
+            console.log("--------------"+top);
+            
+
 
             // Create note and oct matrices
             fill_note_matrix(note_matrix);
@@ -277,17 +297,27 @@
 
     <body>
         
+        <div class="bg"></div>
+        
+
         <audio id="myAudio">
             <source src="" type="audio/mp3">
         </audio>
 
-        
         <img src="title.png" id="title">
-        <div id="fretboard">
 
+        <div id="sidebar">
+        
+
+        </div>
+
+        <div id="fretboard">
             
 
+            
+            
             <img src="fretboard.PNG" id="black">
+            
             <div class="box"></div>
             <div class="box" style="top:-57px"></div>
             <div class="box" style="top:-100px"></div>
@@ -357,21 +387,21 @@
                 <div class='nudge' style='top:-252px;display:inline-block'></div>
                 <div class='nudge' style='top:-252px;display:inline-block'></div>
                 <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
+                <div class='nudge' style='top:-251px;display:inline-block'></div>
+                <div class='nudge' style='top:-251px;display:inline-block'></div>
+                <div class='nudge' style='top:-251px;display:inline-block'></div>
+                <div class='nudge' style='top:-251px;display:inline-block'></div>
+                <div class='nudge' style='top:-251px;display:inline-block'></div>
+                <div class='nudge' style='top:-251px;display:inline-block'></div>
+                <div class='nudge' style='top:-251px;display:inline-block'></div>
+                <div class='nudge' style='top:-251px;display:inline-block'></div>
+                <div class='nudge' style='top:-251px;display:inline-block'></div>
+                <div class='nudge' style='top:-251px;display:inline-block'></div>
+                <div class='nudge' style='top:-251px;display:inline-block'></div>
+                <div class='nudge' style='top:-251px;display:inline-block'></div>
+                <div class='nudge' style='top:-251px;display:inline-block'></div>
+                <div class='nudge' style='top:-251px;display:inline-block'></div>
+                <div class='nudge' style='top:-251px;display:inline-block'></div>
                 <div class='nudge' style='top:-250px;display:inline-block'></div>
                 <div class='nudge' style='top:-250px;display:inline-block'></div>
                 <div class='nudge' style='top:-250px;display:inline-block'></div>
