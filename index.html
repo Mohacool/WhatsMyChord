@@ -21,13 +21,6 @@
         }
       </style>
 
-    <script type="text/javascript">
-        console.log(screen.width);
-        if (screen.width <=700){
-            document.location="mobile.html";
-        }
-    </script>
-    
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -38,7 +31,7 @@
     <script type="text/javascript">
 
         // current Notes
-        var curr_notes = ["E","B","G","D","A","E"];
+        var curr_notes = ["E","A","D","G","B","E"];
         var curr_notes_num = [0,0,0,0,0,0];
 
         // Set global variables
@@ -56,8 +49,7 @@
         // Plays single note sound, adds the note and note paths (for sound) to lists
         function playNote(string,note_name){
 
-            // Update current notes
-            curr_notes[string-1] = note_name.slice(0,-1);
+            
             
 
             if (note_name[1]=="#"){
@@ -81,13 +73,100 @@
             x.play()
         }
 
+
+        /* 
+        This function deals with all the clicks on the fretboard
+        The open strings are 91-96
+        The muted strings are 101-106
+        The rest of the notes are 1-90
+        */ 
+        function clicky(note_num){
+            console.log("==========================",note_num,"clicked");
+
+            console.log(note_num);
+            if (note_num>90){
+                var string = note_num - 90;
+                console.log("string is now",string);
+                var fret = 0;
+            }
+            else{
+                var string = Math.floor(note_num/15) + 1;
+                var fret = note_num - (string-1)*15;
+            }
+
+            console.log("REAL STRING"+string);
+            console.log("REAL FRET" + fret);
+
+            let note_name = note_matrix.get([string-1,fret]); // Fret is not -1 because open string is at pos 0 
+            let oct = oct_matrix.get([string-1,fret]);
+
+            let note = note_name + oct;
+
+            // Make the note smaller if its #/b
+            if (note_name.length == 2){
+                console.log("small");
+                $(".note_circle").css({"font-size":"13px"});
+            }
+            else{
+                $(".note_circle").css({"font-size":"14px"});
+            }
+
+            let string_name = "string"+ string;
+            
+            // Change the note name on string
+            if (note_name.endsWith('b')){
+                note_name = note_name.slice(0,-1)+'\u266D'
+            }
+            if (note_name.endsWith('#')){
+                note_name = note_name.slice(0,-1)+'\u266F'
+            }
+            $(".note_circle."+string_name).text(note_name);
+
+            // Move the note circle to the correct spot
+            let x_pos = 8 + (fret-1)*44.4;
+            if (fret==0){
+                x_pos = -35;
+            }
+
+            // Move note circle
+            $(".note_circle."+string_name).css({"left":x_pos+"px"});
+
+            // Show the note
+            $(".note_circle."+string_name).css({"visibility":"visible"});
+
+            // Hide the X again
+            $(".x."+string_name).css({"opacity":"0"});
+            $(".x:hover."+string_name).css({"opacity":"1"});
+
+            if (fret==-0){ fret = 0; }
+                
+            curr_notes_num[string-1] = fret;
+
+            // Update current notes
+            console.log("new",note_name);
+            console.log("string now",string);
+            curr_notes[string-1] = note_name;
+
+            console.log(curr_notes);
+            console.log(curr_notes_num);
+
+            playNote(string,note);
+        }
+
+
         function muted(string){
-            let strings = [1,2,3,4,5,6];
-            let string_name = "string"+strings[string-1];
-            console.log(string_name);
+            
+            let string_name = "string"+string;
+            
             $(".note_circle."+string_name).css({"visibility":"hidden"});
 
             console.log("muted string is",string);
+
+            curr_notes[string-1] = "";
+            curr_notes_num[string-1] = -1;
+
+            console.log(curr_notes);
+            console.log(curr_notes_num);
 
             $(".x."+string_name).css({"opacity":"1"});
 
@@ -173,121 +252,6 @@
             fill_oct_matrix(oct_matrix);
             
             
-
-            $("#fretboard").click(function(e){
-
-                //console.log("setting all back to nromal");
-                //$(".nudge:hover").css({"opacity":1});
-                //$(".nudge:hover").css({"visibility":"visible"});
-                
-                // Find click position
-                var elm = $(this); 
-                var left_offset = elm.css('padding-left').slice(0,-2);
-                var top_offset = elm.css('padding-top').slice(0,-2)
-                var xPos = e.pageX - left_offset - 12; 
-                var yPos = e.pageY - top_offset - 9;  
-
-
-                // Find where the click happens within the fret boxes
-                var fret = xPos/44.4;
-                var fret_decimal = fret - Math.floor(fret);
-
-                var string = yPos/31;
-                var string_decimal = string - Math.floor(string);
-
-
-                
-                // Check if the click happens in the right spot
-                if (inRange(fret_decimal,0.19,0.65) && !inRange(string_decimal,0.30,0.70)){
-
-                    if (inRange(yPos,-10,160)){
-                    
-                        console.log(xPos+"," +yPos);
-                        
-
-                        fret = Math.ceil(xPos/44.4);
-                        string = Math.ceil((yPos+5)/28);
-
-                        console.log(fret,",",string);
-
-                        //console.log("Fret,String= ",fret,", ",string);
-
-                        
-                        let note_name = note_matrix.get([string-1,fret]); // Fret is not -1 because open string is at pos 0 
-                        let oct = oct_matrix.get([string-1,fret]);
-
-                        let note = note_name + oct;
-
-                        console.log(note+"hey");
-
-                        // Make the note smaller if its #/b
-                        if (note_name.length == 2){
-                            console.log("small");
-                            $(".note_circle").css({"font-size":"13px"});
-                        }
-                        else{
-                            $(".note_circle").css({"font-size":"14px"});
-                        }
-
-                        let string_name = "string"+ string;
-                        
-                        // Change the note name on string
-                        if (note_name.endsWith('b')){
-                            note_name = note_name.slice(0,-1)+'\u266D'
-                        }
-                        if (note_name.endsWith('#')){
-                            note_name = note_name.slice(0,-1)+'\u266F'
-                        }
-
-                        $(".note_circle."+string_name).text(note_name);
-
-                        console.log(fret);
-
-                        // Move the note circle to the correct spot
-                        let x_pos = 8 + (fret-1)*44.4;
-                        if (fret==0){
-                            x_pos = -35;
-                        }
-
-                        // Move note circle
-                        $(".note_circle."+string_name).css({"left":x_pos+"px"});
-
-                        // Show the note
-                        $(".note_circle."+string_name).css({"visibility":"visible"});
-
-                        // Hide the X again
-                        $(".x."+string_name).css({"opacity":"0"});
-                        $(".x:hover."+string_name).css({"opacity":"1"});
-
-                        if (fret==-0){ fret = 0; }
-                            
-                        curr_notes_num[string-1] = fret;
-
-                        playNote(string,note);
-
-
-                        
-                        console.log(notePaths);
-                        console.log(curr_notes_num);
-                        
-
-                    }
-                    
-                    else{
-                        console.log("dont");
-                        
-                    }
-            }
-                
-                
-                
-
-                
-                
-                //console.log("fret:",fret," string:",string);
-
-                
-            });
             
 
         });
@@ -305,13 +269,20 @@
     <body>
         
         <div class="bg"></div>
+        <div class="header">
+            <div class="logo_container">
+
+                <img src="title.png" id="logo_container">
+            </div>
+
+        </div>
         
 
         <audio id="myAudio">
             <source src="" type="audio/mp3">
         </audio>
 
-        <img src="title.png" id="title">
+        <!-- <img src="title.png" id="title"> !-->
 
         <div id="sidebar">
         
@@ -331,99 +302,99 @@
             <div class="box" style="top:-143px"></div>
             <div class="box" style="top:-187px"></div>
             <div class="box" style="top:-228px"></div>
-            <!-- <span class="dot dot1" ></span> -->
+            
             
             <div id="nodegrid">
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-252px;display:inline-block'></div>
-                <div class='nudge' style='top:-251px;display:inline-block'></div>
-                <div class='nudge' style='top:-251px;display:inline-block'></div>
-                <div class='nudge' style='top:-251px;display:inline-block'></div>
-                <div class='nudge' style='top:-251px;display:inline-block'></div>
-                <div class='nudge' style='top:-251px;display:inline-block'></div>
-                <div class='nudge' style='top:-251px;display:inline-block'></div>
-                <div class='nudge' style='top:-251px;display:inline-block'></div>
-                <div class='nudge' style='top:-251px;display:inline-block'></div>
-                <div class='nudge' style='top:-251px;display:inline-block'></div>
-                <div class='nudge' style='top:-251px;display:inline-block'></div>
-                <div class='nudge' style='top:-251px;display:inline-block'></div>
-                <div class='nudge' style='top:-251px;display:inline-block'></div>
-                <div class='nudge' style='top:-251px;display:inline-block'></div>
-                <div class='nudge' style='top:-251px;display:inline-block'></div>
-                <div class='nudge' style='top:-251px;display:inline-block'></div>
-                <div class='nudge' style='top:-250px;display:inline-block'></div>
-                <div class='nudge' style='top:-250px;display:inline-block'></div>
-                <div class='nudge' style='top:-250px;display:inline-block'></div>
-                <div class='nudge' style='top:-250px;display:inline-block'></div>
-                <div class='nudge' style='top:-250px;display:inline-block'></div>
-                <div class='nudge' style='top:-250px;display:inline-block'></div>
-                <div class='nudge' style='top:-250px;display:inline-block'></div>
-                <div class='nudge' style='top:-250px;display:inline-block'></div>
-                <div class='nudge' style='top:-250px;display:inline-block'></div>
-                <div class='nudge' style='top:-250px;display:inline-block'></div>
-                <div class='nudge' style='top:-250px;display:inline-block'></div>
-                <div class='nudge' style='top:-250px;display:inline-block'></div>
-                <div class='nudge' style='top:-250px;display:inline-block'></div>
-                <div class='nudge' style='top:-250px;display:inline-block'></div>
-                <div class='nudge' style='top:-250px;display:inline-block'></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('1')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('2')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('3')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('4')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('5')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('6')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('7')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('8')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('9')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('10')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('11')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('12')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('13')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('14')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('15')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('16')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('17')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('18')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('19')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('20')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('21')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('22')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('23')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('24')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('25')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('26')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('27')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('28')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('29')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('30')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('31')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('32')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('33')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('34')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('35')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('36')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('37')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('38')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('39')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('40')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('41')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('42')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('43')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('44')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('45')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('46')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('47')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('48')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('49')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('50')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('51')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('52')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('53')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('54')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('55')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('56')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('57')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('58')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('59')"></div>
+                <div class='nudge' style='top:-252px;display:inline-block' onclick="clicky('60')"></div>
+                <div class='nudge' style='top:-251px;display:inline-block' onclick="clicky('61')"></div>
+                <div class='nudge' style='top:-251px;display:inline-block' onclick="clicky('62')"></div>
+                <div class='nudge' style='top:-251px;display:inline-block' onclick="clicky('63')"></div>
+                <div class='nudge' style='top:-251px;display:inline-block' onclick="clicky('64')"></div>
+                <div class='nudge' style='top:-251px;display:inline-block' onclick="clicky('65')"></div>
+                <div class='nudge' style='top:-251px;display:inline-block' onclick="clicky('66')"></div>
+                <div class='nudge' style='top:-251px;display:inline-block' onclick="clicky('67')"></div>
+                <div class='nudge' style='top:-251px;display:inline-block' onclick="clicky('68')"></div>
+                <div class='nudge' style='top:-251px;display:inline-block' onclick="clicky('69')"></div>
+                <div class='nudge' style='top:-251px;display:inline-block' onclick="clicky('70')"></div>
+                <div class='nudge' style='top:-251px;display:inline-block' onclick="clicky('71')"></div>
+                <div class='nudge' style='top:-251px;display:inline-block' onclick="clicky('72')"></div>
+                <div class='nudge' style='top:-251px;display:inline-block' onclick="clicky('73')"></div>
+                <div class='nudge' style='top:-251px;display:inline-block' onclick="clicky('74')"></div>
+                <div class='nudge' style='top:-251px;display:inline-block' onclick="clicky('75')"></div>
+                <div class='nudge' style='top:-250px;display:inline-block' onclick="clicky('76')"></div>
+                <div class='nudge' style='top:-250px;display:inline-block' onclick="clicky('77')"></div>
+                <div class='nudge' style='top:-250px;display:inline-block' onclick="clicky('78')"></div>
+                <div class='nudge' style='top:-250px;display:inline-block' onclick="clicky('79')"></div>
+                <div class='nudge' style='top:-250px;display:inline-block' onclick="clicky('80')"></div>
+                <div class='nudge' style='top:-250px;display:inline-block' onclick="clicky('81')"></div>
+                <div class='nudge' style='top:-250px;display:inline-block' onclick="clicky('82')"></div>
+                <div class='nudge' style='top:-250px;display:inline-block' onclick="clicky('83')"></div>
+                <div class='nudge' style='top:-250px;display:inline-block' onclick="clicky('84')"></div>
+                <div class='nudge' style='top:-250px;display:inline-block' onclick="clicky('85')"></div>
+                <div class='nudge' style='top:-250px;display:inline-block' onclick="clicky('86')"></div>
+                <div class='nudge' style='top:-250px;display:inline-block' onclick="clicky('87')"></div>
+                <div class='nudge' style='top:-250px;display:inline-block' onclick="clicky('88')"></div>
+                <div class='nudge' style='top:-250px;display:inline-block' onclick="clicky('89')"></div>
+                <div class='nudge' style='top:-250px;display:inline-block' onclick="clicky('90')"></div>
 
             </div>
 
@@ -434,6 +405,14 @@
             <span class="x string4" style="top:-434px" onclick="muted('4')">X</span>
             <span class="x string5" style="top:-433px" onclick="muted('5')">X</span>
             <span class="x string6" style="top:-430px" onclick="muted('6')">X</span>
+
+            <span class="open string1" onclick="clicky('91')"></span>
+            <span class="open string2" onclick="clicky('92')"></span>
+            <span class="open string3" onclick="clicky('93')"></span>
+            <span class="open string4" onclick="clicky('94')"></span>
+            <span class="open string5" onclick="clicky('95')"></span>
+            <span class="open string6" onclick="clicky('96')"></span>
+
 
             <span class="note_circle string1">E</span>
             <span class="note_circle string2">A</span>
