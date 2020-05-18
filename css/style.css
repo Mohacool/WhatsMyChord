@@ -7,7 +7,7 @@ body {
     position:absolute;
     width:600px;
     left:28%;
-    top:0%;
+    top:15%;
     
 }
 
@@ -15,15 +15,33 @@ body {
     
     position: absolute;
     padding-top: 13%;
-    padding-left:25%;
-    width: 680px;
+    padding-left:30%;
+    width: 680px; 
     
+}
+
+
+
+.header{
+    width:110%;
+    height:80px;
+    display:block;
+    background-color: gray;
+}
+
+.logo_container{
+    
+    height:160px;
+    top:-20px;
+    text-align:center;
+    position:relative;
+    border: 1px solid green;
     
 }
 
 #sidebar{
   height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 200px; /* Set the width of the sidebar */
+  width: 250px; /* Set the width of the sidebar */
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
   z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */
@@ -31,7 +49,7 @@ body {
   background-color: #111; /* Black */
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 20px;
-    
+
 }
 
 
@@ -122,13 +140,14 @@ body {
 #nodegrid{
     position:relative;
     /* shift everything here*/ 
+    
 }
 
 .note_circle{
     
-    display:flex;
+    display:block;
     position: relative;
-    top:-613px;
+    top:-795px;
     left:-35px;
     
     border-radius: 50%;
@@ -151,6 +170,19 @@ body {
 }
 
 
+.open{
+    display:block;
+    position:relative;
+
+    margin-top:5.3px;
+    top: -614px;
+    left:-32px;
+    width: 25px;
+    height:25px;
+    border-radius: 50%;
+    background-color: #1eb285;
+    
+}
 
 
 
