@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="icon" href="data:;base64,=">
     <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">  
 
     <style>
         body,
@@ -84,18 +85,27 @@
             console.log("==========================",note_num,"clicked");
 
             console.log(note_num);
+            console.log("string",Math.floor(note_num/15));
+            var string = Math.floor(note_num/15);
+            console.log("fret",note_num - (string-1)*15);
             if (note_num>90){
                 var string = note_num - 90;
                 console.log("string is now",string);
                 var fret = 0;
             }
             else{
-                var string = Math.floor(note_num/15) + 1;
+                var string = Math.floor(note_num/15)+1;
                 var fret = note_num - (string-1)*15;
+
+                // Side case for any notes on the 15th fret
+                if (note_num%15 == 0){
+                    var string = Math.floor(note_num/15);
+                    var fret = note_num - (string-1)*15;
+                }
             }
 
-            console.log("REAL STRING"+string);
-            console.log("REAL FRET" + fret);
+            //console.log("REAL STRING"+string);
+            //console.log("REAL FRET" + fret);
 
             let note_name = note_matrix.get([string-1,fret]); // Fret is not -1 because open string is at pos 0 
             let oct = oct_matrix.get([string-1,fret]);
@@ -139,12 +149,11 @@
             $(".x:hover."+string_name).css({"opacity":"1"});
 
             if (fret==-0){ fret = 0; }
-                
+            
+            // Update current note numbers
             curr_notes_num[string-1] = fret;
 
             // Update current notes
-            console.log("new",note_name);
-            console.log("string now",string);
             curr_notes[string-1] = note_name;
 
             console.log(curr_notes);
@@ -153,7 +162,7 @@
             playNote(string,note);
         }
 
-
+        // Deal with muted strings
         function muted(string){
             
             let string_name = "string"+string;
@@ -243,21 +252,13 @@
         $(document).ready(function(){
 
             let top = $("#fretboard").css('padding-top');
-            console.log("--------------"+top);
+            //console.log("--------------"+top);
             
-
-
             // Create note and oct matrices
             fill_note_matrix(note_matrix);
             fill_oct_matrix(oct_matrix);
-            
-            
-            
 
         });
-
-        
-        
 
     </script>
     
@@ -285,13 +286,20 @@
         <!-- <img src="title.png" id="title"> !-->
 
         <div id="sidebar">
-        
-
+            <div class="info">
+                <p1> Information and such</p1>
+                <p1> Information and such</p1>
+                <p1> Information and such</p1>
+                <p1> Information and such</p1>
+                <p1> Information and such</p1>
+                <p1> Information and such</p1>
+            </div>
         </div>
 
         <div id="fretboard">
-            
-
+            <div class="play-button">
+                <a href="#" class="round-button"><i class="fa fa-play fa-2x"></i></a>
+            </div>
             
             
             <img src="fretboard.PNG" id="black">
