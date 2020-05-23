@@ -7,7 +7,6 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">  
 
-    
     <script type="text/javascript">
         console.log(screen.width);
         if (screen.width <=700){
@@ -40,7 +39,7 @@
     <script type="text/javascript">
 
         // current Notes
-        var curr_notes = ["E","A","D","G","B","E"];
+        var curr_notes = ["E","B","G","D","A","E"];
         var curr_notes_num = [0,0,0,0,0,0];
 
         // Set global variables
@@ -54,18 +53,199 @@
         var note_matrix = math.zeros(6,16);
         var oct_matrix = math.zeros(6,16);
 
+        /* Take in a chord such as ["0","3","2","1","-1","-1"] -> ["E","C",'G','E']
+
+            Also remove muted strings 
+        */
+        function chordify(chord_nums){
+
+            var chord_names = [];
+            //console.log(chord_nums);
+            
+            for (i=0;i<6;i++){
+
+                if (chord_nums[i]!=-1){
+                    
+                    var note = note_matrix.get([5-i,chord_nums[i]]);
+                    chord_names.push(note);
+                }
+                
+            }
+
+
+            return chord_names;
+        }
+
+        function doStuff(input_chord){
+
+            
+
+            // Set Manipulation functions
+            function isIn(s)          { return elt => s.has(elt); }
+            function contains(s1, s2) { return [...s2] . every(isIn(s1)); }
+            function eqSet(a, b)      { return contains(a, b) && contains(b, a); }
+            var matches = [];
+            var normal_matches = [];
+            var set_matches = [];
+
+            // clear the divs of any chord names
+            for (var i = 0;i < 6; i++){
+                let name = ".chords.chord"+i;
+                $(name).text("");
+                
+            }
+            
+
+            $.getJSON("/notes/data.json", function(data) {
+                let count = 0;
+
+
+                var curr = chordify(input_chord);
+                
+                // Removes "" from notes
+                var filter_note = curr_notes.filter(function (el) {
+                            return el != "";
+                });
+
+               
+
+                for (var chord in data){
+
+                    data[chord].forEach(function (item) {
+
+
+                        let curr_chord = JSON.stringify(item);
+                        var chordified = chordify(item);
+                       
+                        
+                        
+
+                        var input_set = new Set (filter_note);
+
+                        var check_set = new Set (chordified);
+
+                       
+
+                        //console.log(filter_note);
+
+                        
+                        
+
+                        //console.log("Chord Name "+ chord );
+                        //console.log(filter_note);
+                        //console.log(chordified);
+
+                        
+
+                        
+                        // Check note_nums against each other
+                        var match = JSON.stringify(input_chord.slice().reverse()) == JSON.stringify(item);
+
+                        //console.log(match);
+
+
+                        var match_set = eqSet(input_set,check_set);
+
+
+                        chord = chord.replace('minor','m');
+                        chord = chord.replace('major','');
+
+                        if (match){
+                            console.log("Matched with",chord); 
+                            if (!(normal_matches.includes(chord) || (set_matches.includes(chord) )))  {
+                                normal_matches.push(chord);  
+                            }
+                            if (set_matches.includes(chord)){
+                                normal_matches.push(chord);
+
+                                // If found in both, always put in match
+                                let index = set_matches.indexOf(chord);
+                                set_matches.splice(index, 1);
+                                console.log(set_matches);
+                            }
+                             
+                        }
+
+                        if(match_set){
+
+                            
+                            var root = filter_note.slice(-1)[0];
+                            if (!(normal_matches.includes(chord) || (set_matches.includes(chord) )))  {
+
+                                if (!(chord.includes('/') && !(chord.includes('/'+root)))){
+                                    set_matches.push(chord);  
+                                    console.log("SET Matched with",chord, "lowest note",root);
+                                    console.log(input_set);
+                                    console.log(check_set);
+                                    console.log(chordified);
+                                    console.log(item);
+                                }
+
+                            }
+                            
+                            
+                            
+                            
+                            
+                            
+
+                        }
+
+                       
+
+
+                        count +=1;
+
+
+                    });
+                }
+                //console.log("went through",count,"chords");
+
+                /*
+                // Merge the normal matches and the set matches together
+                if (normal_matches.length != 0){
+                    matches.push(normal_matches);
+                }
+                if (set_matches.length !=0){
+                    //console.log('set matches is'+set_matches);
+                    matches.push(set_matches);
+                }
+                */
+
+                matches = normal_matches.concat(set_matches);
+                
+                console.log("full",matches);
+                //console.log(filter_note);
+                
+                console.log(matches.length);
+                console.log("new =========================");
+                for (var i = 0;i < matches.length; i++){
+                    let name = ".chords.chord"+i;
+                    console.log('place',matches[i],'at',name);
+                    $(name).text(matches[i]);
+                    console.log(matches);
+                }
+
+                console.log("text at 1 is",$(".chords.chord0").text());
+                console.log("text at 2 is",$(".chords.chord1").text());
+                console.log("text at 3 is",$(".chords.chord2").text());
+                console.log("text at 4 is",$(".chords.chord3").text());
+                
+
+                
+            });
+        
+
+        }
 
         // Plays single note sound, adds the note and note paths (for sound) to lists
         function playNote(string,note_name){
-
-            
-            
 
             if (note_name[1]=="#"){
                 note_name = note_name[0] + 's' + note_name[2];
             }
             if (note_name.substring(0,2) == "Bb"){
-                console.log(note_name = "As" + note_name[2]);
+                //console.log(note_name = "As" + note_name[2]);
                 note_name = "As" + note_name[2];
             }
 
@@ -83,6 +263,67 @@
         }
 
 
+        // Play chord
+
+        function play_chord(){
+
+            
+            var snd1  = new Audio();
+
+            var snd0  = new Audio();
+            var src0  = document.createElement("source");
+            src0.type = "audio/mpeg";
+            src0.src  = notePaths[0];
+            snd0.appendChild(src0);
+
+            var snd1  = new Audio();
+            var src1  = document.createElement("source");
+            src1.type = "audio/mpeg";
+            src1.src  = notePaths[1];
+            snd1.appendChild(src1);
+
+            var snd2  = new Audio();
+            var src2  = document.createElement("source");
+            src2.type = "audio/mpeg";
+            src2.src  = notePaths[2];
+            snd2.appendChild(src2);
+
+            var snd3  = new Audio();
+            var src3  = document.createElement("source");
+            src3.type = "audio/mpeg";
+            src3.src  = notePaths[3];
+            snd3.appendChild(src3);
+
+            var snd4  = new Audio();
+            var src4  = document.createElement("source");
+            src4.type = "audio/mpeg";
+            src4.src  = notePaths[4];
+            snd4.appendChild(src4);
+
+            var snd5  = new Audio();
+            var src5  = document.createElement("source");
+            src5.type = "audio/mpeg";
+            src5.src  = notePaths[5];
+            snd5.appendChild(src5);
+
+
+            function start1() { snd1.play();}
+            function start2() {snd2.play();}
+            function start3() {snd3.play();}
+            function start4() {snd4.play();}
+            function start0() {snd0.play();}
+            
+
+            var timeGap = 300;
+
+            //console.log("playing",notePaths);
+            
+            snd5.play();setTimeout(start4, timeGap);setTimeout(start3, timeGap+50);setTimeout(start2, timeGap+100);
+            setTimeout(start1, timeGap+150);setTimeout(start0, timeGap+200);
+
+            snd0,snd1,snd2,snd3,snd4,snd5 = [],[],[],[],[],[];
+        }
+
         /* 
         This function deals with all the clicks on the fretboard
         The open strings are 91-96
@@ -90,15 +331,15 @@
         The rest of the notes are 1-90
         */ 
         function clicky(note_num){
-            console.log("==========================",note_num,"clicked");
+            //console.log("==========================",note_num,"clicked");
 
-            console.log(note_num);
-            console.log("string",Math.floor(note_num/15));
+            //console.log(note_num);
+            //console.log("string",Math.floor(note_num/15));
             var string = Math.floor(note_num/15);
-            console.log("fret",note_num - (string-1)*15);
+            //console.log("fret",note_num - (string-1)*15);
             if (note_num>90){
                 var string = note_num - 90;
-                console.log("string is now",string);
+                //console.log("string is now",string);
                 var fret = 0;
             }
             else{
@@ -122,7 +363,7 @@
 
             // Make the note smaller if its #/b
             if (note_name.length == 2){
-                console.log("small");
+                //console.log("small");
                 $(".note_circle").css({"font-size":"13px"});
             }
             else{
@@ -131,6 +372,9 @@
 
             let string_name = "string"+ string;
             
+            // Update current notes
+            curr_notes[string-1] = note_name;
+
             // Change the note name on string
             if (note_name.endsWith('b')){
                 note_name = note_name.slice(0,-1)+'\u266D'
@@ -161,11 +405,13 @@
             // Update current note numbers
             curr_notes_num[string-1] = fret;
 
-            // Update current notes
-            curr_notes[string-1] = note_name;
+            
 
-            console.log(curr_notes);
-            console.log(curr_notes_num);
+            //console.log(curr_notes);
+            //console.log(curr_notes_num);
+            //console.log(notePaths);
+
+            doStuff(curr_notes_num);
 
             playNote(string,note);
         }
@@ -177,13 +423,15 @@
             
             $(".note_circle."+string_name).css({"visibility":"hidden"});
 
-            console.log("muted string is",string);
+            //console.log("muted string is",string);
 
             curr_notes[string-1] = "";
+            notePaths[string-1] = "";
             curr_notes_num[string-1] = -1;
 
-            console.log(curr_notes);
-            console.log(curr_notes_num);
+            //console.log(curr_notes);
+            //console.log(curr_notes_num);
+            doStuff(curr_notes_num);
 
             $(".x."+string_name).css({"opacity":"1"});
 
@@ -305,12 +553,17 @@
         </div>
 
         <div id="fretboard">
-            <div class="play-button">
+
+            <div class="play-button" onclick="play_chord()">
                 <a href="#" class="round-button"><i class="fa fa-play fa-2x"></i></a>
             </div>
+
+            
             
             
             <img src="fretboard.PNG" id="black">
+
+            
             
             <div class="box"></div>
             <div class="box" style="top:-57px"></div>
@@ -431,13 +684,22 @@
 
 
             <span class="note_circle string1">E</span>
-            <span class="note_circle string2">A</span>
-            <span class="note_circle string3">D</span>
-            <span class="note_circle string4">G</span>
-            <span class="note_circle string5">B</span>
+            <span class="note_circle string2">B</span>
+            <span class="note_circle string3">G</span>
+            <span class="note_circle string4">D</span>
+            <span class="note_circle string5">A</span>
             <span class="note_circle string6">E</span>
 
-            
+            <div id="chord_name_container">
+
+                <div class="chords chord0"></div>
+                <div class="chords chord1"></div>
+                <div class="chords chord2"></div>
+                <div class="chords chord3"></div>
+                <div class="chords chord4"></div>
+                <div class="chords chord5"></div>
+                
+            </div>
 
             
             
