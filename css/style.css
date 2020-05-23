@@ -3,6 +3,22 @@ body {
     overflow:hidden;
 }
 
+.chords{
+    display:inline-block;
+    font-size:40px;
+    margin-left:25px;
+}
+
+#chord_name_container{
+    position: relative;
+    border: 1px solid green;
+    top:100px;
+    height:40px;
+    width: 670px;
+    top: -770px;
+    
+}
+
 .info{
     color:white;
     margin-top:80%;
@@ -20,7 +36,7 @@ body {
 #fretboard {
     
     position: absolute;
-    padding-top: 13%;
+    padding-top: 0%;
     padding-left:30%;
     width: 680px; 
     
@@ -47,7 +63,7 @@ body {
 
 #sidebar{
   height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 250px; /* Set the width of the sidebar */
+  width: 15%; /* Set the width of the sidebar */
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
   z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */
