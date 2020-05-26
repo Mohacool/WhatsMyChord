@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="/style.css">
     <link rel="icon" href="data:;base64,=">
     <title>Document</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">  
 
+
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Marvel" />
+    
     <script type="text/javascript">
         console.log(screen.width);
         if (screen.width <=700){
@@ -14,6 +17,7 @@
         }
     </script>
 
+    <!--
     <style>
         body,
         
@@ -28,6 +32,7 @@
           
         }
       </style>
+      -->
 
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -76,6 +81,86 @@
             return chord_names;
         }
 
+        // Set the notes back to open 
+        function reset(){
+
+            // Reset all notes
+            clicky(91);
+            clicky(92);
+            clicky(93);
+            clicky(94);
+            clicky(95);
+            clicky(96);
+
+            // Hide chord diagrams
+            $(".chord_diagram").hide();
+            $(".chords").hide();
+
+            // Hide chord names
+            for (var i = 0;i < 6; i++){
+                let name = ".chords.chord"+i;
+                console.log("clearing",name);
+                $(name).text("");
+                
+            }
+
+
+        }
+
+        /*
+            Fill the chord images 
+        */
+
+        function fillDiagrams(matches){
+            
+            var all_notes = ['C','C#','D','D#','E','F','F#','G','G#','A','Bb','B','Db','Eb','Gb','Ab','A#'];
+            
+
+
+            // If the note is simple A,B,C.... make it Amajor
+
+            // If there is a match
+            if (matches.length !=0){
+                console.log("ERRORR: matches=",matches);
+                if (all_notes.includes(matches[0])){
+                    var note = matches[0]+"major";
+                    if (note.includes('/')){
+                        note = note.replace('/','ov');
+                    }
+                    
+                }
+                else{
+                    note = matches[0];
+                    if (note.includes('/')){
+                        note = note.replace('/','ov');
+                    }
+
+                
+                    
+                }
+            
+            // Cycle through the 5 slots and fill them with the first 5 available chords
+
+            // This whole thing is hard_coded
+            var img_name = "/notes/chord_images/cropped/"+ note+"-0"+".jpg";
+            var img_2_name = "/notes/chord_images/cropped/"+ note+"-1"+".jpg";
+
+            console.log("opening",img_name);
+            $(".chord_diagram.chord1").attr("src",img_name);
+            $(".chord_diagram.chord2").attr("src",img_2_name);
+
+
+            }
+
+            // If there's no match
+            else{
+                $(".chords").hide();
+                $(".chord_diagram").hide();
+            }
+            
+            
+        }
+
         function doStuff(input_chord){
 
             
@@ -87,6 +172,8 @@
             var matches = [];
             var normal_matches = [];
             var set_matches = [];
+
+            var chords_of_matches = [];
 
             // clear the divs of any chord names
             for (var i = 0;i < 6; i++){
@@ -230,6 +317,8 @@
                 console.log("text at 2 is",$(".chords.chord1").text());
                 console.log("text at 3 is",$(".chords.chord2").text());
                 console.log("text at 4 is",$(".chords.chord3").text());
+
+                fillDiagrams(matches);
                 
 
                 
@@ -331,6 +420,9 @@
         The rest of the notes are 1-90
         */ 
         function clicky(note_num){
+            $(".chord_diagram").show();
+            $(".chords").show();
+
             //console.log("==========================",note_num,"clicked");
 
             //console.log(note_num);
@@ -525,7 +617,7 @@
 
     <body>
         
-        <div class="bg"></div>
+        <!-- <div class="bg"></div> !-->
         <div class="header">
             <div class="logo_container">
 
@@ -557,11 +649,15 @@
             <div class="play-button" onclick="play_chord()">
                 <a href="#" class="round-button"><i class="fa fa-play fa-2x"></i></a>
             </div>
+            <div class="reset" onclick="reset()">CLEAR</div>
 
             
             
             
             <img src="fretboard.PNG" id="black">
+            
+            
+            
 
             
             
@@ -692,6 +788,8 @@
 
             <div id="chord_name_container">
 
+                
+                 
                 <div class="chords chord0"></div>
                 <div class="chords chord1"></div>
                 <div class="chords chord2"></div>
@@ -699,8 +797,42 @@
                 <div class="chords chord4"></div>
                 <div class="chords chord5"></div>
                 
+                
             </div>
 
+            <div id="chord_diagram_container">
+                <!-- 
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+                -->
+
+                <img class="chord_diagram chord1" src="">
+                <img class="chord_diagram chord2" style="left:120px" src="">
+            </div>
+
+            <div class="fret_numbers">
+                
+                
+                <span class="frets">1</span>
+                <span class="frets">2</span>
+                <span class="frets">3</span>
+                <span class="frets">4</span>
+                <span class="frets">5</span>
+                <span class="frets">6</span>
+                <span class="frets">7</span>
+                <span class="frets">8</span>
+                <span class="frets">9</span>
+                <span class="frets">10</span>
+                <span class="frets">11</span>
+                <span class="frets">12</span>
+                <span class="frets">13</span>
+                <span class="frets">14</span>
+                <span class="frets">15</span>
+
+            </div>
             
             
 
