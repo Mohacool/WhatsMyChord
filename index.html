@@ -85,12 +85,12 @@
         function reset(){
 
             // Reset all notes
-            clicky(91);
-            clicky(92);
-            clicky(93);
-            clicky(94);
-            clicky(95);
-            clicky(96);
+            clicky(91,false);
+            clicky(92,false);
+            clicky(93,false);
+            clicky(94,false);
+            clicky(95,false);
+            clicky(96,false);
 
             // Hide chord diagrams
             $(".chord_diagram").hide();
@@ -419,7 +419,7 @@
         The muted strings are 101-106
         The rest of the notes are 1-90
         */ 
-        function clicky(note_num){
+        function clicky(note_num,playsound=true){
             $(".chord_diagram").show();
             $(".chords").show();
 
@@ -504,8 +504,12 @@
             //console.log(notePaths);
 
             doStuff(curr_notes_num);
+            
+            if (playsound){
+                playNote(string,note);
+            }
 
-            playNote(string,note);
+            
         }
 
         // Deal with muted strings
@@ -633,6 +637,7 @@
 
         <!-- <img src="title.png" id="title"> !-->
 
+        
         <div id="sidebar">
             <div class="info">
                 <p1> Information and such</p1>
