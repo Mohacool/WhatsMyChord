@@ -107,6 +107,21 @@
 
         }
 
+        function doesFileExist(urlToFile)
+            {
+                var xhr = new XMLHttpRequest();
+                xhr.open('HEAD', urlToFile, false);
+                xhr.send();
+
+                if (xhr.status == "404") {
+                    //console.log("File doesn't exist");
+                    return false;
+                } else {
+                    //console.log("File exists");
+                    return true;
+                }
+            }
+
         /*
             Fill the chord images 
         */
@@ -121,9 +136,13 @@
 
             // If there is a match
             if (matches.length !=0){
-                console.log("ERRORR: matches=",matches);
+
+                //console.log("ERRORR: matches=",matches);
+
+                // If its simple A,B,C
                 if (all_notes.includes(matches[0])){
-                    var note = matches[0]+"major";
+
+                    var note = matches[0]+"major"; //Make it major
                     if (note.includes('/')){
                         note = note.replace('/','ov');
                     }
@@ -135,6 +154,11 @@
                         note = note.replace('/','ov');
                     }
 
+                    // Replace # with Sharp
+                    if (note.includes('#')){
+                        note = note.replace('#','sharp');
+                    }
+
                 
                     
                 }
@@ -142,10 +166,38 @@
             // Cycle through the 5 slots and fill them with the first 5 available chords
 
             // This whole thing is hard_coded
+
+            
             var img_name = "/notes/chord_images/cropped/"+ note+"-0"+".jpg";
             var img_2_name = "/notes/chord_images/cropped/"+ note+"-1"+".jpg";
 
+           
+            
+
+            
+            
+            if (!doesFileExist(img_name)){
+                var img_name = "/notes/chord_images/cropped/more/"+ note+"-0"+".jpg";
+                var img_2_name = "/notes/chord_images/cropped/more/"+ note+"-1"+".jpg";
+                
+
+                if (doesFileExist(img_name)){
+                    
+                }
+                else{
+                    
+                    var img_name = "/notes/chord_images/cropped/evenmore/"+ note+"-0"+".jpg";
+                    var img_2_name = "/notes/chord_images/cropped/evenmore/"+ note+"-1"+".jpg";
+                }
+
+            }
+
+            
+            
+
+            console.log("image changed to ",img_name);
             console.log("opening",img_name);
+
             $(".chord_diagram.chord1").attr("src",img_name);
             $(".chord_diagram.chord2").attr("src",img_2_name);
 
