@@ -3,15 +3,86 @@ body {
     overflow:hidden;
 }
 
+.reset{
+    position:relative;
+    height:30px;
+    top:140px;
+    left:700px;
+    width:80px;
+    border:1px solid green;
+    cursor:pointer;
+}
+
+.reset:hover{
+    background: #f3edd6;
+}
+.item {
+    
+    display:inline-block;
+    margin: 0.7rem;
+    background: #f3edd6;
+    border: 3px solid #b59214;
+    color: #b59214;
+    padding: 2.8rem;
+    font-size: 2rem;
+    text-align: center;
+    width:10px;
+  }
+
 .chords{
     display:inline-block;
     font-size:40px;
     margin-left:25px;
 }
 
+.chord_diagram{
+    top:9px;
+    position:absolute;
+    height:90%; 
+    display:inline-block;
+    
+}
+#chord_diagram_container{
+    position:relative;
+    border: 1px solid green;
+    
+
+    /*
+    border: 1px solid green;
+
+    */
+    height:140px;
+    top: -740px;
+    width: 670px;
+
+}
+
+.frets{
+    font-family: 'Marvel';
+    margin-left:35.65px;
+    font-size:11px;
+}
+.fret_numbers{
+    left:-14px;
+    top:-990px;
+    
+    position: relative;
+    
+    
+    /*
+    border: 1px solid green;
+    */
+    height:10px;
+    width:710px;
+}
+
 #chord_name_container{
     position: relative;
     border: 1px solid green;
+    /*
+    border: 1px solid green;
+
+    */
     top:100px;
     height:40px;
     width: 670px;
@@ -26,6 +97,8 @@ body {
 }
 
 #title{
+    
+
     position:absolute;
     width:600px;
     left:28%;
@@ -210,7 +283,7 @@ body {
 .play-button{
     position:relative;
     left:700px;
-    top:115px;
+    top:145px;
 }
 
 .round-button {
@@ -233,7 +306,10 @@ body {
 	transition: all 0.3s ease;
 }
 .round-button:hover {
-	background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0,0,0,0.8);
+    
+    /*
 	box-shadow: 0px 0px 10px white;
-	text-shadow: 0px 0px 10px white;
+    text-shadow: 0px 0px 10px white;
+    */
 }
