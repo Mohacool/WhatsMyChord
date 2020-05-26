@@ -302,6 +302,7 @@
 
                         if (match){
                             console.log("Matched with",chord); 
+                            console.log(JSON.stringify(item));
                             if (!(normal_matches.includes(chord) || (set_matches.includes(chord) )))  {
                                 normal_matches.push(chord);  
                             }
@@ -686,6 +687,7 @@
         
         <!-- <div class="bg"></div> !-->
         <div class="header">
+            
             <div class="logo_container">
 
                 <img src="title.png" id="logo_container">
@@ -701,7 +703,8 @@
         <!-- <img src="title.png" id="title"> !-->
 
         
-        <div id="sidebar">
+        <!--
+            <div id="sidebar">
             <div class="info">
                 <p1> Information and such</p1>
                 <p1> Information and such</p1>
@@ -711,9 +714,12 @@
                 <p1> Information and such</p1>
             </div>
         </div>
+        !-->
 
         <div id="fretboard">
 
+
+            <div id="fretborder"></div>
             <div class="play-button" onclick="play_chord()">
                 <a href="#" class="round-button"><i class="fa fa-play fa-2x"></i></a>
             </div>
@@ -722,7 +728,7 @@
             
             
             
-            <img src="fretboard.PNG" id="black">
+            <img src="fretboard.png" id="black">
             
             
             
