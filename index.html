@@ -128,7 +128,7 @@
 
         function fillDiagrams(matches){
             
-            var all_notes = ['C','C#','D','D#','E','F','F#','G','G#','A','Bb','B','Db','Eb','Gb','Ab','A#'];
+            var all_notes = ['C','Csharp','D','Dsharp','E','F','Fsharp','G','Gsharp','A','Bb','B','Db','Eb','Gb','Ab','Asharp'];
             
 
 
@@ -158,6 +158,17 @@
                     if (note.includes('#')){
                         note = note.replace('#','sharp');
                     }
+
+                    
+                    
+                    // If chord is something minor
+                    const regex = RegExp('.*m'+"$");
+                    if (regex.test(note)){
+                        console.log("TRUE");
+                        note = note.replace('m','minor');
+
+                    }
+
 
                 
                     
