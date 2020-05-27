@@ -26,9 +26,9 @@ html,body{
     border-radius:5px;
     position: absolute;
     top:80px;
-    right:-30px;
+    right:-39px;
     height:210px;
-    width:750px;
+    width:767px;
     background-color:#fdf7e9;
     z-index:-100;
 }
@@ -300,8 +300,8 @@ html,body{
     border: 2px solid #666;
     color: #666;
     
-
-    font: 14px Arial, sans-serif;
+    font-family: 'Gotham';
+    font: 14px 'Gotham';
     line-height: 12px;
     text-align: center;
     
@@ -313,6 +313,7 @@ html,body{
 
 
 .open{
+    cursor: pointer;
     display:block;
     position:relative;
 
@@ -322,7 +323,8 @@ html,body{
     width: 25px;
     height:25px;
     border-radius: 50%;
-    background-color: #1eb285;
+    background-color: gray;
+    
     
 }
 
