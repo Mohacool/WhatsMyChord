@@ -23,7 +23,7 @@ html,body{
 
 
 #fretborder{
-    
+    border-radius:5px;
     position: absolute;
     top:80px;
     right:-30px;
@@ -95,6 +95,7 @@ html,body{
     font-size:11px;
 }
 .fret_numbers{
+    visibility: hidden;
     left:-14px;
     top:-990px;
     
@@ -139,13 +140,21 @@ html,body{
     
 }
 
+#everything{
+    zoom:1;
+    
+    
+}
 
 #fretboard {
     
     position: absolute;
+    
+
     padding-top: -10%;
     padding-left:25%;
-    width: 680px; 
+    width: 680px;
+    
     
     
 }
@@ -246,7 +255,7 @@ html,body{
     width: 23px;
     height: 20px;
     
-    border: 1px solid green;
+    border: 1px solid gray;
     /* opacity: 0; 
     
     
@@ -265,7 +274,7 @@ html,body{
     width: 16px;
     height:16px;
     border-radius: 50%;
-    background-color: #1eb285;
+    background-color: #fdf7e9;
     
 }
 
@@ -296,6 +305,7 @@ html,body{
     line-height: 12px;
     text-align: center;
     
+    cursor: pointer;
     
     
     font-weight: bold;
