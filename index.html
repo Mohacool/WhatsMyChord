@@ -148,12 +148,23 @@
 
                 //console.log("ERRORR: matches=",matches);
 
+                
+
+                var matches_fix = matches[0].replace('#','sharp');
+                console.log("@@@@@@@@@ - IF all notes has ",matches_fix);
+
                 // If its simple A,B,C
-                if (all_notes.includes(matches[0])){
+                if (all_notes.includes(matches_fix)){
 
                     var note = matches[0]+"major"; //Make it major
+                    
                     if (note.includes('/')){
                         note = note.replace('/','ov');
+                    }
+
+                    // Replace # with Sharp
+                    if (note.includes('#')){
+                        note = note.replace('#','sharp');
                     }
                     
                 }
@@ -163,10 +174,12 @@
                         note = note.replace('/','ov');
                     }
 
-                    // Replace # with Sharp
-                    if (note.includes('#')){
+                     // Replace # with Sharp
+                     if (note.includes('#')){
                         note = note.replace('#','sharp');
                     }
+
+                    
 
                     
                     
@@ -781,7 +794,7 @@
                 
                 
                 
-                <img src="fretboard.PNG" id="black">
+                <img src="fretboard.PNG" height="160px" width="671px" id="black">
                 
                 
                 
