@@ -682,6 +682,12 @@
             // Ratio = 1 padding = 341 + 
             // Ratio = 1/2 padding = 2*(341) + (1/2)*680
             
+            var start_percentage = ((screen.width - 680)/2)/screen.width;
+
+            alert(start_percentage);
+
+            alert(start_percentage);
+
             var blah = 100 - (window.devicePixelRatio*100);
             var blahblah = (blah/10)*2.5;
 
@@ -690,8 +696,11 @@
             var full = 25 + blahblah;
             
             var zoom = 1/window.devicePixelRatio;
-            
-            $("#fretboard").css({'padding-left': full+'%'});
+
+            $("#fretboard").css({'padding-left': start_percentage*100+'%'});
+
+
+            //$("#fretboard").css({'padding-left': full+'%'});
             //$('#everything').css({'zoom':zoom})
             
             //console.log("--------------"+top);
