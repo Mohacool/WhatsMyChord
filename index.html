@@ -686,7 +686,6 @@
 
             alert(start_percentage);
 
-            alert(start_percentage);
 
             var blah = 100 - (window.devicePixelRatio*100);
             var blahblah = (blah/10)*2.5;
@@ -696,14 +695,20 @@
             var full = 25 + blahblah;
             
             var zoom = 1/window.devicePixelRatio;
-
+            alert(zoom);
             var started = start_percentage*100;
+
+
 
             $("#fretboard").css({'padding-left': start_percentage*100+'%'});
 
             alert('moved' + started);
+
+            // Zoom
+            
+
             //$("#fretboard").css({'padding-left': full+'%'});
-            //$('#everything').css({'zoom':zoom})
+            $('#everything').css({'zoom':zoom})
             
             //console.log("--------------"+top);
             
