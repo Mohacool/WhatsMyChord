@@ -695,14 +695,23 @@
             var full = 25 + blahblah;
             
             var zoom = window.screen.width/1366;
+
             alert("zoom by" + zoom + "cuz your screen is "+ window.screen.width);
-            var started = start_percentage*100;
+            
+
+            var account_for_zoom = (1 - zoom)*screen.width;
+            
+        
+
+            alert("account for %:" + account_for_zoom);
+
+            var total_move = start_percentage*100 + account_for_zoom;
 
 
 
-            $("#fretboard").css({'padding-left': start_percentage*100+'%'});
+            $("#fretboard").css({'padding-left': total_move+'%'});
 
-            alert('moved' + started);
+            
 
             // Zoom
             
