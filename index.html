@@ -697,9 +697,11 @@
             
             var zoom = 1/window.devicePixelRatio;
 
+            var started = start_percentage*100;
+
             $("#fretboard").css({'padding-left': start_percentage*100+'%'});
 
-            alert('moved',start_perecentage);
+            alert('moved' + started);
             //$("#fretboard").css({'padding-left': full+'%'});
             //$('#everything').css({'zoom':zoom})
             
