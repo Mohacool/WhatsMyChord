@@ -44,6 +44,14 @@
     <script type="text/javascript">
         alert("Your screen resolution is: " + window.screen.width * window.devicePixelRatio + "x" + window.screen.height * window.devicePixelRatio);
         alert("True resoltuion" + window.screen.width + "by" +window.screen.height);
+
+        
+
+        
+        
+
+
+
         // current Notes
         var curr_notes = ["E","B","G","D","A","E"];
         var curr_notes_num = [0,0,0,0,0,0];
@@ -668,7 +676,24 @@
 
         $(document).ready(function(){
 
-            let top = $("#fretboard").css('padding-top');
+
+            // Add 5% for every 10% decrease
+
+            // Ratio = 1 padding = 341 + 
+            // Ratio = 1/2 padding = 2*(341) + (1/2)*680
+            
+            var blah = 100 - (window.devicePixelRatio*100);
+            var blahblah = (blah/10)*2.5;
+
+            alert("ratio" + blahblah);
+
+            var full = 25 + blahblah;
+            
+            var zoom = 1/window.devicePixelRatio;
+            
+            //$("#fretboard").css({'padding-left': full+'%'});
+            $('#everything').css({'zoom':zoom})
+            
             //console.log("--------------"+top);
             
             // Create note and oct matrices
