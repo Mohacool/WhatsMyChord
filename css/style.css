@@ -3,7 +3,7 @@
 body {
 
 
-    overflow:hidden;
+    overflow:hidden; 
     background-color:#232323;
     border: 6px solid #fdf7e9;
     -webkit-box-sizing: border-box;/* Safari/Chrome, other WebKit */
@@ -61,8 +61,16 @@ html,body{
 
 .chords{
     display:inline-block;
-    font-size:40px;
+    font: 20px 'Gotham';
+    color: #595959;
     margin-left:25px;
+    
+    margin-top:6px;
+    cursor:pointer;
+}
+
+.chords:hover{
+    color: #3a3a3a;
 }
 
 .chord_diagram{
@@ -73,6 +81,9 @@ html,body{
     
 }
 #chord_diagram_container{
+
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     position:relative;
     background-color: #fdf7e9;
 
@@ -83,9 +94,10 @@ html,body{
     border: 1px solid green;
 
     */
-    height:140px;
-    top: -740px;
-    width: 670px;
+    height:120px;
+    top: -760px;
+    width: 767px;
+    left:-48px;
 
 }
 
@@ -109,7 +121,11 @@ html,body{
     width:710px;
 }
 
+
+
 #chord_name_container{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     position: relative;
     background-color: #fdf7e9;
     
@@ -117,10 +133,11 @@ html,body{
     border: 1px solid green;
 
     */
-    top:100px;
-    height:40px;
-    width: 670px;
-    top: -770px;
+    
+    height:35px;
+    width: 767px;
+    left:-48px;
+    top: -764px;
     
 }
 
@@ -255,7 +272,7 @@ html,body{
     width: 23px;
     height: 20px;
     
-    border: 1px solid gray;
+    border: 1px solid #3a3a3a;
     /* opacity: 0; 
     
     
@@ -274,7 +291,7 @@ html,body{
     width: 16px;
     height:16px;
     border-radius: 50%;
-    background-color: #fdf7e9;
+    background-color: #595959;
     
 }
 
@@ -283,6 +300,19 @@ html,body{
     /* shift everything here*/ 
     
 }
+
+@font-face {
+    font-family: 'Gotham';
+    src: url('GothamBold.eot');
+    src: url('GothamBold.eot?#iefix') format('embedded-opentype'),
+        url('GothamBold.woff2') format('woff2'),
+        url('GothamBold.woff') format('woff'),
+        url('GothamBold.svg#GothamBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+
 
 .note_circle{
     
@@ -300,8 +330,8 @@ html,body{
     border: 2px solid #666;
     color: #666;
     
-    font-family: 'Gotham';
-    font: 14px 'Gotham';
+    
+    font: 20px 'Gotham';
     line-height: 12px;
     text-align: center;
     
