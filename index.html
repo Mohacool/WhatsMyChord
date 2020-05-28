@@ -247,6 +247,10 @@
             console.log("image changed to ",img_name);
             console.log("opening",img_name);
 
+            var img_name = "/notes/chord_images/cropped/evenmore/img9.png";
+            var img_2_name = "/notes/chord_images/cropped/evenmore/img6.png";
+
+            console.log("#$$#$#$#$#$#$"+img_name);
             $(".chord_diagram.chord1").attr("src",img_name);
             $(".chord_diagram.chord2").attr("src",img_2_name);
 
@@ -566,6 +570,8 @@
             let note = note_name + oct;
 
             // Make the note smaller if its #/b
+
+            /*
             if (note_name.length == 2){
                 //console.log("small");
                 $(".note_circle").css({"font-size":"13px"});
@@ -573,6 +579,7 @@
             else{
                 $(".note_circle").css({"font-size":"14px"});
             }
+            */
 
             let string_name = "string"+ string;
             
