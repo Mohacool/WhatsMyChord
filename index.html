@@ -89,12 +89,13 @@
 
             return chord_names;
         }
-
+        
+        // If the note itself is clicked then place it back to open frets
         function notey(string){
             
 
             var open_num = 90 + string;
-
+            console.log("***************** reseting",open_num)
             clicky(open_num,false);
         }
 
@@ -217,8 +218,8 @@
             // This whole thing is hard_coded
 
             
-            var img_name = "/notes/chord_images/cropped/"+ note+"-0"+".jpg";
-            var img_2_name = "/notes/chord_images/cropped/"+ note+"-1"+".jpg";
+            var img_name = "/notes/chord_images/cropped/"+ note+"-0"+".png";
+            var img_2_name = "/notes/chord_images/cropped/"+ note+"-1"+".png";
 
            
             
@@ -226,8 +227,8 @@
             
             
             if (!doesFileExist(img_name)){
-                var img_name = "/notes/chord_images/cropped/more/"+ note+"-0"+".jpg";
-                var img_2_name = "/notes/chord_images/cropped/more/"+ note+"-1"+".jpg";
+                var img_name = "/notes/chord_images/cropped/more/"+ note+"-0"+".png";
+                var img_2_name = "/notes/chord_images/cropped/more/"+ note+"-1"+".png";
                 
 
                 if (doesFileExist(img_name)){
@@ -235,8 +236,8 @@
                 }
                 else{
                     
-                    var img_name = "/notes/chord_images/cropped/evenmore/"+ note+"-0"+".jpg";
-                    var img_2_name = "/notes/chord_images/cropped/evenmore/"+ note+"-1"+".jpg";
+                    var img_name = "/notes/chord_images/cropped/evenmore/"+ note+"-0"+".png";
+                    var img_2_name = "/notes/chord_images/cropped/evenmore/"+ note+"-1"+".png";
                 }
 
             }
@@ -247,8 +248,7 @@
             console.log("image changed to ",img_name);
             console.log("opening",img_name);
 
-            var img_name = "notes/chord_images/cropped/evenmore/img9.png";
-            var img_2_name = "notes/chord_images/cropped/evenmore/img6.png";
+            
 
             console.log("#$$#$#$#$#$#$"+img_name);
             $(".chord_diagram.chord1").attr("src",img_name);
@@ -412,6 +412,8 @@
                 
                 console.log(matches.length);
                 console.log("new =========================");
+
+                // Place the chord names
                 for (var i = 0;i < matches.length; i++){
                     let name = ".chords.chord"+i;
                     console.log('place',matches[i],'at',name);
@@ -607,6 +609,8 @@
             // Show the note
             $(".note_circle."+string_name).css({"visibility":"visible"});
 
+            console.log("made "+".note_circle."+string_name+"visible");
+
             // Hide the X again
             $(".x."+string_name).css({"opacity":"0"});
             $(".x:hover."+string_name).css({"opacity":"1"});
@@ -627,7 +631,7 @@
                     x_clicked = true;
                 }
                 else{
-                    $(".note_circle.string"+string_num).css({"visibility":"visible"});
+                    $(".note_circle.string"+string_num+1).css({"visibility":"visibility"});
                 }
                 
             }
@@ -1000,7 +1004,7 @@
 
                     
                     
-                    <div class="chords chord0"></div>
+                    <div class="chords chord0">Hello</div>
                     <div class="chords chord1"></div>
                     <div class="chords chord2"></div>
                     <div class="chords chord3"></div>
