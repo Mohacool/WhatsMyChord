@@ -76,19 +76,35 @@ html,body{
 .chord_diagram{
     display: inline-block;
     opacity:0.7;
-    filter: opacity(70%);
+
     top:6px;
     position:absolute;
     height:90%; 
     display:inline-block;
     cursor: pointer;
     background-clip:content-box;
+    -webkit-filter: none;
+
+  -moz-filter: none;
+
+  -ms-filter: none;
+
+  -o-filter: none;
+
+  filter: none;
     
 }
 
 .chord_diagram:hover{
     opacity:1 ;
-    filter: opacity(100%);
+    filter: hue-rotate(14%);
+    
+    filter: brightness(0%);
+    filter: invert(100%);
+    border-top: 3px solid #fdf7e9;
+    -webkit-filter : hue-rotate(180deg);
+
+    
     
     
     
@@ -226,10 +242,11 @@ html,body{
 
 
 .x{
+    visibility:hidden;
     width:12px;
     opacity:0;
     
-    cursor: pointer;
+    
     position:relative;
     font-family:  'Arial', sans-serif;
     font-size: 1.2em;
