@@ -100,23 +100,30 @@
         }
 
         function x_it(string_num){
-            
+            //alert(".open.string"+string_num);
             var clicky_num = 90 + string_num;
             console.log(".note_circle.string"+string_num);
-            $(".note_circle.string"+string_num).css({"visibility":"hidden"});
+            //$(".note_circle.string"+string_num).css({"visibility":"hidden"});
 
+            $(".note_circle.string"+string_num).css({"background-color":"#fdf7e9"});
+            //$(".open.string"+string_num).css({"visibility":"hidden"});
+
+            $(".open.string"+string_num).css({"background-color":"#fdf7e9"});
+
+            $(".text_circle.string"+string_num).text("X");
+            $(".text_circle.string"+string_num).css({"color":"#3a3a3a"});
         }
 
         // Set the notes back to open 
         function reset(){
 
             // Reset all notes
-            clicky(91,false);
-            clicky(92,false);
-            clicky(93,false);
-            clicky(94,false);
-            clicky(95,false);
-            clicky(96,false);
+            clicky(91,false,true);
+            clicky(92,false,true);
+            clicky(93,false,true);
+            clicky(94,false,true);
+            clicky(95,false,true);
+            clicky(96,false,true);
 
             // Hide chord diagrams
             $(".chord_diagram").hide();
@@ -170,7 +177,7 @@
                 var matches_fix = matches[0].replace('#','sharp');
                 console.log("@@@@@@@@@ - IF all notes has ",matches_fix);
 
-                // If its simple A,B,C
+                // If its simple A,B,C add major to it 
                 if (all_notes.includes(matches_fix)){
 
                     var note = matches[0]+"major"; //Make it major
@@ -202,6 +209,7 @@
                     
                     // If chord is something minor
                     const regex = RegExp('.*m'+"$");
+
                     if (regex.test(note)){
                         console.log("TRUE");
                         note = note.replace('m','minor');
@@ -213,55 +221,87 @@
                     
                 }
             
-            // Cycle through the 5 slots and fill them with the first 5 available chords
 
-            // This whole thing is hard_coded
+                // Clear the previous chord diagrams 
+                for (var i = 0;i < 6; i++){
+                    $(".chord_diagram.chord"+i).attr("src","");
+                }
+                
+                // Cycle through the 5 slots and fill them with the first 5 available chords
 
-            
-            var img_name = "/notes/chord_images/cropped/"+ note+"-0"+".png";
-            var img_2_name = "/notes/chord_images/cropped/"+ note+"-1"+".png";
+                // This whole thing is hard_coded
+
+                // Loop through 5 chord shapes for the chord 
+                for (var i = 0;i < 5; i++){
+                    
+                    
+                    var chord_num = i+1;
+
+                    // Find the image location (find_file checks 3 locations)
+                    img_name = find_file(note,i);
+
+                    // 
+                    if (img_name){
+                        $(".chord_diagram.chord"+chord_num).attr("src",img_name);
+                    }
+                    else{
+                        break;
+                    }
+                }
 
            
             
 
-            
-            
-            if (!doesFileExist(img_name)){
-                var img_name = "/notes/chord_images/cropped/more/"+ note+"-0"+".png";
-                var img_2_name = "/notes/chord_images/cropped/more/"+ note+"-1"+".png";
-                
+                function find_file(note,number){
 
-                if (doesFileExist(img_name)){
+                    var img_name = "/notes/chord_images/cropped/"+note+"-"+number+".png";
                     
+
+                    if (!doesFileExist(img_name)){
+                        
+                        var img_name = "/notes/chord_images/cropped/more/"+ note+"-"+number+".png";
+
+                        if (!doesFileExist(img_name)){
+                            
+                            var img_name = "/notes/chord_images/cropped/evenmore/"+ note+"-"+number+".png";
+
+                            if (!doesFileExist(img_name)){
+                                
+                                return false;
+                            }
+                        }
+
+                    }
+                    console.log("Found it -",number);
+                    return img_name;
+
                 }
-                else{
-                    
-                    var img_name = "/notes/chord_images/cropped/evenmore/"+ note+"-0"+".png";
-                    var img_2_name = "/notes/chord_images/cropped/evenmore/"+ note+"-1"+".png";
-                }
+            
+            
 
             }
-
-            
-            
-
-            console.log("image changed to ",img_name);
-            console.log("opening",img_name);
-
-            
-
-            console.log("#$$#$#$#$#$#$"+img_name);
-            $(".chord_diagram.chord1").attr("src",img_name);
-            $(".chord_diagram.chord2").attr("src",img_2_name);
-
-
-            }
-
             // If there's no match
             else{
                 $(".chords").hide();
                 $(".chord_diagram").hide();
             }
+
+            
+            
+
+                console.log("image changed to ",img_name);
+                console.log("opening",img_name);
+
+                
+
+                console.log("#$$#$#$#$#$#$"+img_name);
+            
+            
+
+
+            
+
+            
             
             
         }
@@ -269,6 +309,7 @@
         function doStuff(input_chord){
 
             
+            var all_notes = ['C','C#','D','D#','E','F','F#','G','G#','A','Bb','B','Db','Eb','Gb','Ab','A#'];
 
             // Set Manipulation functions
             function isIn(s)          { return elt => s.has(elt); }
@@ -285,6 +326,17 @@
                 let name = ".chords.chord"+i;
                 $(name).text("");
                 
+            }
+
+            // reset the opacity of the chords
+            $(".chord_diagram.chord").css({"opacity":"0.7"});
+            for (var i = 0;i < 5; i++){
+                $(".chord_diagram.chord"+i).css({"opacity":"0.7"});
+                //$(".chord_diagram.chord"+i).css({"filter":"opacity(70%)"});
+                
+                
+               
+
             }
             
 
@@ -338,9 +390,12 @@
 
                         var match_set = eqSet(input_set,check_set);
 
-
+                        var temp_chord = chord;
+                        
                         chord = chord.replace('minor','m');
                         chord = chord.replace('major','');
+
+                        
 
                         if (match){
                             console.log("Matched with",chord); 
@@ -356,6 +411,43 @@
                                 set_matches.splice(index, 1);
                                 console.log(set_matches);
                             }
+
+                            console.log("````````````````````` chord matched is"+chord);
+                            //var chord_index = data[chord].indexOf(JSON.stringify(item));
+
+                            
+
+                            var chord_index = 0
+                            
+                            console.log("TEmp chord",temp_chord);
+
+                            const regex = RegExp('.*m'+"$");
+                            
+                            if (all_notes.includes(temp_chord)){
+                                console.log("?GADS?FS?D?D");
+                                temp_chord = temp_chord +"major";
+                            }
+                            else if (regex.test(temp_chord)){
+                                console.log("TRUE");
+                                temp_chord = temp_chord.replace('m','minor');
+
+                            }  
+                            
+                            for (var i = 0;i < data[temp_chord].length; i++){
+                                if (JSON.stringify(item)==JSON.stringify(data[temp_chord][i])){
+                                    chord_index = i;
+                                    console.log("got");
+                                    
+                                }
+                            }
+                            console.log("````````````````````` its the ",chord_index);
+
+                            var index = chord_index +1;
+
+                            $(".chord_diagram.chord"+index).css({"filter":"opacity(100%)"});
+                            $(".chord_diagram.chord"+index).css({"opacity":"1"});
+
+                            console.log(".chord_diagram.chord"+index);
                              
                         }
 
@@ -417,6 +509,16 @@
                 for (var i = 0;i < matches.length; i++){
                     let name = ".chords.chord"+i;
                     console.log('place',matches[i],'at',name);
+
+
+                    // Do any chord name changes here
+
+                    if (matches[i].includes('mmaj')){
+                        matches[i] = matches[i].replace('mmaj','mMaj');
+                    }
+
+
+
                     $(name).text(matches[i]);
                     console.log(matches);
                 }
@@ -527,7 +629,7 @@
         The muted strings are 101-106
         The rest of the notes are 1-90
         */ 
-        function clicky(note_num,playsound=true){
+        function clicky(note_num,playsound=true,reset=false){
             $(".chord_diagram").show();
             $(".chords").show();
 
@@ -556,7 +658,16 @@
                 }
             }
 
+            // RESET all the 
+            
             $(".note_circle.string"+string).css({"visibility":"visible"});
+            $(".open.string"+string).css({"background-color":"#595959"});
+
+            $(".note_circle.string"+string).css({"background-color":"#323232"});
+            $(".text_circle.string"+string).css({"color":"#fdf7e9"});
+
+            
+
             console.log("SHOWWWWWWWWWWWWWWWW",".note_circle.string"+string);
 
             // If same note clicked again
@@ -573,17 +684,14 @@
 
             // Make the note smaller if its #/b
 
-            /*
-            if (note_name.length == 2){
-                //console.log("small");
-                $(".note_circle").css({"font-size":"13px"});
-            }
-            else{
-                $(".note_circle").css({"font-size":"14px"});
-            }
-            */
+            
+            
+            
 
             let string_name = "string"+ string;
+
+
+            
             
             // Update current notes
             curr_notes[string-1] = note_name;
@@ -595,7 +703,34 @@
             if (note_name.endsWith('#')){
                 note_name = note_name.slice(0,-1)+'\u266F'
             }
-            $(".note_circle."+string_name).text(note_name);
+
+            // Add note name to circle
+            $(".text_circle."+string_name).text(note_name);
+
+            // Change aligning of certain note names
+            if (["G","C"].includes(note_name)){
+                $(".text_circle."+string_name).css({"margin-left":"-3.5px"});
+            }
+            else if (["A","D"].includes(note_name)){
+                $(".text_circle."+string_name).css({"margin-left":"-3.3px"});
+            }
+            else{
+                $(".text_circle."+string_name).css({"margin-left":"-2px"});
+            }
+
+            // Change text size/aligning for # and b notes
+            if (note_name.length == 2){
+                //console.log("small");
+                $(".text_circle."+string_name).css({"font-size":"15px"});
+                $(".text_circle."+string_name).css({"margin-left":"-4px"});
+                $(".text_circle."+string_name).css({"line-height":"27px"});
+
+            }
+            else{
+                $(".text_circle."+string_name).css({"font-size":"20px"});
+                
+            }
+            
 
             // Move the note circle to the correct spot
             let x_pos = 8 + (fret-1)*44.4;
@@ -623,7 +758,7 @@
                 
                 var string_num = note_num-91;
                 console.log("curr note is",curr_notes_num[string_num]);
-                if (curr_notes_num[string_num] == 0){
+                if (curr_notes_num[string_num] == 0 && reset==false){
                     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
                     // Create the x
@@ -993,12 +1128,24 @@
                 <span class="open string6" onclick="clicky('96')"></span>
 
 
-                <span class="note_circle string1" onclick="notey(1)">E</span>
-                <span class="note_circle string2" onclick="notey(2)">B</span>
-                <span class="note_circle string3" onclick="notey(3)">G</span>
-                <span class="note_circle string4" onclick="notey(4)">D</span>
-                <span class="note_circle string5" onclick="notey(5)">A</span>
-                <span class="note_circle string6" onclick="notey(6)">E</span>
+                <span class="note_circle string1" onclick="notey(1)">
+                    <span class="text_circle string1">E</span>
+                </span>
+                <span class="note_circle string2" onclick="notey(2)">
+                    <span class="text_circle string2">B</span>
+                </span>
+                <span class="note_circle string3" onclick="notey(3)">
+                    <span class="text_circle string3" style="margin-left:-3.5px">G</span>
+                </span>
+                <span class="note_circle string4" onclick="notey(4)">
+                    <span class="text_circle string4" style="margin-left:-3.3px">D </span>
+                </span>
+                <span class="note_circle string5" onclick="notey(5)">
+                    <span class="text_circle string5" style="margin-left:-3.3px">A</span>
+                </span>
+                <span class="note_circle string6" onclick="notey(6)">
+                    <span class="text_circle string6">E</span>
+                </span>
 
                 <div id="chord_name_container">
 
@@ -1023,8 +1170,11 @@
                     <div class="item">5</div>
                     -->
 
-                    <img class="chord_diagram chord1" src="">
-                    <img class="chord_diagram chord2" style="left:120px" src="">
+                    <img class="chord_diagram chord1" style="left:37.5px" src="">
+                    <img class="chord_diagram chord2" style="left:157.5px" src="">
+                    <img class="chord_diagram chord3" style="left:277.5px" src="">
+                    <img class="chord_diagram chord4" style="left:397.5px" src="">
+                    <img class="chord_diagram chord5" style="left:517.5px" src="">
                 </div>
 
                 <div class="fret_numbers">
