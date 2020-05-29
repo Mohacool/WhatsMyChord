@@ -48,8 +48,8 @@
         
 
         
-        
-
+        const sharpRegExp = /#/g;
+        var curr_chord_to_display = 0;
 
 
         // current Notes
@@ -116,6 +116,14 @@
 
             notePaths[string_num-1] = "";
         }
+        
+
+        // Change the number of global variable to show which chord will be displayed
+        function chord_display_change(num){
+
+            doStuff([2,2,2,2,2,2],false); //not sure why it works but it does
+            curr_chord_to_display = num;
+        }
 
         function diagramClick(diagnum){
 
@@ -148,6 +156,10 @@
 
                 chord_name = chord_name.replace('ov','/');
 
+                const inverseSharpRegExp = /sharp/g;
+                chord_name = chord_name.replace(inverseSharpRegExp,'#');
+                chord_name = chord_name.replace('mMaj','mmaj');
+
                 var chord_nums = data[chord_name][chord_index]
 
                 var note_oct = [];
@@ -158,6 +170,7 @@
                 console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%",chord_nums);
                 reset(false);
                 console.log("RESETTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+                console.log("RESET placing",chord_nums);
                 for (var i = 0;i < 6; i++){
                     console.log("*******************************************",i);
 
@@ -168,13 +181,25 @@
                         clicky(91+i,true,false,false);
                         console.log("9666666666666666666666666666666 - i");
                         console.log(96-i);
+                        console.log("RESET: click",91+i,"once");
                         
                     }
                     else if(chord_nums[i]==0){
+                        console.log('RESET:open on the ',i+1,'th string');
                         note_oct.push(oct_matrix.get([i,chord_nums[i]]));
                         note.push(note_matrix.get([i,chord_nums[i]]));
-                        clicky(96-i,true,false,false);
-                        clicky(96-i,true,false,false);
+
+                        console.log("RESET curr",curr_notes_num);
+                        if (curr_notes_num[i]==0){
+                            
+                        }
+                        else{
+                            clicky(96-i,true,false,false);
+                        }
+                        
+                        //clicky(96-i,true,false,false);
+                        console.log("i twice",i);
+                        console.log("RESET: click",96-i,"once");
                         
                         
                     }
@@ -184,11 +209,14 @@
                         var note_num = 15*i+chord_nums[i];
                         console.log("``````````````````````````",note_num);
 
-                        clicky(note_num,true,false,false)
+                        clicky(note_num,true,false,false);
+
+                        console.log("RESET: click",note_num,"once");
                         
                     }
    
                 }
+                
                 
                 //console.log("mask",chordify(chord_nums.reverse()));
                 //console.log("mask",note,note_oct);
@@ -229,6 +257,8 @@
         // Set the notes back to open 
         function reset(refresh=true){
 
+            console.log("RESET now with refresh=",refresh);
+
             if (refresh==true){
                 // Reset all notes
                 clicky(91,false,true);
@@ -255,13 +285,18 @@
             $(".chord_diagram").hide();
             $(".chords").hide();
 
-            // Hide chord names
-            for (var i = 0;i < 6; i++){
-                let name = ".chords.chord"+i;
-                console.log("clearing",name);
-                $(name).text("");
-                
+            if (refresh==true){
+
+                 // Hide chord names
+                for (var i = 0;i < 6; i++){
+                    let name = ".chords.chord"+i;
+                    console.log("clearing",name);
+                    $(name).text("");
+                    
+                }
+
             }
+           
 
 
         }
@@ -287,8 +322,14 @@
 
         function fillDiagrams(matches){
             
+            console.log("LOL matches",matches);
+
             var all_notes = ['C','Csharp','D','Dsharp','E','F','Fsharp','G','Gsharp','A','Bb','B','Db','Eb','Gb','Ab','Asharp'];
             
+            
+            var curr_chord = matches[curr_chord_to_display];
+            
+
 
 
             // If the note is simple A,B,C.... make it Amajor
@@ -300,13 +341,13 @@
 
                 
 
-                var matches_fix = matches[0].replace('#','sharp');
+                var matches_fix = curr_chord.replace(sharpRegExp,'sharp');
                 console.log("@@@@@@@@@ - IF all notes has ",matches_fix);
 
                 // If its simple A,B,C add major to it 
                 if (all_notes.includes(matches_fix)){
 
-                    var note = matches[0]+"major"; //Make it major
+                    var note = curr_chord+"major"; //Make it major
                     
                     if (note.includes('/')){
                         note = note.replace('/','ov');
@@ -314,19 +355,19 @@
 
                     // Replace # with Sharp
                     if (note.includes('#')){
-                        note = note.replace('#','sharp');
+                        note = note.replace(sharpRegExp,'sharp');
                     }
                     
                 }
                 else{
-                    note = matches[0];
+                    note = curr_chord;
                     if (note.includes('/')){
                         note = note.replace('/','ov');
                     }
 
                      // Replace # with Sharp
                      if (note.includes('#')){
-                        note = note.replace('#','sharp');
+                        note = note.replace(sharpRegExp,'sharp');
                     }
 
                     
@@ -416,12 +457,7 @@
             
             
 
-                console.log("image changed to ",img_name);
-                console.log("opening",img_name);
-
                 
-
-                console.log("#$$#$#$#$#$#$"+img_name);
             
             
 
@@ -433,7 +469,7 @@
             
         }
 
-        function doStuff(input_chord){
+        function doStuff(input_chord,clear=true){
 
             
             var all_notes = ['C','C#','D','D#','E','F','F#','G','G#','A','Bb','B','Db','Eb','Gb','Ab','A#'];
@@ -452,11 +488,12 @@
 
             // clear the divs of any chord names unless 
             
-            
+            if (clear==true){
 
-            for (var i = 0;i < 6; i++){
-                let name = ".chords.chord"+i;
-                $(name).text("");
+                for (var i = 0;i < 6; i++){
+                    let name = ".chords.chord"+i;
+                    $(name).text("");
+                }
             }
 
             
@@ -656,6 +693,7 @@
                 // Place the chord names
                 for (var i = 0;i < matches.length; i++){
                     let name = ".chords.chord"+i;
+                    
                     console.log('place',matches[i],'at',name);
 
 
@@ -676,8 +714,14 @@
                 console.log("text at 3 is",$(".chords.chord2").text());
                 console.log("text at 4 is",$(".chords.chord3").text());
 
-                //lolp
+                //lol
+                //$("#chord_diagram_container").css({"background-color":"#fdf7e9"});
+                $(".spinner").css({"visibility":"hidden"});
+
+                
                 fillDiagrams(matches);
+                
+
                 
 
                 
@@ -785,6 +829,8 @@
 
             console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",refresh);
 
+            $(".input_msg").css({"display":"none"});
+            
             
             
 
@@ -947,6 +993,8 @@
             console.log("==========================",note_num,"clicked");
 
             if (refresh==true){
+                //$(".spinner").css({"visibility":"visible"});$("#chord_diagram_container").css({"background-color":"red"});
+                $(".spinner").css({"visibility":"visible"});
                 doStuff(curr_notes_num);
             }
             
@@ -1052,6 +1100,10 @@
         $(document).ready(function(){
 
 
+            // Input message
+            $(".input_msg").delay(1000).animate({ opacity: 1 }, 1200);
+
+
             // Add 5% for every 10% decrease
 
             // Ratio = 1 padding = 341 + 
@@ -1083,7 +1135,8 @@
             var total_move = start_percentage*100 + account_for_zoom;
 
 
-
+            
+            
             $("#fretboard").css({'padding-left': total_move+'%'});
 
             
@@ -1303,13 +1356,13 @@
                 <div id="chord_name_container">
 
                     
-                    
-                    <div class="chords chord0">Hello</div>
-                    <div class="chords chord1"></div>
-                    <div class="chords chord2"></div>
-                    <div class="chords chord3"></div>
-                    <div class="chords chord4"></div>
-                    <div class="chords chord5"></div>
+                    <div class="input_msg">Input a chord to get started</div>
+                    <div class="chords chord0" onclick="chord_display_change(0)"></div>
+                    <div class="chords chord1" onclick="chord_display_change(1)"></div>
+                    <div class="chords chord2" onclick="chord_display_change(2)"></div>
+                    <div class="chords chord3" onclick="chord_display_change(3)"></div>
+                    <div class="chords chord4" onclick="chord_display_change(4)"></div>
+                    <div class="chords chord5" onclick="chord_display_change(5)"></div>
                     
                     
                 </div>
@@ -1322,6 +1375,11 @@
                     <div class="item">4</div>
                     <div class="item">5</div>
                     -->
+                    <div class="spinner">
+                        <div class="bounce1"></div>
+                        <div class="bounce2"></div>
+                        <div class="bounce3"></div>
+                      </div>
 
                     <img class="chord_diagram chord1" style="left:37.5px" src="" onclick="diagramClick(1)">
                     <img class="chord_diagram chord2" style="left:157.5px" src="" onclick="diagramClick(2)">
