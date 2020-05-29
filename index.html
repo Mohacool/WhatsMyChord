@@ -100,6 +100,7 @@
         }
 
         function x_it(string_num){
+            
             //alert(".open.string"+string_num);
             var clicky_num = 90 + string_num;
             console.log(".note_circle.string"+string_num);
@@ -112,18 +113,143 @@
 
             $(".text_circle.string"+string_num).text("X");
             $(".text_circle.string"+string_num).css({"color":"#3a3a3a"});
+
+            notePaths[string_num-1] = "";
+        }
+
+        function diagramClick(diagnum){
+
+            $(".chord_diagram.chord"+diagnum).css({"opacity":"1"});
+
+            for (var i = 1;i < 6; i++){
+                if (i!=diagnum){
+                    $(".chord_diagram.chord"+i).css({"opacity":"0.6"});
+                }
+            }
+
+
+            console.log("CLICK at ",diagnum);
+            console.log($(".chord_diagram.chord"+diagnum).attr("src"));
+
+            // Takes ex: /notes/chord_images/cropped/evenmore/G69-0.png
+            var chord_pos = $(".chord_diagram.chord"+diagnum).attr("src").split("/").length;
+            var chord = $(".chord_diagram.chord"+diagnum).attr("src").split("/")[chord_pos-1];
+            chord = chord.split('.').slice(0, -1).join('.')
+            // ------> G69-0
+
+
+
+            var chord_name = chord.split("-")[0];
+            var chord_index = chord.split("-")[1];
+
+            //alert(chord_index);
+
+            $.getJSON("/notes/data.json", function(data) {
+
+                chord_name = chord_name.replace('ov','/');
+
+                var chord_nums = data[chord_name][chord_index]
+
+                var note_oct = [];
+                var note = [];
+
+                chord_nums = chord_nums.reverse();
+
+                console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%",chord_nums);
+                reset(false);
+                console.log("RESETTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+                for (var i = 0;i < 6; i++){
+                    console.log("*******************************************",i);
+
+                    if (chord_nums[i]==-1){ // If its muted 
+                        
+                        note_oct.push("");
+                        note.push("-");
+                        clicky(91+i,true,false,false);
+                        console.log("9666666666666666666666666666666 - i");
+                        console.log(96-i);
+                        
+                    }
+                    else if(chord_nums[i]==0){
+                        note_oct.push(oct_matrix.get([i,chord_nums[i]]));
+                        note.push(note_matrix.get([i,chord_nums[i]]));
+                        clicky(96-i,true,false,false);
+                        clicky(96-i,true,false,false);
+                        
+                        
+                    }
+                    else{
+                        note_oct.push(oct_matrix.get([i,chord_nums[i]]));
+                        note.push(note_matrix.get([i,chord_nums[i]]));
+                        var note_num = 15*i+chord_nums[i];
+                        console.log("``````````````````````````",note_num);
+
+                        clicky(note_num,true,false,false)
+                        
+                    }
+   
+                }
+                
+                //console.log("mask",chordify(chord_nums.reverse()));
+                //console.log("mask",note,note_oct);
+
+                //pop
+                for (var i = 0;i < 6; i++){
+                    var note_name = note[i]+note_oct[i];
+
+                    console.log(note_name);
+                    if (note_name !="-"){
+
+                        if (note_name[1]=="#"){
+                            note_name = note_name[0] + 's' + note_name[2];
+                        }
+                        if (note_name.substring(0,2) == "Bb"){
+                            //console.log(note_name = "As" + note_name[2]);
+                            note_name = "As" + note_name[2];
+                        }
+
+                        var notePath = "/notes/" + note_name + '.mp3'
+                        //console.log(notePath);
+                        notePaths[i]=notePath;
+
+                    }
+
+                }
+                
+
+            })
+
+            
+
+            
+            
+
         }
 
         // Set the notes back to open 
-        function reset(){
+        function reset(refresh=true){
 
-            // Reset all notes
-            clicky(91,false,true);
-            clicky(92,false,true);
-            clicky(93,false,true);
-            clicky(94,false,true);
-            clicky(95,false,true);
-            clicky(96,false,true);
+            if (refresh==true){
+                // Reset all notes
+                clicky(91,false,true);
+                clicky(92,false,true);
+                clicky(93,false,true);
+                clicky(94,false,true);
+                clicky(95,false,true);
+                clicky(96,false,true);
+            }
+            else{
+                clicky(91,false,true,false);
+                clicky(92,false,true,false);
+                clicky(93,false,true,false);
+                clicky(94,false,true,false);
+                clicky(95,false,true,false);
+                clicky(96,false,true,false);
+
+            }
+            
+
+
 
             // Hide chord diagrams
             $(".chord_diagram").hide();
@@ -236,6 +362,7 @@
                     
                     
                     var chord_num = i+1;
+                    
 
                     // Find the image location (find_file checks 3 locations)
                     img_name = find_file(note,i);
@@ -321,23 +448,41 @@
 
             var chords_of_matches = [];
 
-            // clear the divs of any chord names
+
+
+            // clear the divs of any chord names unless 
+            
+            
+
             for (var i = 0;i < 6; i++){
                 let name = ".chords.chord"+i;
                 $(name).text("");
-                
             }
+
+            
+                
+            
+
+            
+            
 
             // reset the opacity of the chords
-            $(".chord_diagram.chord").css({"opacity":"0.7"});
-            for (var i = 0;i < 5; i++){
-                $(".chord_diagram.chord"+i).css({"opacity":"0.7"});
-                //$(".chord_diagram.chord"+i).css({"filter":"opacity(70%)"});
-                
-                
-               
+            
 
+            for (var i = 1;i < 6; i++){
+                console.log("reset");
+                $(".chord_diagram.chord"+i).css({"opacity":"0.6"});
+                //$(".chord_diagram.chord"+i).css({"filter":"opacity(70%)"});
             }
+
+            for (var i = 1;i < 6; i++){
+                console.log("opacity of"+i+" is"+ $(".chord_diagram.chord"+i).css("opacity"));
+                console.log("opacity of"+i+" is"+ $(".chord_diagram.chord"+i).css("filter"));
+                
+                //$(".chord_diagram.chord"+i).css({"filter":"opacity(70%)"});
+            }
+
+
             
 
             $.getJSON("/notes/data.json", function(data) {
@@ -444,7 +589,9 @@
 
                             var index = chord_index +1;
 
-                            $(".chord_diagram.chord"+index).css({"filter":"opacity(100%)"});
+
+                            // Make the existing chord black 
+                            
                             $(".chord_diagram.chord"+index).css({"opacity":"1"});
 
                             console.log(".chord_diagram.chord"+index);
@@ -505,6 +652,7 @@
                 console.log(matches.length);
                 console.log("new =========================");
 
+                
                 // Place the chord names
                 for (var i = 0;i < matches.length; i++){
                     let name = ".chords.chord"+i;
@@ -528,6 +676,7 @@
                 console.log("text at 3 is",$(".chords.chord2").text());
                 console.log("text at 4 is",$(".chords.chord3").text());
 
+                //lolp
                 fillDiagrams(matches);
                 
 
@@ -552,6 +701,7 @@
 
             // update NotePaths to later play the whole chord
             notePaths[string-1] = notePath;
+            console.log(notePath);
 
             
 
@@ -629,11 +779,11 @@
         The muted strings are 101-106
         The rest of the notes are 1-90
         */ 
-        function clicky(note_num,playsound=true,reset=false){
+        function clicky(note_num,playsound=true,reset=false,refresh=true){
             $(".chord_diagram").show();
             $(".chords").show();
 
-            
+            console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",refresh);
 
             
             
@@ -763,6 +913,7 @@
 
                     // Create the x
                     x_it(string_num+1);
+                   
                     x_clicked = true;
                 }
                 else{
@@ -795,12 +946,14 @@
 
             console.log("==========================",note_num,"clicked");
 
-
-            doStuff(curr_notes_num);
+            if (refresh==true){
+                doStuff(curr_notes_num);
+            }
+            
 
             
             
-            if (playsound){
+            if (playsound && refresh==true){
                 playNote(string,note);
             }
 
@@ -1170,11 +1323,11 @@
                     <div class="item">5</div>
                     -->
 
-                    <img class="chord_diagram chord1" style="left:37.5px" src="">
-                    <img class="chord_diagram chord2" style="left:157.5px" src="">
-                    <img class="chord_diagram chord3" style="left:277.5px" src="">
-                    <img class="chord_diagram chord4" style="left:397.5px" src="">
-                    <img class="chord_diagram chord5" style="left:517.5px" src="">
+                    <img class="chord_diagram chord1" style="left:37.5px" src="" onclick="diagramClick(1)">
+                    <img class="chord_diagram chord2" style="left:157.5px" src="" onclick="diagramClick(2)">
+                    <img class="chord_diagram chord3" style="left:277.5px" src="" onclick="diagramClick(3)">
+                    <img class="chord_diagram chord4" style="left:397.5px" src="" onclick="diagramClick(4)">
+                    <img class="chord_diagram chord5" style="left:517.5px" src="" onclick="diagramClick(5)">
                 </div>
 
                 <div class="fret_numbers">
