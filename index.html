@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="icon" href="data:;base64,=">
-    <title>Whats my Chord</title>
+    <title>Whats My Chord</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">  
 
     <link rel="https://cdn.rawgit.com/mfd/f3d96ec7f0e8f034cc22ea73b3797b59/raw/856f1dbb8d807aabceb80b6d4f94b464df461b3e/gotham.css">
@@ -45,11 +45,15 @@
         //alert("Your screen resolution is: " + window.screen.width * window.devicePixelRatio + "x" + window.screen.height * window.devicePixelRatio);
         //alert("True resoltuion" + window.screen.width + "by" +window.screen.height);
 
-        
+
 
         
+        var dark_theme = true;
+        
         const sharpRegExp = /#/g;
-        var curr_chord_to_display = 0;
+
+
+       
 
 
         // current Notes
@@ -90,6 +94,35 @@
             return chord_names;
         }
         
+        function night(){
+
+            if (dark_theme){
+                const colorscheme = document.querySelector(':root');
+                colorscheme.style.setProperty('--white', '#3a3a3a'); 
+                colorscheme.style.setProperty('--black', '#fdf7e9');
+                colorscheme.style.setProperty('--gray', '#fdf7e9');
+                colorscheme.style.setProperty('--gray-hover', '#fdf7e9');
+
+                $("#fretborder").css({"background-color":"#fdf7e9"});
+                
+                
+                
+                dark_theme = false;
+            }
+            else{
+                const colorscheme = document.querySelector(':root');
+                colorscheme.style.setProperty('--white', '#fdf7e9'); 
+                colorscheme.style.setProperty('--black', '#232323'); 
+                colorscheme.style.setProperty('--gray', '#3a3a3a ');
+                colorscheme.style.setProperty('--gray-hover', '#595959');
+
+                $("#fretborder").css({"background-color":"var(--white)"});
+                dark_theme = true;
+            }
+                   
+        }
+
+
         // If the note itself is clicked then place it back to open frets
         function notey(string){
             
@@ -121,8 +154,10 @@
         // Change the number of global variable to show which chord will be displayed
         function chord_display_change(num){
 
-            doStuff([2,2,2,2,2,2],false); //not sure why it works but it does
-            curr_chord_to_display = num;
+            alert("Select chord #" + num);
+            
+
+            
         }
 
         function diagramClick(diagnum){
@@ -131,7 +166,7 @@
 
             for (var i = 1;i < 6; i++){
                 if (i!=diagnum){
-                    $(".chord_diagram.chord"+i).css({"opacity":"0.6"});
+                    $(".chord_diagram.chord"+i).css({"opacity":"0.7"});
                 }
             }
 
@@ -254,9 +289,51 @@
 
         }
 
+        function new_reset(){
+            curr_notes_num = [0,0,0,0,0,0];
+            curr_notes = ["E", "B", "G", "D", "A", "E"];
+            notePaths = ["/notes/E4.mp3", "/notes/B3.mp3", "/notes/G3.mp3", "/notes/D3.mp3", "/notes/A2.mp3", "/notes/E2.mp3"];
+            
+            for (var i = 1;i < 7; i++){
+                console.log("diag",i);
+
+                // Add note name to circle
+                $(".text_circle.string"+i).text(curr_notes[i-1]);
+
+                // Adjust size and aligning
+                $(".text_circle.string"+i).css({"font-size":"20px"});
+                $(".text_circle.string"+i).css({"font-size":"20px"});
+                $(".text_circle.string"+i).css({"margin-left":"-2px"});
+                $(".text_circle.string"+i).css({"line-height":"26.5px"});        
+                if (["A","D"].includes(curr_notes[i-1])){
+                    $(".text_circle.string"+i).css({"margin-left":"-3.3px"});
+                }
+                else if (curr_notes[i-1]=="G"){
+                    $(".text_circle.string"+i).css({"margin-left":"-3.5px"});
+                }
+
+                $(".note_circle.string"+i).css({"left":"-35px"});
+                
+                
+                //cat
+
+            }
+            
+            
+
+            // Hide chord diagrams
+            $(".chord_diagram").hide();
+            $(".chords").hide();
+            $(".input_msg").hide();
+
+            // Show the spinner
+            $(".spinner").css({"visibility":"visible"});
+        }
+
         // Set the notes back to open 
         function reset(refresh=true){
 
+            
             console.log("RESET now with refresh=",refresh);
 
             if (refresh==true){
@@ -267,6 +344,7 @@
                 clicky(94,false,true);
                 clicky(95,false,true);
                 clicky(96,false,true);
+                
             }
             else{
                 clicky(91,false,true,false);
@@ -286,14 +364,16 @@
             $(".chords").hide();
 
             if (refresh==true){
-
+                //jil
                  // Hide chord names
                 for (var i = 0;i < 6; i++){
                     let name = ".chords.chord"+i;
                     console.log("clearing",name);
+                    
                     $(name).text("");
                     
                 }
+                
 
             }
            
@@ -326,10 +406,10 @@
 
             var all_notes = ['C','Csharp','D','Dsharp','E','F','Fsharp','G','Gsharp','A','Bb','B','Db','Eb','Gb','Ab','Asharp'];
             
-            
-            var curr_chord = matches[curr_chord_to_display];
-            
 
+            
+            // Current chord to display
+            display_chord = matches[0]; 
 
 
             // If the note is simple A,B,C.... make it Amajor
@@ -341,13 +421,13 @@
 
                 
 
-                var matches_fix = curr_chord.replace(sharpRegExp,'sharp');
+                var matches_fix = display_chord.replace(sharpRegExp,'sharp');
                 console.log("@@@@@@@@@ - IF all notes has ",matches_fix);
 
                 // If its simple A,B,C add major to it 
                 if (all_notes.includes(matches_fix)){
 
-                    var note = curr_chord+"major"; //Make it major
+                    var note = display_chord+"major"; //Make it major
                     
                     if (note.includes('/')){
                         note = note.replace('/','ov');
@@ -360,7 +440,7 @@
                     
                 }
                 else{
-                    note = curr_chord;
+                    note = display_chord;
                     if (note.includes('/')){
                         note = note.replace('/','ov');
                     }
@@ -377,7 +457,7 @@
                     // If chord is something minor
                     const regex = RegExp('.*m'+"$");
 
-                    if (regex.test(note)){
+                    if (regex.test(note) && !note.includes('dim')){
                         console.log("TRUE");
                         note = note.replace('m','minor');
 
@@ -450,6 +530,12 @@
             }
             // If there's no match
             else{
+                $(".input_msg").css({"display":"block"});
+                $(".input_msg").text("No chords matched");
+
+                $(".input_msg").css({"margin-left":"300px"});
+                $(".input_msg").css({"padding-top":"10px"});
+
                 $(".chords").hide();
                 $(".chord_diagram").hide();
             }
@@ -469,8 +555,9 @@
             
         }
 
-        function doStuff(input_chord,clear=true){
+        function doStuff(input_chord,clear=true,reset=false){
 
+            
             
             var all_notes = ['C','C#','D','D#','E','F','F#','G','G#','A','Bb','B','Db','Eb','Gb','Ab','A#'];
 
@@ -492,8 +579,12 @@
 
                 for (var i = 0;i < 6; i++){
                     let name = ".chords.chord"+i;
-                    $(name).text("");
+                    
+                    alert('ohoh');
                 }
+                //lpo
+                
+                
             }
 
             
@@ -508,7 +599,7 @@
 
             for (var i = 1;i < 6; i++){
                 console.log("reset");
-                $(".chord_diagram.chord"+i).css({"opacity":"0.6"});
+                $(".chord_diagram.chord"+i).css({"opacity":"0.7"});
                 //$(".chord_diagram.chord"+i).css({"filter":"opacity(70%)"});
             }
 
@@ -609,7 +700,7 @@
                                 console.log("?GADS?FS?D?D");
                                 temp_chord = temp_chord +"major";
                             }
-                            else if (regex.test(temp_chord)){
+                            else if (regex.test(temp_chord)&& !note.includes('dim')){
                                 console.log("TRUE");
                                 temp_chord = temp_chord.replace('m','minor');
 
@@ -689,23 +780,91 @@
                 console.log(matches.length);
                 console.log("new =========================");
 
+                console.log('pol MATCHES ARE',matches);
+
+
+                
+                
                 
                 // Place the chord names
                 for (var i = 0;i < matches.length; i++){
                     let name = ".chords.chord"+i;
                     
-                    console.log('place',matches[i],'at',name);
+                    console.log('pol place',matches[i],'at',name);
 
 
                     // Do any chord name changes here
-
                     if (matches[i].includes('mmaj')){
                         matches[i] = matches[i].replace('mmaj','mMaj');
                     }
 
 
 
-                    $(name).text(matches[i]);
+                    var to_super = ['6','9','69','11','13','add9','sus4','sus2','sus2su4','dim','maj7#5','7b9','#m69'];
+
+                    function super_detected(){
+
+                        
+                        var count = 0;
+                        for (var x = 0;x < to_super.length; x++){
+                            
+                            var sup = to_super[x];
+                            console.log('super',sup);
+                            if (matches[i].includes(sup)){
+
+                                console.log('super detected',matches[i]);
+                                
+                                var cut_index = matches[i].indexOf(sup);
+                                var first = matches[i].substring(0,cut_index);
+                                var second = matches[i].substring(cut_index);
+                                $(name).html(first+"<sup>"+second+"</sup>");
+                                
+                            }
+                            count = 1;
+                            
+                            
+                        }
+                        if (count==0){return false}
+                        else{return true}
+                    }
+                    
+
+
+                    
+
+                    console.log("text at CHANGE ",name,"to",matches[i]);
+
+
+                    $(name).html(matches[i]);
+                    // ADD SUPERSCRIPTS
+                    
+                    
+                    /*
+                    if (super_detected()){
+                        
+                    }
+                    else{
+                        console.log('text at !!!!!! AFTER Im changing');
+                        
+                        $(name).html(matches[i]);
+
+                        console.log("text at empty",empty);
+                    }
+                    */
+
+                    
+                    
+                    
+
+                    
+                    //lolp
+                    
+                    
+
+                    
+
+                    
+                    
                     console.log(matches);
                 }
 
@@ -716,7 +875,15 @@
 
                 //lol
                 //$("#chord_diagram_container").css({"background-color":"#fdf7e9"});
-                $(".spinner").css({"visibility":"hidden"});
+
+
+                // Show the chords and hide spinner if its not reset time
+                if (reset==false){
+                    console.log("diag NO RESET CLICKED, i'm showing face");
+                    $(".spinner").css({"visibility":"hidden"});
+                    $(".chord_diagram").show();
+                }
+                
 
                 
                 fillDiagrams(matches);
@@ -824,11 +991,39 @@
         The rest of the notes are 1-90
         */ 
         function clicky(note_num,playsound=true,reset=false,refresh=true){
-            $(".chord_diagram").show();
-            $(".chords").show();
 
-            console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",refresh);
+            
+            $(".chords.chord0").css({"border-right-width":"0px"});
 
+
+            if (refresh){
+                for (var i = 0;i<6;i++){
+                    $(".chords.chord"+i).text("");
+                    $(name).text("");
+            }
+            }
+            
+
+
+            
+            // Unhide the chord names and chord diagrams when something is clicked
+
+            if (reset==false){
+
+                console.log("diag Im showing myself because reset isn't clicked");
+                $(".chord_diagram").show();
+                $(".chords").show();
+            }
+           
+           
+            
+            // Move the first chord over 70px 
+            //$(".chords.chord0").css({"border-right-width":"70px"});
+
+            $(".chords.chord0").delay(0).animate({"border-right-width":"70px"},1000);
+            //$(".chords.chord0").delay(0).animate({"border-right-width":"80px"},1000);
+
+            // Hide the input message when something is clicked
             $(".input_msg").css({"display":"none"});
             
             
@@ -854,8 +1049,7 @@
                 }
             }
 
-            // RESET all the 
-            
+            // Make the notes visible 
             $(".note_circle.string"+string).css({"visibility":"visible"});
             $(".open.string"+string).css({"background-color":"#595959"});
 
@@ -925,6 +1119,8 @@
             else{
                 $(".text_circle."+string_name).css({"font-size":"20px"});
                 
+                
+                
             }
             
 
@@ -992,11 +1188,18 @@
 
             console.log("==========================",note_num,"clicked");
 
+            
+
             if (refresh==true){
-                //$(".spinner").css({"visibility":"visible"});$("#chord_diagram_container").css({"background-color":"red"});
+
+                console.log("diag I will show the spinner and hide the chord diagrams");
                 $(".spinner").css({"visibility":"visible"});
-                doStuff(curr_notes_num);
+                $(".chord_diagram").hide();
+
+                console.log("diag im passing in RESET=",reset);
+                doStuff(curr_notes_num,reset);
             }
+            
             
 
             
@@ -1004,6 +1207,8 @@
             if (playsound && refresh==true){
                 playNote(string,note);
             }
+
+            
 
             
         }
@@ -1103,6 +1308,8 @@
             // Input message
             $(".input_msg").delay(1000).animate({ opacity: 1 }, 1200);
 
+            $(".chords.chord0").css({"color":"#232323"});
+
 
             // Add 5% for every 10% decrease
 
@@ -1146,6 +1353,7 @@
 
             //$("#fretboard").css({'padding-left': full+'%'});
             $('#everything').css({'zoom':zoom})
+            $('#everything').css('transform', 'scale(' + zoom + ')');
             
             //console.log("--------------"+top);
             
@@ -1204,7 +1412,7 @@
                 <div class="play-button" onclick="play_chord()">
                     <a href="#" class="round-button"><i class="fa fa-play fa-2x"></i></a>
                 </div>
-                <div class="reset" onclick="reset()">CLEAR</div>
+                <div class="reset" onclick="new_reset()">CLEAR</div>
 
                 
                 
@@ -1357,7 +1565,7 @@
 
                     
                     <div class="input_msg">Input a chord to get started</div>
-                    <div class="chords chord0" onclick="chord_display_change(0)"></div>
+                    <div class="chords chord0" onclick="chord_display_change(0)"> </div>
                     <div class="chords chord1" onclick="chord_display_change(1)"></div>
                     <div class="chords chord2" onclick="chord_display_change(2)"></div>
                     <div class="chords chord3" onclick="chord_display_change(3)"></div>
@@ -1408,6 +1616,8 @@
                     <span class="frets">15</span>
 
                 </div>
+
+                <div class="night_circle" onclick="night()"></div>
 
             </div>
         </div>
