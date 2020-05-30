@@ -268,13 +268,19 @@ html,body{
     
 }
 
-@-moz-document domain('www.whatsmychord.com') {
+@-moz-document url-prefix() { 
+
     .header{
         visibility:visible;
     }
-    
+  }
+
+@-moz-document domain('whatsmychord.com') {
+.header{
+    visibility:visible;
 }
 
+}
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     
 
@@ -285,7 +291,7 @@ html,body{
         left:100px;
         bottom:100px;
     }
-}
+    }
 
 .header{
     visibility:hidden;
