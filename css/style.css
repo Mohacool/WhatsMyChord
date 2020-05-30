@@ -1,11 +1,16 @@
-
+:root {
+    --white:#fdf7e9;
+    --black:#232323;
+    --gray:#3a3a3a;
+    --gray-hover:#595959;
+}
 
 body {
 
 
     overflow:hidden; 
-    background-color:#232323;
-    border: 6px solid #fdf7e9;
+    background-color:var(--black);
+    border: 6px solid var(--white);
     -webkit-box-sizing: border-box;/* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;/* Firefox, other Gecko */
     box-sizing: border-box;/* Opera/IE 8+ */
@@ -22,6 +27,21 @@ html,body{
     }
 
 
+.night_circle {
+    cursor:pointer;
+    position:fixed;
+    top:590px;
+    right:20px;
+    height: 50px;
+    width: 50px;
+    background-color: var(--white);
+    border-radius: 50%;
+    display: inline-block;
+}  
+.night_circle:hover{
+    background-color: var(--gray);
+}
+
 #fretborder{
     border-radius:5px;
     position: absolute;
@@ -29,23 +49,44 @@ html,body{
     right:-39px;
     height:210px;
     width:767px;
-    background-color:#fdf7e9;
+    background-color:var(--white);
     z-index:-100;
 }
 
+
+
 .reset{
+
+    
+
     position:relative;
     height:30px;
-    top:140px;
-    left:730px;
-    width:80px;
-    border:1px solid green;
+    top:145px;
+    left:740px;
+    
+    color: var(--white);
+    font: 14px 'Gotham';
+
     cursor:pointer;
 }
 
 .reset:hover{
-    background: #f3edd6;
+    color: #131212;
+    left:738px;
+    top:144px;
+    font: 16px 'Gotham';
+    
 }
+
+/*
+.reset:hover{
+    left:0px;
+    color: #b59214;
+    font: 140px 'Gotham';
+}
+*/
+
+
 .item {
     
     display:inline-block;
@@ -65,7 +106,7 @@ html,body{
     font: 15px 'Gotham';
     margin-left: 250px;
     padding-top:8px;
-    color: #232323;
+    color: var(--black);
     -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
        -moz-animation: fadein 2s; /* Firefox < 16 */
         -ms-animation: fadein 2s; /* Internet Explorer */
@@ -74,18 +115,25 @@ html,body{
 }
 
 .chords{
+    border: 0px solid #fdf7e9;
+    border-right-width:0px;
+
+
+    height:5px;
     display:inline-block;
     font: 20px 'Gotham';
-    color: #595959;
-    margin-left:25px;
+    color: var(--gray-hover);
+    margin-left:50px;
     
     margin-top:6px;
     cursor:pointer;
 }
 
 .chords:hover{
-    color: #3a3a3a;
+    color: var(--gray);
 }
+
+
 
 .chord_diagram{
     display: inline-block;
@@ -115,7 +163,7 @@ html,body{
     
     filter: brightness(0%);
     filter: invert(100%);
-    border-top: 3px solid #fdf7e9;
+    border-top: 3px solid var(--white);
     -webkit-filter : hue-rotate(180deg);
 
     
@@ -129,7 +177,7 @@ html,body{
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     position:relative;
-    background-color: #fdf7e9;
+    background-color: var(--white);
 
    
     
@@ -171,7 +219,7 @@ html,body{
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     position: relative;
-    background-color: #fdf7e9;
+    background-color: var(--white);
     
     /*
     border: 1px solid green;
@@ -220,7 +268,24 @@ html,body{
     
 }
 
+@-moz-document domain('www.whatsmychord.com') {
+    .header{
+        visibility:visible;
+    }
+    
+}
 
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    
+
+    #id-name {
+        position:absolute;
+        width:100px;
+        height:100px;
+        left:100px;
+        bottom:100px;
+    }
+}
 
 .header{
     visibility:hidden;
@@ -235,7 +300,7 @@ html,body{
     
     height:160px;
     top:-20px;
-    text-align:center;
+    text-align:left;
     position:relative;
     border: 1px solid green;
     
@@ -317,7 +382,7 @@ html,body{
     width: 23px;
     height: 20px;
     
-    border: 1px solid #3a3a3a;
+    border: 1px solid var(--gray);
     /* opacity: 0; 
     
     
@@ -336,7 +401,7 @@ html,body{
     width: 16px;
     height:16px;
     border-radius: 50%;
-    background-color: #fdf7e9;
+    background-color: var(--white);
     
 }
 
@@ -371,8 +436,8 @@ html,body{
     height: 9px;
     padding: 8px;
 
-    background: #3a3a3a;
-    border: 1px solid #fdf7e9;
+    background: var(--gray);
+    border: 1px solid var(--white);
 
 
     
@@ -405,7 +470,7 @@ html,body{
     align-items: center; 
     justify-content: center;
     text-align: center; 
-    color: #fdf7e9;
+    color: var(--white);
     
     
 }
@@ -423,9 +488,9 @@ html,body{
     width: 23px;
     height:23px;
     
-    border: 2px solid #fdf7e9;
+    border: 2px solid var(--white);
     border-radius: 50%;
-    background-color: #595959;
+    background-color: var(--gray-hover);
     
     
 }
@@ -447,12 +512,12 @@ html,body{
 	padding-top: 17px;
 	padding-left: 8px;
 	line-height: 20px;
-	border: 6px solid #232323;
+	border: 6px solid var(--black);
 	border-radius: 50%;
-	color:#232323;
+	color:var(--black);
 	text-align:center;
 	text-decoration:none;
-	background-color: #fdf7e9;
+	background-color: var(--white);
 	font-size:13px;
 	font-weight:bold;
 	transition: all 0.3s ease;
@@ -477,7 +542,7 @@ html,body{
   .spinner > div {
     width: 18px;
     height: 18px;
-    background-color: #3a3a3a;
+    background-color: var(--gray);
   
     border-radius: 100%;
     display: inline-block;
