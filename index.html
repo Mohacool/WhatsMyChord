@@ -4,11 +4,25 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="icon" href="data:;base64,=">
-    <title>Whats My Chord</title>
+    <title>Guitar Chord Finder | Whats My Chord? </title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">  
 
     <link rel="https://cdn.rawgit.com/mfd/f3d96ec7f0e8f034cc22ea73b3797b59/raw/856f1dbb8d807aabceb80b6d4f94b464df461b3e/gotham.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Marvel" />
+    
+
+    <head>  <meta name="description" 
+        content="What chord is this? Is there an easier way to play it? Enter it into the virtual fretboard to find out. 
+        The chord finder will identify and show you different ways to play it."></head>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+
     
     <script type="text/javascript">
         console.log(screen.width);
@@ -788,6 +802,7 @@
                 
                 // Place the chord names
                 for (var i = 0;i < matches.length; i++){
+
                     let name = ".chords.chord"+i;
                     
                     console.log('pol place',matches[i],'at',name);
@@ -801,6 +816,9 @@
 
 
                     var to_super = ['6','9','69','11','13','add9','sus4','sus2','sus2su4','dim','maj7#5','7b9','#m69'];
+
+
+                    var super_temp;
 
                     function super_detected(){
 
@@ -817,7 +835,9 @@
                                 var cut_index = matches[i].indexOf(sup);
                                 var first = matches[i].substring(0,cut_index);
                                 var second = matches[i].substring(cut_index);
-                                $(name).html(first+"<sup>"+second+"</sup>");
+
+                                super_temp = first+"<sup>"+second+"</sup>";
+                                //$(name).html(first+"<sup>"+second+"</sup>");
                                 
                             }
                             count = 1;
@@ -835,6 +855,7 @@
                     console.log("text at CHANGE ",name,"to",matches[i]);
 
 
+                    
                     $(name).html(matches[i]);
                     // ADD SUPERSCRIPTS
                     
@@ -851,6 +872,7 @@
                         console.log("text at empty",empty);
                     }
                     */
+                    
 
                     
                     
@@ -995,7 +1017,7 @@
             
             $(".chords.chord0").css({"border-right-width":"0px"});
 
-
+            // Hide the chord names 
             if (refresh){
                 for (var i = 0;i<6;i++){
                     $(".chords.chord"+i).text("");
@@ -1311,7 +1333,7 @@
                 }
                 else if(navigator.userAgent.indexOf("Chrome") != -1 )
                 {
-                    alert('Chrome');
+                    //alert('Chrome');
                 }
                 else if(navigator.userAgent.indexOf("Safari") != -1)
                 {
