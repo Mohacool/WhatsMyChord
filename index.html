@@ -66,13 +66,14 @@
 
 
 
-        
+        var chord_num_selected = 0;
+
         var dark_theme = true;
         
         const sharpRegExp = /#/g;
 
 
-       
+        var matches = [];
 
 
         // current Notes
@@ -174,6 +175,8 @@
         function chord_display_change(num){
 
             alert("Select chord #" + num);
+
+            chord_num_selected = num;
             
 
             
@@ -419,7 +422,7 @@
             Fill the chord images 
         */
 
-        function fillDiagrams(matches){
+        function fillDiagrams(){
             
             console.log("LOL matches",matches);
 
@@ -428,7 +431,7 @@
 
             
             // Current chord to display
-            display_chord = matches[0]; 
+            display_chord = matches[chord_num_selected]; 
 
 
             // If the note is simple A,B,C.... make it Amajor
@@ -584,7 +587,7 @@
             function isIn(s)          { return elt => s.has(elt); }
             function contains(s1, s2) { return [...s2] . every(isIn(s1)); }
             function eqSet(a, b)      { return contains(a, b) && contains(b, a); }
-            var matches = [];
+            matches = [];
             var normal_matches = [];
             var set_matches = [];
 
@@ -913,7 +916,7 @@
                 
 
                 
-                fillDiagrams(matches);
+                fillDiagrams();
                 
 
                 
@@ -1019,8 +1022,11 @@
         */ 
         function clicky(note_num,playsound=true,reset=false,refresh=true){
 
+
             
             $(".chords.chord0").css({"border-right-width":"0px"});
+            $(".chords.chord1").css({"margin-left":"0px"});
+            
 
             // Hide the chord names 
             if (refresh){
@@ -1046,6 +1052,8 @@
             
             // Move the first chord over 70px 
             //$(".chords.chord0").css({"border-right-width":"70px"});
+
+            
 
             $(".chords.chord0").delay(0).animate({"border-right-width":"70px"},1000);
             //$(".chords.chord0").delay(0).animate({"border-right-width":"80px"},1000);
