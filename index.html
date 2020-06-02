@@ -1552,6 +1552,10 @@
                     //alert($(window).width());
                     $('.square').css({"visibility":"hidden"});
 
+                    let push = $(window).width()-210;
+                    alert($(window).width()-210);
+                   // $('.play-button').css({"left":push+"px"});
+
 
                 }
                 
@@ -1569,9 +1573,9 @@
                 $('.note_circle').css({"pointer":"default"});
                 $('.reset').css({"pointer":"default"});
 
-                let zoom = ($(window).width()/497)*1.3
+                let zoom = ($(window).width()/360)*1.3
                 //alert("zooming"+zoom);
-
+                alert($(window).width()-210);
                 //$('#everything').css('transform', 'scale(' + zoom + ')');
                 //$('#everything').css({'zoom':zoom})
 
