@@ -1573,7 +1573,7 @@
                 $('.note_circle').css({"pointer":"default"});
                 $('.reset').css({"pointer":"default"});
 
-                let zoom = ($(window).width()/360)*1.3
+                let zoom = (($(window).width()-360)/360)+1;
                 //alert("zooming"+zoom);
                 alert($(window).width()-210);
                 //$('#everything').css('transform', 'scale(' + zoom + ')');
