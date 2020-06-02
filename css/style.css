@@ -5,7 +5,7 @@
     --gray-hover:#595959;
 }
 
-.title{
+.page_title{
     white-space: nowrap;
     position: absolute; /* taken out of the normal flow of the document */
     top: 10%; /* moved down by 50% of the screen height */
@@ -717,7 +717,7 @@ html,body{
     
     .play-button{
         top:400px;
-        left:1000px;
+        left:153%;
     }
   
  
@@ -735,17 +735,17 @@ html,body{
     
     
     .reset{
-        left:1000px;
+        left:154.5%;
         top:400px;
     }
 
-    .title{
+    .page_title{
   
         white-space: nowrap;
         top:5%;
         
         /* background-color: var(--gray); */
-        font-size:40px;
+        font-size:250%;
         color:var(--white);
         width:97%;
    
