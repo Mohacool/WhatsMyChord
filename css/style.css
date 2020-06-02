@@ -720,7 +720,7 @@ html,body{
     
     .play-button{
         top:400px;
-        left:153%;
+        left:150%;
     }
   
  
@@ -739,7 +739,7 @@ html,body{
     
     .reset{
         
-        left:154.5%;
+        left:151.5%;
         top:400px;
     }
 
@@ -749,7 +749,7 @@ html,body{
         top:5%;
         
         /* background-color: var(--gray); */
-        font-size:240%;
+        font-size:250%;
         color:var(--white);
         width:97%;
    
