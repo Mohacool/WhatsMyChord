@@ -1583,15 +1583,18 @@
                 $('.page_title').css('transform', 'scale(' + zoom + ')');
                 $('.page_title').css({'zoom':zoom});
                 //let fret_push = 360/($(window).width()-360);
-                let fret_push = 14;
-                let curr_fret = $('#fretboard').css('right');
-                alert("curr fret"+curr_fret);
-                let push = fret_push - curr_fret;
-                $('#fretboard').css({'right':push+"px"});
+                $(window).resize(function(){
+                    let fret_push = 14;
+                    let curr_fret = $('#fretboard').css('right');
+                    alert("curr fret"+curr_fret);
+                    let push = curr_fret - push;
+                    alert("push by"+push);
+                    $('#fretboard').css({'right':push+"px"});
 
-                alert(screen.width+"Will zoom"+zoom);
+                    alert(screen.width+"Will zoom"+zoom);
 
-                alert("NOW"+$('#fretboard').css('right'));
+                    alert("NOW"+$('#fretboard').css('right'));
+                }
 
             }
             
