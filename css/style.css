@@ -698,7 +698,10 @@ html,body{
 
     body {
         overflow-y:auto;
-        
+        border-top: 6px solid var(--white);
+        border-bottom: 6px solid var(--white);
+        border-left: 1px solid var(--white);
+        border-right: 1px solid var(--white);
        /* overflow-y:scroll; */
         max-height:900px;
         height:900px;
@@ -751,6 +754,21 @@ html,body{
    
         
     }
+
+    .boxes{
+        top:300px;
+        left:133%;
+        display:flex;
+        position:absolute;
+        height: 80px;
+        padding-left:65%;
+
+        width: 40%;
+        border: 1px solid red;
+        background-color: red;
+        
+        
+      }
 
     .square {
     
