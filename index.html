@@ -1582,12 +1582,12 @@
 
                 $('.page_title').css('transform', 'scale(' + zoom + ')');
                 $('.page_title').css({'zoom':zoom});
-                //let fret_push = 360/($(window).width()-360);
+                let fret_push = 360/($(window).width()-360);
                 
-                let fret_push = 14;
+                //let fret_push = 14;
                 let curr_fret = $('#fretboard').css('right');
                 alert("curr fret"+curr_fret);
-                let push = parseInt(curr_fret.replace('px','')) + fret_push;
+                let push = parseInt(curr_fret.replace('px','')) - fret_push;
                 alert("push by"+push);
                 $('#fretboard').css({'right':push+"px"});
 
