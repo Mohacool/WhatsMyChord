@@ -1597,10 +1597,10 @@
 
                 //let play_push
                 
-                let play_push = ($(window).width()-210)/2;
-                let curr_play = $('.play-button').css('right');
-                let play = parseInt(curr_play.replace('px','')) -play_push;
-                $('.play-button').css({'right':play+"px"});
+                let play_push = (($(window).width()-210)/2)-75;
+                let curr_play = $('.play-button').css('left');
+                let play = parseInt(curr_play.replace('px','')) + play_push;
+                $('.play-button').css({'left':play+"px"});
                 alert("pushing play button by"+play_push);
 
             }
