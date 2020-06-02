@@ -1549,7 +1549,7 @@
 
                 if ($(window).width()<700){
 
-                    alert('sweet');
+                    alert($(window).width());
                     $('.square').css({"visibility":"hidden"});
 
 
@@ -1569,9 +1569,13 @@
                 $('.note_circle').css({"pointer":"default"});
                 $('.reset').css({"pointer":"default"});
 
-                let zoom = 0.5;
+                let zoom = 497/$(window).width();
+
                 $('#everything').css('transform', 'scale(' + zoom + ')');
                 $('#everything').css({'zoom':zoom})
+
+                $('.page_title').css('transform', 'scale(' + zoom + ')');
+                $('.page_title').css({'zoom':zoom})
 
 
             }
