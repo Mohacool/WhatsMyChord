@@ -5,6 +5,9 @@
     --gray-hover:#595959;
 }
 
+
+
+
 body {
 
 
@@ -19,6 +22,7 @@ body {
     
 }
 
+
 html,body{
     width: 100%;
     height: 100%;
@@ -28,10 +32,13 @@ html,body{
 
 
 .night_circle {
+    
     cursor:pointer;
-    position:fixed;
-    top:590px;
-    right:20px;
+    position: absolute;
+    
+    bottom: 20px;
+    right: 20px;
+    
     height: 50px;
     width: 50px;
     background-color: var(--white);
@@ -101,7 +108,10 @@ html,body{
   }
 
 .input_msg{
-    display:flex;
+    display:block;
+    
+    
+    white-space: nowrap;
     opacity:0;
     font: 15px 'Gotham';
     margin-left: 250px;
@@ -116,11 +126,54 @@ html,body{
 
 .chords{
     border: 0px solid #fdf7e9;
+    
+    margin: auto auto;
+    cursor: pointer;
+    margin-left:60px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction:row;
+    font: 20px 'Gotham';
+    color: var(--gray-hover);
+
+    -webkit-transition: -webkit-transform 2s ease-in-out;
+}
+
+
+.chords.chord1{
+    
+    
+}
+.chords.chord0.anim{
+    transform: translateX(180px);
+}
+.chords.chord1.anim{
+    transform: translateX(-120px);
+}
+
+.chords.chord0{
+    transform: translateX(0%);
+}
+
+.chords.chord1{
+    transform: translateX(0%);
+}
+
+
+
+
+/*
+.chords{
+
+    
+    border: 0px solid #fdf7e9;
     border-right-width:0px;
 
-
     height:5px;
-    display:inline-block;
+    display:inline-flex;
+    
+    
+    
     font: 20px 'Gotham';
     color: var(--gray-hover);
     margin-left:50px;
@@ -129,9 +182,22 @@ html,body{
     cursor:pointer;
 }
 
+
+.chords .chord0{ order:0;}
+.chords .chord1{ order:0;}
+.chords .chord3{ order:0;}
+.chords .chord4{ order:0;}
+.chords .chord5{ order:0;}
+
+.chords .chord2{
+    margin-left:20px;
+    order:0;
+}
+
 .chords:hover{
     color: var(--gray);
 }
+*/
 
 
 
@@ -157,19 +223,11 @@ html,body{
     
 }
 
+
 .chord_diagram:hover{
     opacity:1 ;
-    filter: hue-rotate(14%);
-    
-    filter: brightness(0%);
-    filter: invert(100%);
+ 
     border-top: 3px solid var(--white);
-    -webkit-filter : hue-rotate(180deg);
-
-    
-    
-    
-    
 
 }
 #chord_diagram_container{
@@ -216,6 +274,8 @@ html,body{
 
 
 #chord_name_container{
+    
+    display:flex;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     position: relative;
@@ -250,6 +310,7 @@ html,body{
 }
 
 #everything{
+    
     zoom:1;
     transform: scale(1);
     
@@ -259,6 +320,7 @@ html,body{
 #fretboard {
     
     position: absolute;
+    
     
 
     padding-top: -10%;
@@ -313,6 +375,21 @@ html,body{
     
 }
 
+#rightbar{
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 7%; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: -1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    right:0;
+    background-color: #111; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+  
+  }
+
+
+
 #sidebar{
   height: 100%; /* Full-height: remove this if you want "auto" height */
   width: 15%; /* Set the width of the sidebar */
@@ -359,7 +436,9 @@ html,body{
     display:block;
 }
 
-
+#fret_full{
+    /*transform: rotate(90deg); */
+}
 
 
 .box {
@@ -376,6 +455,7 @@ html,body{
 
 
 .nudge{
+    
     opacity: 0;
     margin-right:15.5px;
     margin-top:4.5px;
@@ -401,6 +481,8 @@ html,body{
 }
 
 .nudge:hover{
+    
+    
     opacity:1;
     margin-right:19px;
     margin-top:2px;
@@ -581,3 +663,49 @@ html,body{
       transform: scale(1.0);
     }
   }
+
+  @media only screen and (max-width:600px){
+    #fret_full{
+        transform:rotate(90deg);
+        
+    }
+
+    body {
+        
+        overflow-y:scroll;
+       /* overflow-y:scroll; */
+        
+    }
+
+    #fretborder{
+        visibility:hidden;
+    }
+
+    
+    .play-button{
+        top:400px;
+        left:900px;
+    }
+ 
+    #fretboard {
+    
+        position: absolute;
+        
+        right:400px;
+        top:-200px;
+
+        width: 680px;
+        
+        
+        
+    }
+    .reset{
+        left:910px;
+        top:400px;
+    }
+    .note_circle{
+        visibility:hidden;
+    }
+
+    
+}
