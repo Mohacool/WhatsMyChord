@@ -720,14 +720,14 @@ html,body{
     
     .play-button{
         top:400px;
-        left:140%;
+        left:146%;
     }
   
  
     #fretboard {
         position: absolute;
         
-        right:118%;
+        right:115%;
         top:-310px;
 
         width: 680px;
@@ -739,7 +739,7 @@ html,body{
     
     .reset{
         
-        left:141.5%;
+        left:147.5%;
         top:400px;
     }
 
@@ -749,7 +749,7 @@ html,body{
         top:5%;
         
         /* background-color: var(--gray); */
-        font-size:170%;
+        font-size:200%;
         color:var(--white);
         width:97%;
    
