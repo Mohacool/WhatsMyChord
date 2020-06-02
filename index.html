@@ -237,15 +237,17 @@
 
             $.getJSON("/notes/data.json", function(data) {
                 
+                alert(matches[chord_num_selected]);
                 let chord_lst = data[matches[chord_num_selected]];
 
+                alert(chord_lst);
                 for (var i = 0;i < chord_lst.length; i++){
 
-                    //console.log("nig"+ curr_state+"compare to",JSON.stringify(chord_lst[i]));
+                    console.log("nig"+ curr_state+"compare to",JSON.stringify(chord_lst[i]));
                     if  (JSON.stringify(curr_state) == JSON.stringify(chord_lst[i])) {
                         //alert('found at '+i);
                         let index = i+1;
-                        //console.log("nig GOTTT at "+i);
+                        console.log("nig GOTTT at "+i);
                         $(".chord_diagram.chord"+index).css({"opacity":"1"});
                     }
                 }
@@ -547,7 +549,7 @@
                 //console.log("ERRORR: matches=",matches);
 
                 
-
+                alert(display_chord);
                 var matches_fix = display_chord.replace(sharpRegExp,'sharp');
                 console.log("@@@@@@@@@ - IF all notes has ",matches_fix);
 
@@ -1560,7 +1562,13 @@
 
             // IF DEVICE IS A PHONE 
             else if (screen.width<700){
+
                 $('.nudge:hover').css({"visibility":"hidden"});
+                $('.open').css({"pointer":"default"});
+                $('.round-button').css({"pointer":"default"});
+                $('.note_circle').css({"pointer":"default"});
+                $('.reset').css({"pointer":"default"});
+
             }
             
             
@@ -1583,11 +1591,14 @@
   
         <!-- <div class="bg"></div> !-->
         <div class="header">
+            <div class="title">WHATS MY CHORD</div>
             
+            <!--
             <div class="logo_container">
 
                 <img src="title.png" id="logo_container">
             </div>
+            -->
 
         </div>
         
