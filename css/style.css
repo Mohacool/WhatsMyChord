@@ -710,10 +710,10 @@ html,body{
     #fretborder{
         position:absolute;
         transform:rotate(90deg);
-        right:-525px;
+        right:-523px;
         top:565px;
         width:730px;
-        height:200px;
+        height:190px;
         
     }
 
@@ -727,7 +727,7 @@ html,body{
     #fretboard {
         position: absolute;
         
-        right:109%;
+        right:113%;
         top:-310px;
 
         width: 680px;
@@ -738,6 +738,7 @@ html,body{
     
     
     .reset{
+        
         left:154.5%;
         top:400px;
     }
@@ -748,7 +749,7 @@ html,body{
         top:5%;
         
         /* background-color: var(--gray); */
-        font-size:250%;
+        font-size:240%;
         color:var(--white);
         width:97%;
    
