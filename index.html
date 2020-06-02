@@ -1582,6 +1582,13 @@
 
                 $('.page_title').css('transform', 'scale(' + zoom + ')');
                 $('.page_title').css({'zoom':zoom});
+                let adjust_title = (zoom-1)*20;
+                let title_height = $('.page_title').css('top').replace('px','');
+                let new_height = title_height - adjust_title;
+                alert('new height added+'+adjust_title);
+                $('.page_title').css({'top':new_height+"px"});
+                alert('curr height'+new_height);
+
                 let fret_push = 360/($(window).width()-360);
                 
                 //let fret_push = 14;
