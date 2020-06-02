@@ -316,7 +316,7 @@ html,body{
     user-select: none;
     -webkit-tap-highlight-color: transparent;
 
-    
+
     zoom:1;
     transform: scale(1);
     
@@ -693,6 +693,11 @@ html,body{
     .play-button{
         top:400px;
         left:900px;
+        
+        
+    }
+    .round-button{
+        cursor:default;
     }
  
     #fretboard {
@@ -714,8 +719,9 @@ html,body{
         left:910px;
         top:400px;
     }
+
     .note_circle{
-        visibility:hidden;
+        cursor:default;
     }
     .square {
     
@@ -726,8 +732,13 @@ html,body{
         height: 25px;
         width: 39px;
         border: 1px solid transparent;
-        cursor:pointer;
+        
       }
+      .open{
+          cursor:default;
+      }
+
+      
 
 
 
