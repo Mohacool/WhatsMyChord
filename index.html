@@ -1535,9 +1535,32 @@
 
             //$("#fretboard").css({'padding-left': full+'%'});
 
+
+            if ($(window).width()<700){
+                $('.note_circle').addClass('.noSelect');
+                $('.round-button').addClass('.noSelect');
+                
+            }
+
+            // IF THE DEVICE IS BIGGER THAN 700 apply zooming 
             if (screen.width >700){
-            $('#everything').css({'zoom':zoom})
-            $('#everything').css('transform', 'scale(' + zoom + ')');
+
+
+                if ($(window).width()<700){
+
+                    alert('sweet');
+                    $('.square').css({"visibility":"hidden"});
+
+
+                }
+                
+                $('#everything').css({'zoom':zoom})
+                $('#everything').css('transform', 'scale(' + zoom + ')');
+            }
+
+            // IF DEVICE IS A PHONE 
+            else if (screen.width<700){
+                $('.nudge:hover').css({"visibility":"hidden"});
             }
             
             
