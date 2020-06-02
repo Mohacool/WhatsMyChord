@@ -1540,11 +1540,7 @@
 
 
             alert("Ali phone is"+ screen.width);
-            if ($(window).width()<700){
-                $('.note_circle').addClass('.noSelect');
-                $('.round-button').addClass('.noSelect');
-                
-            }
+            
 
 
             // IF THE DEVICE IS BIGGER THAN 700 apply zooming 
@@ -1564,7 +1560,7 @@
             }
 
             // IF DEVICE IS A PHONE 
-            else if (screen.width<700){
+            else if (screen.width<=700){
 
                 $('.nudge:hover').css({"visibility":"hidden"});
                 $('.nudge').css({"visibility":"hidden"});
@@ -1572,6 +1568,11 @@
                 $('.round-button').css({"pointer":"default"});
                 $('.note_circle').css({"pointer":"default"});
                 $('.reset').css({"pointer":"default"});
+
+                let zoom = 0.5;
+                $('#everything').css('transform', 'scale(' + zoom + ')');
+                $('#everything').css({'zoom':zoom})
+
 
             }
             
