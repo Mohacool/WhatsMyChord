@@ -1569,7 +1569,7 @@
                 $('.note_circle').css({"pointer":"default"});
                 $('.reset').css({"pointer":"default"});
 
-                let zoom = 497/$(window).width();
+                let zoom = $(window).width()/497;
 
                 $('#everything').css('transform', 'scale(' + zoom + ')');
                 $('#everything').css({'zoom':zoom})
