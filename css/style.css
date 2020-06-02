@@ -5,7 +5,23 @@
     --gray-hover:#595959;
 }
 
+.title{
+    white-space: nowrap;
+    position: absolute; /* taken out of the normal flow of the document */
+    top: 10%; /* moved down by 50% of the screen height */
+    transform: translateY(-50%); /* moved back up (Y axis) by half of its height to achieve the perfect center */
+    width: 100%; /* needs to be defined to keep the default block behavior */
+    text-align: center;
+    
+    margin: 0; /* again, for perf
+    */
+    color: var(--white);
+    font: 50px 'Gotham';
+    
+  
+    
 
+}
 
 
 body {
@@ -79,9 +95,8 @@ html,body{
 
 .reset:hover{
     color: #131212;
-    left:738px;
-    top:144px;
-    font: 16px 'Gotham';
+
+    font: 15px 'Gotham';
     
 }
 
@@ -364,11 +379,12 @@ html,body{
     }
 
 .header{
-    visibility:hidden;
+    visibility:visible;
     width:110%;
     height:80px;
     display:block;
-    background-color:gray;
+    
+    /*background-color:gray; */
     
 }
 
@@ -674,55 +690,68 @@ html,body{
   
 
   @media only screen and (max-width:600px){
+
     #fret_full{
         transform:rotate(90deg);
         
     }
 
     body {
+        overflow-y:auto;
         
-        overflow-y:scroll;
        /* overflow-y:scroll; */
-        
+        max-height:900px;
+        height:900px;
     }
 
     #fretborder{
-        visibility:hidden;
+        position:absolute;
+        transform:rotate(90deg);
+        right:-525px;
+        top:565px;
+        width:730px;
+        height:200px;
+        
     }
 
     
     .play-button{
         top:400px;
-        left:900px;
-        
-        
+        left:1000px;
     }
-    .round-button{
-
-        cursor:default;
-    }
+  
  
     #fretboard {
-    
         position: absolute;
         
-        right:100%;
-        top:-200px;
+        right:109%;
+        top:-310px;
 
         width: 680px;
-        
-        
-        
+        height:20px;
+
     }
+
+    
     
     .reset{
-        left:910px;
+        left:1000px;
         top:400px;
     }
 
-    .note_circle{
-        cursor:default;
+    .title{
+  
+        white-space: nowrap;
+        top:5%;
+        
+        /* background-color: var(--gray); */
+        font-size:40px;
+        color:var(--white);
+        width:97%;
+   
+        
     }
+
     .square {
     
         bottom:983px;
@@ -734,13 +763,7 @@ html,body{
         border: 1px solid transparent;
         
       }
-      .open{
-          cursor:default;
-      }
-
-      
-
-
+     
 
     
 }
