@@ -1546,11 +1546,12 @@
             // IF THE DEVICE IS BIGGER THAN 700 apply zooming 
             if (screen.width >700){
 
-
+                // IF LAPTOP and SQUISHED
                 if ($(window).width()<700){
 
                     //alert($(window).width());
                     $('.square').css({"visibility":"hidden"});
+                    $('.page_title').css({"font-size":"300%"});
 
                     let push = $(window).width()-210;
                     alert($(window).width()-210);
@@ -1573,7 +1574,7 @@
                 $('.note_circle').css({"pointer":"default"});
                 $('.reset').css({"pointer":"default"});
 
-                let zoom = (($(window).width()-360)/360)+1;
+                let zoom = (($(window).width()-360)/700)+1;
                 //alert("zooming"+zoom);
                 alert($(window).width()-210);
                 //$('#everything').css('transform', 'scale(' + zoom + ')');
