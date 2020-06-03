@@ -1546,16 +1546,48 @@
             // IF THE DEVICE IS BIGGER THAN 700 apply zooming 
             if (screen.width >700){
 
+                $(window).resize(function() {
+                    $('#fretboard').css({'right':"109%"});
+                    let play_push = (($(window).width()-210)/2)-70;
+                    
+                    //alert(play_push);
+                    let play = parseInt(curr_play.replace('px','')) + play_push;
+                    $('.play-button').css({'left':play+"px"});
+                    let reset_push = play+10;
+                    $('.reset').css({'left':reset_push+"px"});
+                })
                 // IF LAPTOP and SQUISHED
                 if ($(window).width()<700){
+                    
 
                     //alert($(window).width());
                     $('.square').css({"visibility":"hidden"});
                     $('.page_title').css({"font-size":"300%"});
+                    let curr_play = $('.play-button').css('left');
+                    //alert($(window).width());
+                    let play_push = (($(window).width()-210)/2)-70;
+                        
+                    //alert(play_push);
+                    
+                    let play = parseInt(curr_play.replace('px','')) + play_push;
+                    $('.play-button').css({'left':play+"px"});
+                    let reset_push = play+10;
+                    $('.reset').css({'left':reset_push+"px"});
+                    $('#fretboard').css({'right':"109%"});
 
-                    let push = $(window).width()-210;
-                    alert($(window).width()-210);
+                    $(window).resize(function() {
+                        $('#fretboard').css({'right':"109%"});
+                        let play_push = (($(window).width()-210)/2)-70;
+                        
+                        //alert(play_push);
+                        let play = parseInt(curr_play.replace('px','')) + play_push;
+                        $('.play-button').css({'left':play+"px"});
+                        let reset_push = play+10;
+                        $('.reset').css({'left':reset_push+"px"});
+                    })
+
                    // $('.play-button').css({"left":push+"px"});
+                    
 
 
                 }
