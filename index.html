@@ -1542,102 +1542,7 @@
             //alert("Ali phone is"+ screen.width);
             
 
-            
-            // IF THE DEVICE IS BIGGER THAN 700 apply zooming 
-            if (screen.width >700){
 
-               
-                // IF LAPTOP and SQUISHED
-                if ($(window).width()<700){
-                    
-
-                    //alert($(window).width());
-                    $('.square').css({"visibility":"hidden"});
-                    $('.page_title').css({"font-size":"300%"});
-                    let curr_play = $('.play-button').css('left');
-                    //alert($(window).width());
-                    let play_push = (($(window).width()-210)/2)-70;
-                        
-                    //alert(play_push);
-                    
-                    let play = parseInt(curr_play.replace('px','')) + play_push;
-                    $('.play-button').css({'left':play+"px"});
-                    let reset_push = play+10;
-                    $('.reset').css({'left':reset_push+"px"});
-                    $('#fretboard').css({'right':"109%"});
-
-                    $(window).resize(function() {
-                        $('#fretboard').css({'right':"109%"});
-                        let play_push = (($(window).width()-210)/2)-70;
-                        
-                        //alert(play_push);
-                        let play = parseInt(curr_play.replace('px','')) + play_push;
-                        $('.play-button').css({'left':play+"px"});
-                        let reset_push = play+10;
-                        $('.reset').css({'left':reset_push+"px"});
-                    })
-
-                   // $('.play-button').css({"left":push+"px"});
-                    
-
-
-                }
-                
-                $('#everything').css({'zoom':zoom})
-                $('#everything').css('transform', 'scale(' + zoom + ')');
-            }
-
-            // IF DEVICE IS A PHONE 
-            else if (screen.width<=700){
-
-                $('.nudge:hover').css({"visibility":"hidden"});
-                $('.nudge').css({"visibility":"hidden"});
-                $('.open').css({"pointer":"default"});
-                $('.round-button').css({"pointer":"default"});
-                $('.note_circle').css({"pointer":"default"});
-                $('.reset').css({"pointer":"default"});
-
-                let zoom = (($(window).width()-360)/700)+1;
-                //alert("zooming"+zoom);
-                alert($(window).width()-210);
-                //$('#everything').css('transform', 'scale(' + zoom + ')');
-                //$('#everything').css({'zoom':zoom})
-
-                $('.page_title').css('transform', 'scale(' + zoom + ')');
-                $('.page_title').css({'zoom':zoom});
-                let adjust_title = (zoom-1)*20;
-                let title_height = $('.page_title').css('top').replace('px','');
-                let new_height = title_height - adjust_title;
-                alert('new height added+'+adjust_title);
-                $('.page_title').css({'top':new_height+"px"});
-                alert('curr height'+new_height);
-
-                let fret_push = 360/($(window).width()-360);
-                
-                //let fret_push = 14;
-                let curr_fret = $('#fretboard').css('right');
-                alert("curr fret"+curr_fret);
-                let push = parseInt(curr_fret.replace('px','')) - fret_push;
-                alert("push by"+push);
-                $('#fretboard').css({'right':push+"px"});
-
-                alert(screen.width+"Will zoom"+zoom);
-
-                alert("NOW"+$('#fretboard').css('right'));
-
-                //let play_push
-                
-                let play_push = (($(window).width()-210)/2)-75;
-                let curr_play = $('.play-button').css('left');
-                let play = parseInt(curr_play.replace('px','')) + play_push;
-                $('.play-button').css({'left':play+"px"});
-                alert("pushing play button by"+play_push);
-
-                let reset = play+12;
-                $('.reset').css({"left":reset+"px"});
-
-            }
-            
             
             //console.log("--------------"+top);
             
@@ -1658,7 +1563,7 @@
   
         <!-- <div class="bg"></div> !-->
         <div class="header">
-            <div class="page_title">WHATS MY CHORD</div>
+            <div class="page_title">[ ] WHATS MY CHORD</div>
             
             <!--
             <div class="logo_container">
@@ -1687,7 +1592,7 @@
                 <div class="boxes">
                 
                 </div> 
-                <div id="fretborder"></div>
+                
                 <div class="play-button" onclick="play_chord()">
                     <a href="#" class="round-button"><i class="fa fa-play fa-2x"></i></a>
                 </div>
@@ -1696,7 +1601,7 @@
                 
                 <div id="fret_full">
                     
-                
+                    <div id="fretborder"></div>
                     <img src="fretboard.PNG" height="160px" width="671px" id="black">
                     
                     
