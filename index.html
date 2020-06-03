@@ -1546,16 +1546,7 @@
             // IF THE DEVICE IS BIGGER THAN 700 apply zooming 
             if (screen.width >700){
 
-                $(window).resize(function() {
-                    $('#fretboard').css({'right':"109%"});
-                    let play_push = (($(window).width()-210)/2)-70;
-                    
-                    //alert(play_push);
-                    let play = parseInt(curr_play.replace('px','')) + play_push;
-                    $('.play-button').css({'left':play+"px"});
-                    let reset_push = play+10;
-                    $('.reset').css({'left':reset_push+"px"});
-                })
+               
                 // IF LAPTOP and SQUISHED
                 if ($(window).width()<700){
                     
@@ -1641,6 +1632,9 @@
                 let play = parseInt(curr_play.replace('px','')) + play_push;
                 $('.play-button').css({'left':play+"px"});
                 alert("pushing play button by"+play_push);
+
+                
+                $('.reset').css({"left":play+"px"});
 
             }
             
