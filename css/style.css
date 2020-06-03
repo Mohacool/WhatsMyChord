@@ -609,6 +609,11 @@ html,body{
 .note_circle{
     
     display:flex;
+    
+    display: -webkit-box;   /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+display: -ms-flexbox;  /* TWEENER - IE 10 */
+display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+display: flex;    
     position: relative;
     top:-802px;
     left:-35px;
@@ -657,6 +662,10 @@ html,body{
     
     cursor: pointer;
     display:flex;
+    display: -webkit-box;   /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+display: -ms-flexbox;  /* TWEENER - IE 10 */
+display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+display: flex;    
     position:relative;
 
     margin-top:4px;
