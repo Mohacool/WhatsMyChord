@@ -1527,8 +1527,8 @@
 
 
             
-            
-            $("#fretboard").css({'padding-left': total_move+'%'});
+            //BIG CHANGE _ REMOVED
+            //$("#fretboard").css({'padding-left': total_move+'%'});
 
             
 
@@ -1562,9 +1562,10 @@
     <body onkeydown='getKeyAndMove(event)'>
   
         <!-- <div class="bg"></div> !-->
-        <div class="header">
-            <div class="page_title">[ ] WHATS MY CHORD</div>
+        <div id="header">
+            <span class="page_title">[ ] WHATS MY CHORD</span> 
             
+            <!-- <div id="headerElements">[ ] WHATS MY CHORD</div> -->
             <!--
             <div class="logo_container">
 
@@ -1589,27 +1590,20 @@
             
             <div id="fretboard">
 
-                <div class="boxes">
                 
-                </div> 
-                
+                <!--
                 <div class="play-button" onclick="play_chord()">
                     <a href="#" class="round-button"><i class="fa fa-play fa-2x"></i></a>
                 </div>
                 <div class="reset" onclick="new_reset()">CLEAR</div>
-                
+                !-->
                 
                 <div id="fret_full">
                     
-                    <div id="fretborder"></div>
+                    
                     <img src="fretboard.PNG" height="160px" width="671px" id="black">
                     
                     
-                    
-
-
-
-
 
                     <div class="box"></div>
                     <div class="box" style="top:-57px"></div>
