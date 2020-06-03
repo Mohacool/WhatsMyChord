@@ -11,7 +11,7 @@
 }
 @viewport{
     zoom: 1.0;
-    width:extend-to-zoom;
+    
 }
 
 .page_title{
@@ -21,7 +21,7 @@
     top: 10%; /* moved down by 50% of the screen height */
     transform: translateY(-50%); /* moved back up (Y axis) by half of its height to achieve the perfect center */
     width: 100%; /* needs to be defined to keep the default block behavior */
-    text-align: center;
+    text-align: left;
     
     margin: 0; /* again, for perf
     */
@@ -390,11 +390,11 @@ html,body{
 
 .header{
     visibility:visible;
-    width:110%;
-    height:80px;
+    width:100%;
+    height:100px;
     display:block;
     
-    /*background-color:gray; */
+    background-color:gray; 
     
 }
 
