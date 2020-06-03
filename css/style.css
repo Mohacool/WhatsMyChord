@@ -1,3 +1,22 @@
+*{
+    margin:0;
+    padding:0;
+}
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, em, img, strong, sub, sup, b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figure, figcaption, footer, header, hgroup, 
+menu, nav, output, section, time {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+
 :root {
     --white:#fdf7e9;
     --black:#232323;
@@ -5,10 +24,7 @@
     --gray-hover:#595959;
 }
 
-*{
-    margin:0;
-    padding:0;
-}
+
 @viewport{
     zoom: 1.0;
     
@@ -149,7 +165,6 @@ html,body{
     box-shadow: -50px -20px 0px 0px var(--white), -50px 20px 0px 0px var(--white),40px -20px 0px 0px var(--white),40px 20px 0px 0px var(--white); 
     border-radius:5px;
     
- 
     
 }
 
@@ -384,6 +399,7 @@ html,body{
     
 }
 
+
 #fretboard {
 
     border: 1px solid white;
@@ -405,17 +421,13 @@ html,body{
     
 }
 
-@-moz-document url-prefix() { 
 
-    .header{
-        visibility:visible;
-    }
-  }
 
 @-moz-document domain('whatsmychord.com') {
 .header{
     visibility:visible;
 }
+
 
 }
 @media screen and (-webkit-min-device-pixel-ratio:0) {
@@ -517,6 +529,8 @@ html,body{
 }
 
 #fret_full{
+
+    
     position:absolute;
     
     left: 23px;
@@ -532,6 +546,7 @@ html,body{
 }
 
 
+
 .box {
     opacity: 0;
     position:relative;
@@ -545,15 +560,24 @@ html,body{
 }
 
 
+
 .nudge{
     
     opacity: 1;
+
+    border-spacing: 0;
+    margin: 0;
+    padding: 0;
     margin-right:15.5px;
-    margin-top:4.5px;
+    margin-top:4.8px;
+
+    
+    
+    
     cursor: pointer;
     position: relative;
     
-    top:-300px;
+    top:3px;
     left: 14px;
     right: 40px;
     
@@ -561,6 +585,7 @@ html,body{
     height: 20px;
     
     border: 1px solid red;
+    
     /* opacity: 0; 
     
     
@@ -586,8 +611,15 @@ html,body{
 }
 
 #nodegrid{
-    position:relative;
-    width:680px;
+    position:absolute;
+    
+    width:100%;
+    border: 1px solid red;
+    height:198px;
+    top:-20px;
+    margin:0 auto;
+    
+    
     
     /* shift everything here*/ 
     
@@ -611,11 +643,15 @@ html,body{
     display:flex;
     
     display: -webkit-box;   /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-display: -ms-flexbox;  /* TWEENER - IE 10 */
-display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-display: flex;    
+    display: -ms-flexbox;  /* TWEENER - IE 10 */
+    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+    display: flex;   
+
     position: relative;
-    top:-802px;
+    top:-619px;
+
+    
+
     left:-35px;
     
     border-radius: 50%;
@@ -663,13 +699,13 @@ display: flex;
     cursor: pointer;
     display:flex;
     display: -webkit-box;   /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-display: -ms-flexbox;  /* TWEENER - IE 10 */
-display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-display: flex;    
+    display: -ms-flexbox;  /* TWEENER - IE 10 */
+    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+    display: flex;    
     position:relative;
 
     margin-top:4px;
-    top: -614px;
+    top: -432px;
     left:-32px;
     width: 23px;
     height:23px;
@@ -717,6 +753,7 @@ display: flex;
     */
 }
 
+
 .spinner {
     position:absolute;
     margin: 50px auto 0;
@@ -760,6 +797,9 @@ display: flex;
       transform: scale(1.0);
     }
   }
+
+
+
 
   /*
   @media only screen and (max-width:600px){
@@ -886,3 +926,13 @@ display: flex;
     
 }
 */
+@-moz-document url-prefix() { 
+
+    .header{
+        visibility:visible;
+    }
+
+    .nudge{
+        margin-top:5.3px;
+    }
+  }
