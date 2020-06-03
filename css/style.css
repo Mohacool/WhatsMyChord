@@ -5,7 +5,17 @@
     --gray-hover:#595959;
 }
 
+*{
+    margin:0;
+    padding:0;
+}
+@viewport{
+    zoom: 1.0;
+    width:extend-to-zoom;
+}
+
 .page_title{
+    min-height:10px;
     white-space: nowrap;
     position: absolute; /* taken out of the normal flow of the document */
     top: 10%; /* moved down by 50% of the screen height */
@@ -48,7 +58,7 @@ html,body{
 
 
 .night_circle {
-    
+    visibility:hidden;
     cursor:pointer;
     position: absolute;
     
@@ -67,8 +77,8 @@ html,body{
 
 #fretborder{
     border-radius:5px;
-    position: absolute;
-    top:80px;
+    position: relative;
+    top:-20px;
     right:-39px;
     height:210px;
     width:767px;
@@ -341,7 +351,7 @@ html,body{
 
 #fretboard {
     
-    position: absolute;
+    position: relative;
     
     
 
@@ -461,6 +471,10 @@ html,body{
 
 #fret_full{
     /*transform: rotate(90deg); */
+    position:absolute;
+    margin: 0 auto;
+    left:25%;
+    
 }
 
 
@@ -689,6 +703,9 @@ html,body{
 
   
 
+
+
+  /*
   @media only screen and (max-width:600px){
 
     #fret_full{
@@ -702,7 +719,7 @@ html,body{
         border-bottom: 6px solid var(--white);
         border-left: 1px solid var(--white);
         border-right: 1px solid var(--white);
-       /* overflow-y:scroll; */
+       
         max-height:900px;
         height:900px;
     }
@@ -747,8 +764,8 @@ html,body{
   
         white-space: nowrap;
         top:5%;
+        left:2%;
         
-        /* background-color: var(--gray); */
         font-size:210%;
         color:var(--white);
         width:97%;
@@ -786,3 +803,4 @@ html,body{
 
     
 }
+*/
