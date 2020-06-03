@@ -146,7 +146,7 @@ html,body{
 */
 
 #black{
-    /*box-shadow: -50px -20px 0px 0px var(--white), -50px 20px 0px 0px var(--white),40px -20px 0px 0px var(--white),40px 20px 0px 0px var(--white); */
+    box-shadow: -50px -20px 0px 0px var(--white), -50px 20px 0px 0px var(--white),40px -20px 0px 0px var(--white),40px 20px 0px 0px var(--white); 
     border-radius:5px;
     
  
@@ -389,7 +389,8 @@ html,body{
     border: 1px solid white;
     position: relative;
     
-    width:700px;
+    
+    width:710px;
     height:500px;
     margin: 0 auto;
     
@@ -518,11 +519,12 @@ html,body{
 #fret_full{
     position:absolute;
     
-    left: 27px;
+    left: 23px;
     width: 672px;
     height:160px;
+    
 
-
+    top: 15%;
    
    
     
@@ -606,7 +608,7 @@ html,body{
 
 .note_circle{
     
-    display:block;
+    display:flex;
     position: relative;
     top:-802px;
     left:-35px;
@@ -619,10 +621,6 @@ html,body{
     background: var(--gray);
     border: 1px solid var(--white);
 
-
-    
-    
-    
     font: 20px 'Gotham';
     line-height: 9px;
     
@@ -631,7 +629,6 @@ html,body{
     margin-left:2.5px;
     
     cursor: pointer;
-    
     
     font-weight: bold;
 }
@@ -659,7 +656,7 @@ html,body{
 
     
     cursor: pointer;
-    display:block;
+    display:flex;
     position:relative;
 
     margin-top:4px;
