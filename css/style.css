@@ -204,7 +204,9 @@ html,body{
     margin: auto auto;
     cursor: pointer;
     margin-left:60px;
-    display: flex;
+    
+    display:inline-block;
+    
     justify-content: flex-start;
     flex-direction:row;
     font: 20px 'Gotham';
@@ -303,7 +305,7 @@ html,body{
 }
 #chord_diagram_container{
 
-    visibility:hidden;
+    
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     position:relative;
@@ -317,9 +319,12 @@ html,body{
 
     */
     height:120px;
-    top: -760px;
-    width: 767px;
-    left:-48px;
+    
+    width: 765px;
+    
+
+    right:28px;
+    top: 36%;
 
 }
 
@@ -360,9 +365,9 @@ html,body{
     */
     
     height:35px;
-    width: 767px;
-    right:30px;
-    top: 60%;
+    width: 765px;
+    right:28px;
+    top: 35%;
     
 }
 
@@ -404,7 +409,7 @@ html,body{
 
 #fretboard {
 
-    border: 1px solid white;
+    border: 1px solid transparent;
     position: relative;
     
     
@@ -586,7 +591,7 @@ html,body{
     width: 23px;
     height: 20px;
     
-    border: 1px solid red;
+    border: 1px solid transparent;
     
     /* opacity: 0; 
     
@@ -609,6 +614,7 @@ html,body{
     height:16px;
     border-radius: 50%;
     background-color: var(--white);
+    border:1px solid var(--gray);
     
 }
 
@@ -616,7 +622,7 @@ html,body{
     position:absolute;
     
     width:100%;
-    border: 1px solid red;
+    border: 1px solid transparent;
     height:198px;
     top:-20px;
     margin:0 auto;
@@ -769,7 +775,7 @@ html,body{
     position:relative;
     height: 25px;
     width: 39px;
-    border: 1px solid red;
+    border: 1px solid transparent;
     
 }
 
@@ -884,7 +890,7 @@ and (orientation : portrait) {
         position:relative;
         height: 25px;
         width: 39px;
-        border: 1px solid red;
+        border: 1px solid transparent;
         
     }
     .nudge{
@@ -929,8 +935,10 @@ and (orientation : portrait) {
        
 
        .play-button{
+        border: 1px solid transparent;
+        width: 50%;
         position:relative;
-        left:140%;
+        left:125%;
         top:0%;
     }
        #fretboard{
@@ -958,7 +966,7 @@ and (orientation : portrait) {
         height:35px;
         width: 185%;
         left:7%;
-        top:-35px;
+        top:-21.5%;
         
        }
        body{
@@ -967,12 +975,13 @@ and (orientation : portrait) {
        }
        
        .input_msg{
-           border: 1px solid green;
+           /*border: 1px solid green; */
            
            position: relative;
-            
-            
-           transform: translateX(-75%);
+
+           width:210px;
+           margin: auto auto;
+           
        }
 
        
@@ -987,6 +996,14 @@ and (orientation : portrait) {
             margin-left:20%;
         }
     
+    }
+
+    @media only screen and (max-width:390px){
+        
+        .play-button{
+            left:150%;
+        }
+
     }
   
 
