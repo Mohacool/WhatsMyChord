@@ -238,10 +238,10 @@
 
             $.getJSON("/notes/data.json", function(data) {
                 
-                alert(matches[chord_num_selected]);
+                //alert(matches[chord_num_selected]);
                 let chord_lst = data[matches[chord_num_selected]];
 
-                alert(chord_lst);
+                //alert(chord_lst);
                 for (var i = 0;i < chord_lst.length; i++){
 
                     console.log("nig"+ curr_state+"compare to",JSON.stringify(chord_lst[i]));
@@ -1482,8 +1482,7 @@
         
 
         $(document).ready(function(){
-
-
+            
             function myFunction() { 
                 if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ) 
                 {
@@ -1576,15 +1575,15 @@
 
 
             //alert("Ali phone is"+ screen.width);
-            
-            alert("my device width is"+ screen.width);
-
+            $('.square').css({"visibility":"visible"});
+            $('.nudge').css({"visibility":"hidden"});
            
             if (screen.width<=1007){
 
                 small_device = true;
                 alert('yesd');
                 alert(screen.height);
+
                 $('.square').css({"visibility":"visible"});
 
                 $('.nudge').css({"visibility":"hidden"});
@@ -1594,6 +1593,15 @@
 
                 $('.open').css({"cursor":"default"});
                 
+            }
+            if (screen.width<=500){
+                function reorient(e) {
+                var portrait = (window.orientation % 180 == 0);
+                $("body > div").css("-webkit-transform", !portrait ? "rotate(-90deg)" : "");
+            }
+            window.onorientationchange = reorient;
+            window.setTimeout(reorient, 0);
+
             }
             
             //console.log("--------------"+top);
