@@ -906,6 +906,7 @@ and (orientation : portrait) {
 
   /* ============DESKTOP SQUISHED=============== */
 
+
   @media only screen and (max-width:926px){
     .play-button{
         position:relative;
@@ -922,8 +923,8 @@ and (orientation : portrait) {
            transform:rotate(90deg);
            transform-origin: 75px 75px; 
            
-           margin-left:10%; margin-right:0;
-           margin-top:-15%;
+           margin-left:25%; margin-right:0;
+           margin-top:-50px;
            
            
            
@@ -931,8 +932,13 @@ and (orientation : portrait) {
        } 
        
 
+       .play-button{
+        position:relative;
+        left:140%;
+        top:0%;
+    }
        #fretboard{
-           border: 1px solid transparent;
+           border: 1px solid white;
            width:50%;
            height: 671px;
            margin-left:0;
@@ -959,6 +965,11 @@ and (orientation : portrait) {
         top:-35px;
         
        }
+       body{
+           overflow-y:scroll;
+           height:140%;
+       }
+       
        .input_msg{
            border: 1px solid green;
            
@@ -973,9 +984,14 @@ and (orientation : portrait) {
         
 
     }
+    
+    @media only screen and (max-width:785px){
 
+        #fret_full{
+            margin-left:20%;
+        }
     
-    
+    }
   
 
  
