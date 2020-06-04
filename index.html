@@ -1484,6 +1484,11 @@
         $(document).ready(function(){
 
             alert($(window).width());
+            function isMobile() {
+                try{ document.createEvent("TouchEvent"); return true; }
+                catch(e){ return false; }
+            }
+            alert(isMobile());
 
             function myFunction() { 
                 if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ) 
