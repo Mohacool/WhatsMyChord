@@ -967,7 +967,7 @@ and (orientation : portrait) {
        }
        body{
            overflow-y:scroll;
-           height:140%;
+           height:890px;
        }
        
        .input_msg{
