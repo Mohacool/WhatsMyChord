@@ -908,11 +908,7 @@ and (orientation : portrait) {
 
 
   @media only screen and (max-width:926px){
-    .play-button{
-        position:relative;
-        left:330px;
-        top:270px;
-    }
+    
 
     }
 
