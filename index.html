@@ -161,8 +161,8 @@
         function x_it(string_num){
             
 
-            $(".chords.chord0").css({"border-right-width":"0px"});
-            $(".chords.chord1").css({"margin-left":"0px"});
+            //$(".chords.chord0").css({"border-right-width":"0px"});
+            //$(".chords.chord1").css({"margin-left":"0px"});
             //alert(".open.string"+string_num);
             var clicky_num = 90 + string_num;
             console.log(".note_circle.string"+string_num);
@@ -551,7 +551,7 @@
                 //console.log("ERRORR: matches=",matches);
 
                 
-                alert(display_chord);
+                //alert(display_chord);
                 var matches_fix = display_chord.replace(sharpRegExp,'sharp');
                 console.log("@@@@@@@@@ - IF all notes has ",matches_fix);
 
@@ -1137,8 +1137,8 @@
 
             $('.chords.chord0').removeClass('anim')
             $('.chords.chord1').removeClass('anim')
-            $(".chords.chord0").css({"border-right-width":"0px"});
-            $(".chords.chord1").css({"margin-left":"0px"});
+            //$(".chords.chord0").css({"border-right-width":"30px"});
+            //$(".chords.chord1").css({"margin-left":"0px"});
             
 
             //iol
@@ -1172,7 +1172,7 @@
 
             
 
-            //$(".chords.chord0").delay(0).animate({"border-right-width":"70px"},1000);
+            $(".chords.chord0").delay(0).animate({"border-right-width":"70px"},1000);
             //$(".chords.chord0").delay(0).animate({"border-right-width":"80px"},1000);
 
             // Hide the input message when something is clicked
@@ -1505,7 +1505,7 @@
                 try{ document.createEvent("TouchEvent"); return true; }
                 catch(e){ return false; }
             }
-            alert(isMobile());
+            alert("Mobile?"+ isMobile());
 
             function myFunction() { 
                 if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ) 
@@ -1624,8 +1624,7 @@
                 
             }
             if (screen.width<=926){
-                $('.play-button').css({"left":"330px"});
-                $('.play-button').css({"top":"270px"});
+               
 
             }
             if (screen.width<=500){
