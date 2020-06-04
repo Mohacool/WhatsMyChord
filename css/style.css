@@ -803,9 +803,11 @@ html,body{
 
   
   @media only screen and (max-width:600px){
+      
         #holder{
             width:680px;
         }
+
         .square {
             
             bottom:800px;
