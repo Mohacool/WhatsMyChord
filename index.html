@@ -1483,8 +1483,20 @@
 
         $(document).ready(function(){
 
+            window.onorientationchange = function() { 
+            var orientation = window.orientation; 
+                switch(orientation) { 
+                    case 0:
+                    case 90:
+                    case -90: window.location.reload(); 
+                    break; } 
+            };
+
+            let body_height = $(document).height() + 10;
+            $('.body').css({"height":body_height+"px"});
+
             alert($(window).width());
-            
+
             function isMobile() {
                 try{ document.createEvent("TouchEvent"); return true; }
                 catch(e){ return false; }
