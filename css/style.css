@@ -756,8 +756,6 @@ html,body{
 #holder{
     width:680px;
     
-    
-    
 }
 .square {
     visibility:hidden;
@@ -819,8 +817,6 @@ html,body{
 @media only screen 
 and (min-device-width : 320px) 
 and (max-device-width : 480px) {
-    
-
     
     .nudge{
         visibility:hidden;
@@ -906,7 +902,14 @@ and (orientation : portrait) {
 
   @media only screen and (max-width:600px){
 
-        
+       #fret_full{
+           
+           transform:rotate(90deg);
+           top:50%;
+           left:-25%;
+       } 
+       
+       
         
 
     }
