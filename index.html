@@ -1492,8 +1492,12 @@
                     break; } 
             };
 
-            let body_height = $(document).height() + 10;
-            $('body').css({"height":body_height+"px"});
+            // If the page has scrolling
+            if ($('body').css('overflow').includes("scroll")){
+                let body_height = $(document).height();
+                $('body').css({"height":body_height+"px"});
+            }
+            
 
             alert($(window).width());
 
