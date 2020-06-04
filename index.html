@@ -1575,11 +1575,15 @@
 
 
             //alert("Ali phone is"+ screen.width);
+
+            /* 
             $('.square').css({"visibility":"visible"});
             $('.nudge').css({"visibility":"hidden"});
+
+            */
            
             if (screen.width<=1007){
-
+                
                 small_device = true;
                 alert('yesd');
                 alert(screen.height);
@@ -1595,12 +1599,7 @@
                 
             }
             if (screen.width<=500){
-                function reorient(e) {
-                    var portrait = (window.orientation % 180 == 0);
-                    $("body > div").css("-webkit-transform", !portrait ? "rotate(-90deg)" : "");
-                }
-                window.onorientationchange = reorient;
-                window.setTimeout(reorient, 0);
+                //lock rotation
             }
             
  
