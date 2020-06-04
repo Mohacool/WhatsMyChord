@@ -753,7 +753,23 @@ html,body{
     text-shadow: 0px 0px 10px white;
     */
 }
-
+#holder{
+    width:680px;
+    
+    padding-top:600px;
+    
+}
+.square {
+    visibility:hidden;
+    bottom:800px;
+    right:1px;
+    display:inline-block;
+    position:relative;
+    height: 25px;
+    width: 39px;
+    border: 1px solid red;
+    
+}
 
 .spinner {
     position:absolute;
@@ -803,21 +819,9 @@ html,body{
 @media only screen 
 and (min-device-width : 320px) 
 and (max-device-width : 480px) {
-    #holder{
-        width:680px;
-    }
+    
 
-    .square {
-        
-        bottom:800px;
-        right:1px;
-        display:inline-block;
-        position:relative;
-        height: 25px;
-        width: 39px;
-        border: 1px solid red;
-        
-    }
+    
     .nudge{
         visibility:hidden;
         cursor: default;
@@ -869,9 +873,7 @@ and (orientation : portrait) {
 
 
   @media only screen and (max-device-width:768){
-    #holder{
-        width:680px;
-    }
+    
 
     .square {
         
