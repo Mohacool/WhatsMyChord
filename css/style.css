@@ -901,11 +901,21 @@ and (orientation : portrait) {
 
     
   }
+
+
+
   /* ============DESKTOP SQUISHED=============== */
 
-  
+  @media only screen and (max-width:926px){
+    .play-button{
+        position:relative;
+        left:330px;
+        top:270px;
+    }
 
-  @media only screen and (max-width:600px){
+    }
+
+  @media only screen and (max-width:800px){
 
        #fret_full{
            
@@ -963,6 +973,8 @@ and (orientation : portrait) {
         
 
     }
+
+    
     
   
 
