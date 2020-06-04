@@ -905,9 +905,24 @@ and (orientation : portrait) {
        #fret_full{
            
            transform:rotate(90deg);
-           top:50%;
-           left:-25%;
+           transform-origin: 75px 75px; 
+           top:50px;
+           
+           margin-left:10%; margin-right:0; 
+           
+           
+           
        } 
+       
+
+       #fretboard{
+           
+           width:50%;
+           height: 671px;
+           margin-left:0;
+
+           
+       }
        
        
         
