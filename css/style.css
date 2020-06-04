@@ -724,12 +724,12 @@ html,body{
 .play-button{
     
     position:relative;
-    left:730px;
-    top:145px;
+    left:740px;
+    top:120px;
 }
 
 .round-button {
-    visibility:hidden;
+    
 	box-sizing: border-box;
 	display:block;
 	width:70px;
@@ -747,6 +747,8 @@ html,body{
 	font-weight:bold;
 	transition: all 0.3s ease;
 }
+
+
 .round-button:hover {
     background-color: rgba(0,0,0,0.8);
     
@@ -948,7 +950,12 @@ and (orientation : portrait) {
         
        }
        .input_msg{
-           margin-left:30%;
+           border: 1px solid green;
+           
+           position: relative;
+            
+            
+           transform: translateX(-75%);
        }
 
        
