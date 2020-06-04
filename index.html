@@ -1353,6 +1353,7 @@
             }
             var is_iPad = navigator.userAgent.match(/iPad/i) != null;
             
+            
             if (small_device){
 
                 for (var i = 1;i < 7; i++){
@@ -1365,7 +1366,11 @@
 
                         if (is_iPad){
                             alert('ipad');
-                            $(".text_circle.string"+i).css({"letter-spacing":"-0.2em"});
+                            $(".text_circle").css({"letter-spacing":"-0.2em"});
+                            alert("spacing"+$(".text_circle").css("letter-spacing"));
+                        }
+                        else{
+                            $(".text_circle").css({"letter-spacing":"0"});
                         }
                     }
                     
