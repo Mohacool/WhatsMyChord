@@ -801,14 +801,14 @@ html,body{
 
 
 
-  /*
+  
   @media only screen and (max-width:600px){
         #holder{
             width:680px;
         }
         .square {
             
-            bottom:983px;
+            bottom:800px;
             right:1px;
             display:inline-block;
             position:relative;
@@ -819,10 +819,19 @@ html,body{
         }
         .nudge{
             visibility:hidden;
+            cursor: default;
         }
+        .note_circle{
+            cursor:default;   
+        }
+        
+        .open{
+            cursor:default;
+        }
+        
 
     }
-    */
+    
   
 
  
