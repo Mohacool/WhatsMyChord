@@ -69,6 +69,7 @@
 
 
         var curr_diag_clicked;
+        var small_device = false;
 
 
         var chord_num_selected = 0;
@@ -1140,6 +1141,9 @@
             $(".chords.chord1").css({"margin-left":"0px"});
             
 
+            //iol
+            
+            
 
             // Hide the chord names 
             if (refresh){
@@ -1348,8 +1352,23 @@
                 doStuff(curr_notes_num,reset);
             }
             
-            
+            alert(curr_notes[5]);
+            if (small_device){
 
+                for (var i = 1;i < 7; i++){
+
+                    $(".text_circle.string"+i).css({"margin-top":"-7px"});
+                    if (curr_notes[i].endsWith('b') || curr_notes[i].endsWith('#')){
+                        alert('moving flats and sharps');
+
+                        $(".text_circle.string"+i).css({"margin-top":"-9px"});
+
+                    }
+                    
+                    
+
+                }
+            }
             
             
             if (playsound && refresh==true){
@@ -1548,18 +1567,15 @@
 
             //alert("Ali phone is"+ screen.width);
             
+            alert("my device width is"+ screen.width);
 
-            
+           
             if (screen.width<=1007){
 
+                small_device = true;
                 alert('yesd');
                 alert(screen.height);
-                for (var i = 1;i < 7; i++){
                 
-                    $(".text_circle.string"+i).css({"margin-top":"-6px"});
-                    
-
-                }
             }
             
             //console.log("--------------"+top);
