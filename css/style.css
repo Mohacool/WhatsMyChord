@@ -799,11 +799,10 @@ html,body{
     }
   }
 
-
-
-
-  @media only screen and (max-device-width:1007){
-
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
     #holder{
         width:680px;
     }
@@ -830,6 +829,74 @@ html,body{
     .open{
         cursor:default;
     }
+/* Styles */
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen 
+and (min-width : 321px) {
+/* Styles */
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen 
+and (max-width : 320px) {
+/* Styles */
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) {
+/* Styles */
+}
+
+/* iPads (landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) {
+/* Styles */
+}
+
+/* iPads (portrait) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) {
+/* Styles */
+}
+
+
+  @media only screen and (max-device-width:768){
+    #holder{
+        width:680px;
+    }
+
+    .square {
+        
+        bottom:800px;
+        right:1px;
+        display:inline-block;
+        position:relative;
+        height: 25px;
+        width: 39px;
+        border: 1px solid red;
+        
+    }
+    .nudge{
+        visibility:hidden;
+        cursor: default;
+    }
+    .note_circle{
+        cursor:default;   
+    }
+    
+    .open{
+        cursor:default;
+    }
+
+    
   }
   /* ============DESKTOP SQUISHED=============== */
 
