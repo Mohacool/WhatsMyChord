@@ -439,6 +439,7 @@
                 }
                 else if (curr_notes[i-1]=="G"){
                     $(".text_circle.string"+i).css({"margin-left":"-3.5px"});
+                    $(".text_circle.string"+i).css({"margin-top":"-3.5px"});
                 }
 
                 $(".note_circle.string"+i).css({"left":"-35px"});
@@ -1548,7 +1549,18 @@
             //alert("Ali phone is"+ screen.width);
             
 
+            
+            if (screen.width<=1007){
 
+                alert('yesd');
+                alert(screen.height);
+                for (var i = 1;i < 7; i++){
+                
+                    $(".text_circle.string"+i).css({"margin-top":"-6px"});
+                    
+
+                }
+            }
             
             //console.log("--------------"+top);
             
