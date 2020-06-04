@@ -1351,8 +1351,8 @@
                 console.log("diag im passing in RESET=",reset);
                 doStuff(curr_notes_num,reset);
             }
+            var is_iPad = navigator.userAgent.match(/iPad/i) != null;
             
-            alert(curr_notes[5]);
             if (small_device){
 
                 for (var i = 1;i < 7; i++){
@@ -1363,7 +1363,12 @@
 
                         $(".text_circle.string"+i).css({"margin-top":"-9px"});
 
+                        if (is_iPad){
+                            console.log('ipad');
+                            $(".text_circle.string"+i).css({"letter-spacing":"-0.2em"});
+                        }
                     }
+                    
                     
                     
 
