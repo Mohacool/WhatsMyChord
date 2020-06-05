@@ -949,7 +949,7 @@ and (orientation : portrait) {
            
        } 
        
-
+       
        .play-button{
         border: 1px solid transparent;
         width: 50%;
@@ -971,6 +971,7 @@ and (orientation : portrait) {
        #chord_name_container{
         
         display: flex;
+        
         align-items: center;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
@@ -1002,10 +1003,15 @@ and (orientation : portrait) {
            margin: 0 auto;
            padding:0;
            border: 1px solid red;
-           width:auto;
-           padding-left:100%;
+           width:100%;
+           padding-left:50%;
            
        }
+       #chord_name_container{
+            width:160%;
+            left:17.5%;
+        
+    }
 
        
        
@@ -1013,11 +1019,13 @@ and (orientation : portrait) {
 
     }
     
+    
     @media only screen and (max-width:785px){
 
         #fret_full{
             margin-left:20%;
         }
+        
     
     }
 
