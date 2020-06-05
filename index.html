@@ -1355,12 +1355,15 @@
             }
             var is_iPad = navigator.userAgent.match(/iPad/i) != null;
             
-            
+            /*
             if (small_device){
 
+                console.log("fed: about to go through all notes");
                 for (var i = 1;i < 7; i++){
-
+                    console.log("fed: i="+i);
                     $(".text_circle.string"+i).css({"margin-top":"-7px"});
+                    console.log("fed: curr_notes[i]="+curr_notes[i]);
+                    console.log("fed: curr_notes"+curr_notes);
                     if (curr_notes[i].endsWith('b') || curr_notes[i].endsWith('#')){
                         alert('moving flats and sharps');
 
@@ -1381,12 +1384,14 @@
 
                 }
             }
+            */
             
             
             if (playsound && refresh==true){
                 playNote(string,note);
             }
 
+            
             
 
             
