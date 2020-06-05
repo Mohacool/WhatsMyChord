@@ -27,7 +27,6 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
     <div class="night_circle" onclick="night()"></div>
     <!-- <div id="rightbar"></div> !-->
 
@@ -1239,28 +1238,16 @@
             // Update current notes
             curr_notes[string-1] = note_name;
 
-            alert(note_name);
-            console.log(note_name);
-
             // Change the note name on string
             if (note_name.endsWith('b')){
-                note_name = note_name.slice(0,-1);
+                note_name = note_name.slice(0,-1)+'\u266D'
             }
             if (note_name.endsWith('#')){
-                alert('got him');
-                //$(".text_circle."+string_name+" b").text("&#9837");
-                note_name = note_name.slice(0,-1);
-                //note_name = note_name + '<b>&#9837</b>'
+                note_name = note_name.slice(0,-1)+'\u266F'
             }
-            // flat &#9837
 
-            
             // Add note name to circle
             $(".text_circle."+string_name).text(note_name);
-            $(".text_circle."+string_name).append('<b>&#9837</b>');
-            //alert($(".text_circle."+string_name+" b").text());
-            
-
 
             // Change aligning of certain note names
             if (["G","C"].includes(note_name)){
@@ -1826,25 +1813,22 @@
 
 
                     <span class="note_circle string1" onclick="notey(1)">
-                        <span class="text_circle string1">E<b>&#9837</b></span>
+                        <span class="text_circle string1">E<b>b</b></span>
                     </span>
                     <span class="note_circle string2" onclick="notey(2)">
-                        <span class="text_circle string2">B<b></b></span>
+                        <span class="text_circle string2">B</span>
                     </span>
                     <span class="note_circle string3" onclick="notey(3)">
-                        <span class="text_circle string3" style="margin-left:-3.5px">G<b></b></span>
+                        <span class="text_circle string3" style="margin-left:-3.5px">G</span>
                     </span>
                     <span class="note_circle string4" onclick="notey(4)">
-                        <span class="text_circle string4" style="margin-left:-3.3px">D<b></b> </span>
+                        <span class="text_circle string4" style="margin-left:-3.3px">D </span>
                     </span>
                     <span class="note_circle string5" onclick="notey(5)">
-                        <span class="text_circle string5" style="margin-left:-3.3px">A<b></b></span>
+                        <span class="text_circle string5" style="margin-left:-3.3px">A</span>
                     </span>
                     <span class="note_circle string6" onclick="notey(6)">
-                        <span class="text_circle string6">E<b></b>
-                        
-                        
-                        </span>
+                        <span class="text_circle string6">E</span>
                     </span>
 
                     <div id="holder">
