@@ -1174,7 +1174,7 @@
 
             
 
-            $(".chords.chord0").delay(0).animate({"border-right-width":"70px"},1000);
+            //$(".chords.chord0").delay(0).animate({"border-right-width":"70px"},1000);
             //$(".chords.chord0").delay(0).animate({"border-right-width":"80px"},1000);
 
             // Hide the input message when something is clicked
@@ -1512,6 +1512,7 @@
                 try{ document.createEvent("TouchEvent"); return true; }
                 catch(e){ return false; }
             }
+
             alert("Mobile?"+ isMobile());
 
             function myFunction() { 
@@ -1939,8 +1940,9 @@
                 
                 <div id="chord_name_container">
 
-                    
-                    <div class="input_msg">Input a chord to get started</div>
+                    <div id="new_container">
+                        <div class="input_msg">Input a chord to get started</div>
+                    </div>
 
                     <div class="chords chord0" onclick="chord_display_change(0)"> </div>
                     <div class="chords chord1" onclick="chord_display_change(1)"></div>
