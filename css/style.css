@@ -2,11 +2,11 @@
     margin:0;
     padding:0;
 }
-html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, em, img, strong, sub, sup, b, i, dl, dt, dd, ol, ul, li,
+html, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, em, img, strong, sub, b, i, dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, figure, figcaption, header, hgroup, 
 menu, nav, output, section, time {
     margin: 0;
     padding: 0;
@@ -14,6 +14,14 @@ menu, nav, output, section, time {
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
+    
+}
+
+footer{
+    position:fixed;
+    
+    width:100%;
+    margin: 0 auto;
 }
 
 
@@ -79,13 +87,15 @@ div.headerElements {
 body {
 
 
-    overflow:hidden; 
+    overflow:auto;
     background-color:var(--black);
     border: 6px solid var(--white);
     -webkit-box-sizing: border-box;/* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;/* Firefox, other Gecko */
     box-sizing: border-box;/* Opera/IE 8+ */
     
+    
+  
     
     
 }
@@ -96,7 +106,7 @@ html,body{
     height: 100%;
     margin:0;
     padding:0;
-    }
+}
 
 
 .night_circle {
@@ -319,9 +329,6 @@ html,body{
     position:relative;
     background-color: var(--white);
 
-   
-    
-
     /*
     border: 1px solid green;
 
@@ -332,7 +339,7 @@ html,body{
     
 
     right:28px;
-    top: 36%;
+    top: 50%;
 
 }
 
@@ -936,6 +943,10 @@ and (orientation : portrait) {
 
   @media only screen and (max-width:800px){
 
+       .page_title{
+
+         font-size:4.5vw;
+       }
        #fret_full{
            
            transform:rotate(90deg);
@@ -944,10 +955,8 @@ and (orientation : portrait) {
            margin-left:25%; margin-right:0;
            margin-top:-50px;
            
-           
-           
-           
        } 
+       
        
        
        .play-button{
@@ -958,13 +967,42 @@ and (orientation : portrait) {
         top:0%;
     }
        #fretboard{
-           border: 1px solid white;
+           border: 1px solid transparent;
            width:50%;
            height: 671px;
            margin-left:0;
-
+           justify-content: center;
+           
            
        }
+       .spinner{
+        transform: rotate(90deg);
+       }
+       #chord_diagram_container{
+        transform: rotate(90deg);
+        border: 1px solid red;
+        width:645px;
+        height:120px;
+        background-color:transparent;
+        
+        position:absolute;
+        
+        
+        
+       
+        padding: 0;
+        margin: 0 auto;
+        right:0;
+        float:left;
+        left:30%;
+
+        
+        
+
+        
+        
+
+    }
        .chords{
            margin-left:5%;
        }
@@ -978,7 +1016,7 @@ and (orientation : portrait) {
         
         border-radius: 3px;
         position: relative;
-        background-color: var(--white);
+        background-color:transparent;
         
         /*
         border: 1px solid green;
@@ -989,27 +1027,60 @@ and (orientation : portrait) {
         width: 185%;
         left:7%;
         top:-21.5%;
+        justify-content: left;
         
         
        }
        body{
            overflow-y:scroll;
-           height:890px;
+           height:950px;
+           /* attempt to fix 
+           height:890xp;
+           */
+           
        }
        
        .input_msg{
            /*border: 1px solid green; */
           
-           margin: 0 auto;
+           
            padding:0;
-           border: 1px solid red;
-           width:100%;
-           padding-left:50%;
+           
+           
+
+           right:0;
+        
+           color:var(--white);
+           padding:0;
+            
+        
+            margin:  0 auto;
+            transform: translateX(-3px);
+           
+           
            
        }
        #chord_name_container{
             width:160%;
-            left:17.5%;
+            margin-left:11%; margin-right:0;
+           
+       }
+
+       
+       .chord_diagram{
+        transform: rotate(-90deg);
+        filter: invert(90%);
+       }
+       
+            
+       #fret_full{
+        margin-left:20%;
+        }
+
+        .chords{
+            color: var(--white);
+        }
+    
         
     }
 
@@ -1017,25 +1088,110 @@ and (orientation : portrait) {
        
         
 
-    }
     
     
-    @media only screen and (max-width:785px){
+    
+   
 
-        #fret_full{
-            margin-left:20%;
+    
+
+    @media only screen and (max-width:600px){
+
+        #chord_name_container{
+            width:192px;
+            margin-left:12%; margin-right:0;
+            top: -21%;
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius:0px;
+            justify-content: normal;
+            background-color: var(--white);
+           
+       }
+       
+       #fretboard{
+           
+       }
+       #chord_diagram_container{
+           background-color:transparent;
+
+           margin: 0 auto;
+           transform: rotate(90deg);
+           
+   
+       }
+       .input_msg{
+        /*border: 1px solid green; */
+        font-size:12px;
+        
+        padding:0;
+        border: 1px solid red;
+        
+        margin:  0 auto;
+        transform: translateX(6%);
+        color: var(--black);
+        
+        
+        
+    }
+       .chord_diagram{
+        filter: invert(100%);
+       }
+       #black{
+        box-shadow: -50px -15px 0px 0px var(--white), -50px 15px 0px 0px var(--white),40px -15px 0px 0px var(--white),40px 15px 0px 0px var(--white); 
+        border-radius:5px;
+        border-bottom-left-radius: 0px;
+        border-top-left-radius:0px;
+        
+        
+        }
+        .play-button{
+            
+            margin: 0 auto;
+            transform: translateX(-35%);
         }
         
-    
-    }
 
-    @media only screen and (max-width:390px){
+
+        
+    }
+    @media only screen and (max-width:501px){
         
         .play-button{
-            left:150%;
+            
+            margin: 0 auto;
+            transform: translateX(-25%);
         }
 
     }
+    @media only screen and (max-width:430px){
+        
+        .play-button{
+            
+            margin: 0 auto;
+            transform: translateX(-25%);
+        }
+
+    }
+    @media only screen and (max-width:400px){
+        
+        .play-button{
+            
+            margin: 0 auto;
+            transform: translateX(-19%);
+        }
+
+    }
+    @media only screen and (max-width:371px){
+        
+        .play-button{
+            
+            margin: 0 auto;
+            transform: translateX(-15%);
+        }
+
+    }
+    
+    
   
 
  
