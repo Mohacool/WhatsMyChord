@@ -1275,7 +1275,7 @@
             */
 
 
-            alert("clicked"+note_num);
+            //alert("clicked"+note_num);
             //lil
             if (refresh){
                 chord_num_selected = 0;
@@ -1672,6 +1672,9 @@
             window.pageYOffset = 0;
             document.documentElement.scrollTop = 0;
 
+            var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+            window.pageXOffset = 0;
+            document.documentElement.scrollLeft = 0;
 
 
             
