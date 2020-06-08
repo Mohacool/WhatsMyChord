@@ -936,6 +936,15 @@ and (orientation : portrait) {
     .open{
         cursor:default;
     }
+    .round-button{
+        cursor:default;
+    }
+    .chord_diagram{
+        cursor:default;
+    }
+    .chords{
+        cursor:default;
+    }
 
     
   }
