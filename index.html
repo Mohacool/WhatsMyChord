@@ -1685,6 +1685,32 @@
                     let diff= ((830 -$(window).width())/100)*3;
                     push_diag = push_diag - diff;
                 }
+                if ($(window).width()<605){
+                    let diff= ((500 -$(window).width())/100)*3;
+                    push_diag = push_diag - diff;
+                }
+                if (inRange($(window).width(),520,600)){
+                    push_diag = push_diag + 6;
+                }
+                if ($(window).width()<508){
+                    push_diag = push_diag - 4;
+                }
+                
+                if ($(window).width()<440){
+                    let diff= ((720 -$(window).width())/100)*3;
+                    push_diag = push_diag - diff;
+                }
+                if (inRange($(window).width(),440,500)){
+                    push_diag = push_diag + 6;
+                }
+                if (inRange($(window).width(),394,439)){
+                    push_diag = push_diag + 6;
+                }
+                if ($(window).width()<370){
+                    push_diag = push_diag -0;
+                }
+                
+
                 
                 $("#chord_diagram_container").css({"left":push_diag+"%"});
 
