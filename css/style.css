@@ -1111,7 +1111,7 @@ and (orientation : portrait) {
     @media only screen and (max-width:600px){
 
         #chord_name_container{
-            width:192px;
+            width:190px;
             margin-left:12%; margin-right:0;
             top: -21%;
             border-bottom-left-radius: 0px;
@@ -1148,7 +1148,7 @@ and (orientation : portrait) {
         font-size:12px;
         
         padding:0;
-        border: 1px solid red;
+        border: 1px solid transparent;
         
         margin:  0 auto;
         transform: translateX(6%);
