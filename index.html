@@ -1250,7 +1250,7 @@
         */ 
         function clicky(note_num,playsound=true,reset=false,refresh=true){
 
-            alert("clicked"+note_num);
+            //alert("clicked"+note_num);
             //lil
             if (refresh){
                 chord_num_selected = 0;
@@ -1671,12 +1671,24 @@
 
             }
             
-            let x = screen.width;
-            let push_diag = -2.860150407e-11*Math.pow(x,5) + 8.277938576e-08*Math.pow(x,4) - 9.308480900e-05*Math.pow(x,3) + 5.038729894e-02*Math.pow(x,2) - 1.283634376e+01*x + 1.201092699e+03;
-            console.log("pushDiag"+push_diag);
+            if (screen.width<800 ){
+                let x = screen.width;
+                let push_diag = -2.860150407e-11*Math.pow(x,5) + 8.277938576e-08*Math.pow(x,4) - 9.308480900e-05*Math.pow(x,3) + 5.038729894e-02*Math.pow(x,2) - 1.283634376e+01*x + 1.201092699e+03;
+                console.log("pushDiag"+push_diag);
 
-            $("#chord_diagram_container").css({"left":push_diag+"%"});
+                $("#chord_diagram_container").css({"left":push_diag+"%"});
 
+            }
+            if ($(window).width()<800 ){
+                let x = $(window).width();
+                let push_diag = -2.860150407e-11*Math.pow(x,5) + 8.277938576e-08*Math.pow(x,4) - 9.308480900e-05*Math.pow(x,3) + 5.038729894e-02*Math.pow(x,2) - 1.283634376e+01*x + 1.201092699e+03;
+                console.log("pushDiag"+push_diag);
+
+                $("#chord_diagram_container").css({"left":push_diag+"%"});
+
+            }
+           
+           
             
             
 
@@ -1688,6 +1700,7 @@
             //alert(push_diag);
 
            //alert($("#chord_diagram_container").css("left"));
+           
             if ($(window).width()<800){
                 if ($(window).width()<700){
                     let diff= ((830 -$(window).width())/100)*3;
