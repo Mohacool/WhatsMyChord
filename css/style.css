@@ -336,7 +336,7 @@ html,body{
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     position:relative;
-    background-color: var(--white);
+    background-color: transparent;
 
     /*
     border: 1px solid green;
@@ -1005,7 +1005,7 @@ and (orientation : portrait) {
         
         right:0;
         float:left;
-        left:70%;
+        left:0px;
         
         top:50%;
         
@@ -1139,6 +1139,7 @@ and (orientation : portrait) {
 
            margin: 0 auto;
            transform: rotate(90deg);
+           background-color:transparent;
            
    
        }
