@@ -1667,14 +1667,7 @@
             });
             
 
-            window.scrollBy(0, 0);
-            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            window.pageYOffset = 0;
-            document.documentElement.scrollTop = 0;
-
-            var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-            window.pageXOffset = 0;
-            document.documentElement.scrollLeft = 0;
+            
 
 
             
@@ -1732,7 +1725,15 @@
             
 
             $(window).resize(function() {
+            
+            window.scrollBy(0, 0);
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            window.pageYOffset = 0;
+            document.documentElement.scrollTop = 0;
 
+            var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+            window.pageXOffset = 0;
+            document.documentElement.scrollLeft = 0;
             //alert($(window).width());
 
             let push_diag = 50 - ((770-$(window).width())/65)*5;
