@@ -87,7 +87,7 @@ div.headerElements {
 body {
 
 
-    overflow:auto;
+    overflow:hidden;
     background-color:var(--black);
     border: 6px solid var(--white);
     -webkit-box-sizing: border-box;/* Safari/Chrome, other WebKit */
@@ -229,9 +229,18 @@ html,body{
     flex-direction:row;
     font: 20px 'Gotham';
     color: var(--gray-hover);
+    opacity:0.7;
+    
+
 
     -webkit-transition: -webkit-transform 2s ease-in-out;
 }
+
+.chords:hover{
+    opacity: 1 !important;
+}
+    
+
 
 
 
@@ -318,7 +327,7 @@ html,body{
 .chord_diagram:hover{
     opacity:1 ;
  
-    border-top: 3px solid var(--white);
+    border-top: 3px solid transparent !important;
 
 }
 #chord_diagram_container{
@@ -339,7 +348,7 @@ html,body{
     
 
     right:28px;
-    top: 50%;
+    top: 36%;
 
 }
 
@@ -971,7 +980,10 @@ and (orientation : portrait) {
            width:50%;
            height: 671px;
            margin-left:0;
-           justify-content: center;
+           
+           
+           
+           
            
            
        }
@@ -980,31 +992,34 @@ and (orientation : portrait) {
        }
        #chord_diagram_container{
         transform: rotate(90deg);
-        border: 1px solid red;
+        border: 1px solid transparent;
         width:645px;
-        height:120px;
+        height:130px;
+        
         background-color:transparent;
         
         position:absolute;
-        
-        
-        
-       
+
         padding: 0;
         margin: 0 auto;
+        
         right:0;
         float:left;
-        left:30%;
+        left:70%;
+        
+        top:50%;
+        
+        
+        
 
-        
-        
-
-        
-        
-
-    }
+        }
        .chords{
            margin-left:5%;
+           margin: 0 auto;
+           padding-left:0;
+           right:0;
+           opacity:1;
+           color:white;
        }
        #chord_name_container{
         
@@ -1025,7 +1040,7 @@ and (orientation : portrait) {
         
         height:35px;
         width: 185%;
-        left:7%;
+        left:68%;
         top:-21.5%;
         justify-content: left;
         
@@ -1077,9 +1092,7 @@ and (orientation : portrait) {
         margin-left:20%;
         }
 
-        .chords{
-            color: var(--white);
-        }
+        
     
         
     }
@@ -1107,9 +1120,19 @@ and (orientation : portrait) {
             background-color: var(--white);
            
        }
+
+       .chords{
+        color: var(--gray-hover);
+        opacity:0.6;
+
+        }
+        .chords:hover{
+            opacity: 1;
+        }
+        
        
        #fretboard{
-           
+        
        }
        #chord_diagram_container{
            background-color:transparent;
@@ -1149,6 +1172,9 @@ and (orientation : portrait) {
             margin: 0 auto;
             transform: translateX(-35%);
         }
+        #chord_name_container{
+            left:7%;
+        }
         
 
 
@@ -1161,6 +1187,7 @@ and (orientation : portrait) {
             margin: 0 auto;
             transform: translateX(-25%);
         }
+        
 
     }
     @media only screen and (max-width:430px){
