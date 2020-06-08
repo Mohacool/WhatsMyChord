@@ -227,11 +227,35 @@
         // Change the number of global variable to show which chord will be displayed
         function chord_display_change(num){
 
+            /*
             $(".chords.chord0").addClass('anim');
             $(".chords.chord1").addClass('anim');
+            */
 
             //alert("CURR DIAG"+curr_diag_clicked);
 
+            //alert(num);
+            //alert('.chords.chord'+num);
+            let color = "var(--gray-hover)";
+            let clicked = "var(--black)";
+            
+
+            if (inRange($(window).width(),584,800)){
+                //alert("white it");
+                color = "var(--gray-hover)";
+                clicked = "var(--white)";
+            }
+            for (i=0;i<6;i++){
+                if (i!=num){
+                    $('.chords.chord'+i).css({"color":color});
+                    $('.chords.chord'+i).css({"opacity":"0.7"});
+                }
+            }
+            $('.chords.chord'+num).css({"color":clicked});
+            $('.chords.chord'+num).css({"opacity":"1"});
+            //$('.chords').css({"color":"var(--gray-hover)"});
+            //$('.chords').css({"opacity":"0.6"});
+            //$('.chords:hover').css({"opacity":"1"});
             //pp
             var temp = curr_diag_clicked+1;
 
@@ -421,7 +445,7 @@
 
             })
 
-            alert(curr_notes_num);
+            //alert(curr_notes_num);
 
             
 
@@ -563,8 +587,8 @@
 
                 
                 //alert(display_chord);
-                alert("trying to find"+matches+"at index:"+chord_num_selected);
-                alert(display_chord);
+                //alert("trying to find"+matches+"at index:"+chord_num_selected);
+                //alert(display_chord);
                 var matches_fix = display_chord.replace(sharpRegExp,'sharp');
                 console.log("@@@@@@@@@ - IF all notes has ",matches_fix);
 
@@ -1227,11 +1251,29 @@
         function clicky(note_num,playsound=true,reset=false,refresh=true){
 
             //alert("clicked"+note_num);
+            //lil
+            if (refresh){
+                chord_num_selected = 0;
+            }
             
-            chord_num_selected = 0;
             
+            //alert($(window).width());
+            let color = "var(--gray-hover)";
+            let clicked = "var(--black)";
+            if (inRange($(window).width(),584,800)){
+                //alert("white it");
+                color = "var(--gray-hover)";
+                clicked = "var(--white)";
+            }
+            for (i=0;i<6;i++){
+                $('.chords.chord'+i).css({"color":color});
+                $('.chords.chord'+i).css({"opacity":"0.7"}); 
+            }
 
-
+            $('.chords.chord'+chord_num_selected).css({"color":clicked});
+            $('.chords.chord'+chord_num_selected).css({"opacity":"1"});
+            
+            
             $('.chords.chord0').removeClass('anim')
             $('.chords.chord1').removeClass('anim')
             //$(".chords.chord0").css({"border-right-width":"30px"});
@@ -1632,6 +1674,41 @@
 
             $(window).resize(function() {
 
+            //alert($(window).width());
+
+            let push_diag = 50 - ((770-$(window).width())/65)*5;
+            //alert(push_diag);
+
+           //alert($("#chord_diagram_container").css("left"));
+            if ($(window).width()<800){
+                if ($(window).width()<700){
+                    let diff= ((830 -$(window).width())/100)*3;
+                    push_diag = push_diag - diff;
+                }
+                
+                $("#chord_diagram_container").css({"left":push_diag+"%"});
+
+            }
+            else{
+                $("#chord_diagram_container").css({"left":"auto"});
+            }
+            
+           
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
+            let color = "var(--gray-hover)";
+            let clicked = "var(--black)";
+            if (inRange($(window).width(),584,800)){
+                
+                color = "var(--gray-hover)";
+                clicked = "var(--white)";
+            }
+            for (i=0;i<6;i++){
+                $('.chords.chord'+i).css({"color":color});
+                $('.chords.chord'+i).css({"opacity":"0.7"}); 
+            }
+
+            $('.chords.chord'+chord_num_selected).css({"color":clicked});
+            $('.chords.chord'+chord_num_selected).css({"opacity":"1"});
                 ///alert("put up");
                 ///document.location.reload(true);
                 
@@ -1749,7 +1826,12 @@
             // Input message
             $(".input_msg").delay(1000).animate({ opacity: 1 }, 1200);
 
-            $(".chords.chord0").css({"color":"#232323"});
+            //$(".chords.chord0").css({"color":"var(--black)"});
+            //$(".chords.chord0").css({"opacity":"1"});
+
+            
+
+           
 
 
             // Add 5% for every 10% decrease
@@ -2177,7 +2259,7 @@
 
     
         <footer>
-            Created by Mohamed
+            
         </footer>
     </body>
 
