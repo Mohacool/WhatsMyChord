@@ -1250,7 +1250,32 @@
         */ 
         function clicky(note_num,playsound=true,reset=false,refresh=true){
 
-            //alert("clicked"+note_num);
+            /*
+            if (inRange(note_num),1,90){
+                let new_list = [];
+                for (i=0;i<6;i++){
+                    if (curr_notes_num[i]!=0){
+                        new_list.push((i*15)+curr_notes_num[i]);
+                    }
+                    
+                }
+                console.log("pop: "+new_list);
+                console.log("pop check if"+note_num+"in"+ new_list);
+                alert(typeof(new_list));
+                if (new_list.includes(parseInt(note_num))){
+                    console.log("pop it has it");
+
+                    if (inRange(note_num,1,15)){
+                        console.log("pop click 91");
+                        clicky(91,true,false,false);
+                    }
+
+                }
+            }
+            */
+
+
+            alert("clicked"+note_num);
             //lil
             if (refresh){
                 chord_num_selected = 0;
@@ -1529,6 +1554,8 @@
             }
 
             
+
+            
             
 
             
@@ -1628,7 +1655,16 @@
         $(document).ready(function(){
             
             ///alert("first");
+
+            alert("("+screen.width+","+screen.height+")");
             
+            $('.square').click(function(event){
+                //console.log("pop"+curr_notes_num);
+                ('.square').unbind();
+
+                //clicky(91);
+                /* onclick logic goes here */ 
+            });
             
 
             window.scrollBy(0, 0);
