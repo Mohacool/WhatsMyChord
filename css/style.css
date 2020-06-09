@@ -346,7 +346,7 @@ html,body{
 }
 #chord_diagram_container{
 
-    
+    border: 1px solid blue;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     position:relative;
@@ -777,7 +777,7 @@ b{
     
     position:relative;
     left:740px;
-    top:120px;
+    top:110px;
 }
 
 .round-button {
@@ -1010,7 +1010,7 @@ and (orientation : portrait) {
         width: 50%;
         position:relative;
         left:125%;
-        top:0%;
+        top:-2%;
     }
        #fretboard{
            border: 1px solid transparent;
@@ -1028,6 +1028,7 @@ and (orientation : portrait) {
         transform: rotate(90deg);
        }
        #chord_diagram_container{
+        border: 1px solid blue;
         transform: rotate(90deg);
         border: 1px solid transparent;
         width:645px;
@@ -1172,11 +1173,14 @@ and (orientation : portrait) {
         
        }
        #chord_diagram_container{
+           border: 1px solid blue;
            background-color:transparent;
-
+           
+          
            margin: 0 auto;
-           transform: rotate(90deg);
+           transform: rotate(90deg) ;
            background-color:transparent;
+           
            
    
        }
