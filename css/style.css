@@ -139,16 +139,30 @@ html,body{
     z-index:-100;
 }
 
+.random{
+    visibility:visible;
+    position:absolute;
+    height:30px;
+    top:-13px;
+    left:9px;
+    
+    color: var(--white);
+    font: 11px 'Gotham';
 
+    cursor:pointer;
+}
+.random:hover{
+    color:black;
+}
 
 .reset{
-
     
-    visibility:hidden;
+    
+    visibility:visible;
     position:relative;
     height:30px;
-    top:145px;
-    left:740px;
+    top:0px;
+    left:10px;
     
     color: var(--white);
     font: 14px 'Gotham';
@@ -157,9 +171,9 @@ html,body{
 }
 
 .reset:hover{
-    color: #131212;
+    color: black;
 
-    font: 15px 'Gotham';
+    
     
 }
 
@@ -947,6 +961,12 @@ and (orientation : portrait) {
         cursor:default;
     }
 
+    .reset{
+        cursor:default;
+    }
+    .random{
+        cursor:default;
+    }
     
   }
 
