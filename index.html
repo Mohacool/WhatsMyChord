@@ -120,7 +120,48 @@
 
             return chord_names;
         }
-        
+        function getRndInteger(min, max) {
+            return Math.floor(Math.random() * (max - min) ) + min;
+        }
+        function random(){
+            
+            $.getJSON("/notes/data.json", function(data) {
+                let len = Object.keys(data).length;
+                let rnd_chord_num = getRndInteger(0,len);
+                let chord = Object.keys(data)[rnd_chord_num];
+                let ways = data[chord];
+                
+                let rnd_way = getRndInteger(0,ways.length);
+                
+                let final_chord = ways[rnd_way];
+                final_chord = final_chord.reverse();
+                //alert(final_chord);
+                //alert(chord);
+                new_reset();
+                
+                for (i=0;i<6;i++){
+
+                    if (final_chord[i]==-1){
+                        
+                        let x = 91+i;
+                        clicky(x);
+                        console.log("lol try"+x);
+                    }
+                    else if(final_chord[i]!=0){
+                        let click_num = (i*15)+final_chord[i];
+                        console.log("lol "+click_num);
+                        clicky(click_num);
+                    }
+                    
+                    
+                }
+                
+                
+
+            })
+
+        }
+
         function night(){
 
             if (dark_theme){
@@ -475,7 +516,6 @@
                 }
                 else if (curr_notes[i-1]=="G"){
                     $(".text_circle.string"+i).css({"margin-left":"-3.5px"});
-                    $(".text_circle.string"+i).css({"margin-top":"-3.5px"});
                 }
 
                 $(".note_circle.string"+i).css({"left":"-35px"});
@@ -1660,7 +1700,7 @@
             
             $('.square').click(function(event){
                 //console.log("pop"+curr_notes_num);
-                ('.square').unbind();
+                //('.square').unbind();
 
                 //clicky(91);
                 /* onclick logic goes here */ 
@@ -2052,8 +2092,10 @@
                 
                 <div class="play-button" onclick="play_chord()">
                     <a href="#" class="round-button"><i class="fa fa-play fa-2x"></i></a>
+                    <div class="reset" onclick="new_reset()">CLEAR</div>
+                    <div class="random" onclick="random()">RANDOM</div>
                 </div>
-                <div class="reset" onclick="new_reset()">CLEAR</div>
+                
                 
                 
                 <div id="fret_full">
