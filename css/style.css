@@ -346,7 +346,7 @@ html,body{
 }
 #chord_diagram_container{
 
-    border: 1px solid blue;
+    
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     position:relative;
@@ -947,32 +947,81 @@ and (orientation : portrait) {
     .note_circle{
         cursor:default;   
         -webkit-tap-highlight-color: transparent;
+        -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
     }
     
     .open{
         cursor:default;
         -webkit-tap-highlight-color: transparent;
+        -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
     }
     .round-button{
         cursor:default;
         -webkit-tap-highlight-color: transparent;
+        -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
     }
     .chord_diagram{
         cursor:default;
         -webkit-tap-highlight-color: transparent;
+        -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
     }
     .chords{
         cursor:default;
         -webkit-tap-highlight-color: transparent;
+        -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
     }
 
     .reset{
         cursor:default;
         -webkit-tap-highlight-color: transparent;
+        -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
     }
     .random{
         cursor:default;
         -webkit-tap-highlight-color: transparent;
+        -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
     }
     
   }
@@ -1028,7 +1077,7 @@ and (orientation : portrait) {
         transform: rotate(90deg);
        }
        #chord_diagram_container{
-        border: 1px solid blue;
+        
         transform: rotate(90deg);
         border: 1px solid transparent;
         width:645px;
@@ -1130,9 +1179,23 @@ and (orientation : portrait) {
         margin-left:20%;
         }
 
-        
-    
-        
+        .random{
+            visibility:visible;
+            
+            top:30px;
+            left:76px;
+            font-size:14px;
+            
+            
+
+            cursor:pointer;
+        }
+        .reset{
+            left:-55px;
+            top:-40px;
+        }
+
+
     }
 
        
@@ -1158,6 +1221,15 @@ and (orientation : portrait) {
             background-color: var(--white);
            
        }
+       .random{
+        top:-13px;
+        left:9px;
+        font-size:11px;
+       }
+       .reset{
+        top:0px;
+        left:10px;
+       }
 
        .chords{
         color: var(--gray-hover);
@@ -1173,7 +1245,7 @@ and (orientation : portrait) {
         
        }
        #chord_diagram_container{
-           border: 1px solid blue;
+           
            background-color:transparent;
            
           
