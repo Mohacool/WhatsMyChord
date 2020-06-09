@@ -946,26 +946,33 @@ and (orientation : portrait) {
     }
     .note_circle{
         cursor:default;   
+        -webkit-tap-highlight-color: transparent;
     }
     
     .open{
         cursor:default;
+        -webkit-tap-highlight-color: transparent;
     }
     .round-button{
         cursor:default;
+        -webkit-tap-highlight-color: transparent;
     }
     .chord_diagram{
         cursor:default;
+        -webkit-tap-highlight-color: transparent;
     }
     .chords{
         cursor:default;
+        -webkit-tap-highlight-color: transparent;
     }
 
     .reset{
         cursor:default;
+        -webkit-tap-highlight-color: transparent;
     }
     .random{
         cursor:default;
+        -webkit-tap-highlight-color: transparent;
     }
     
   }
