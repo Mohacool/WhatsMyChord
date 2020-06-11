@@ -1137,7 +1137,7 @@ and (orientation : portrait) {
        body{
            overflow-y:scroll;
            overflow-x:hidden;
-           position:fixed;
+           
            height:950px;
            /* attempt to fix 
            height:890xp;
