@@ -1770,8 +1770,10 @@
 
                 if($(window).width() != width || $(window).height() != height){
 
+                    
                 
-                    alert("resized");
+                    alert("resized new");
+                    width = $(window).width(), height = $(window).height();
                     window.scrollBy(0, 0);
                     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                     window.pageYOffset = 0;
