@@ -1763,17 +1763,18 @@
            
            
             
-            var width = $(window).width(), height = $(window).height();
+            var width_ = $(window).width();
+            var height_ = $(window).height();
             
 
             $(window).resize(function() {
 
-                if($(window).width() != width || $(window).height() != height){
+                if($(window).width() != width_ || $(window).height() != height_){
 
                     
                 
                     alert("resized new");
-                    width = $(window).width(), height = $(window).height();
+                    width_ = $(window).width(), height_ = $(window).height();
                     window.scrollBy(0, 0);
                     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                     window.pageYOffset = 0;
@@ -1790,6 +1791,7 @@
                     
             
                     if ($(window).width()<800){
+                        alert("smaller than 800");
                         if ($(window).width()<700){
                             let diff= ((830 -$(window).width())/100)*3;
                             push_diag = push_diag - diff;
@@ -1825,7 +1827,10 @@
 
                     }
                     else{
-                        $("#chord_diagram_container").css({"left":"auto"});
+                        alert("bigger than 800");
+                        $("#chord_diagram_container").css({"left":"-28px"});
+                       
+                        alert("setting back");
                     }
                 
             
