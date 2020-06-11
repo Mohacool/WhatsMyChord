@@ -1766,99 +1766,83 @@
             
 
             $(window).resize(function() {
-            
-            window.scrollBy(0, 0);
-            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            window.pageYOffset = 0;
-            document.documentElement.scrollTop = 0;
+                
+                alert("resized");
+                window.scrollBy(0, 0);
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                window.pageYOffset = 0;
+                document.documentElement.scrollTop = 0;
 
-            var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-            window.pageXOffset = 0;
-            document.documentElement.scrollLeft = 0;
-            //alert($(window).width());
+                var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+                window.pageXOffset = 0;
+                document.documentElement.scrollLeft = 0;
+                document.body.scrollTop = document.documentElement.scrollTop = 0;
+                
 
-            let push_diag = 50 - ((770-$(window).width())/65)*5;
-            //alert(push_diag);
 
-           //alert($("#chord_diagram_container").css("left"));
+                let push_diag = 50 - ((770-$(window).width())/65)*5;
+                
            
-            if ($(window).width()<800){
-                if ($(window).width()<700){
-                    let diff= ((830 -$(window).width())/100)*3;
-                    push_diag = push_diag - diff;
-                }
-                if ($(window).width()<605){
-                    let diff= ((500 -$(window).width())/100)*3;
-                    push_diag = push_diag - diff;
-                }
-                if (inRange($(window).width(),520,600)){
-                    push_diag = push_diag + 6;
-                }
-                if ($(window).width()<508){
-                    push_diag = push_diag - 4;
-                }
-                
-                if ($(window).width()<440){
-                    let diff= ((720 -$(window).width())/100)*3;
-                    push_diag = push_diag - diff;
-                }
-                if (inRange($(window).width(),440,500)){
-                    push_diag = push_diag + 6;
-                }
-                if (inRange($(window).width(),394,439)){
-                    push_diag = push_diag + 6;
-                }
-                if ($(window).width()<370){
-                    push_diag = push_diag -0;
-                }
-                
+                if ($(window).width()<800){
+                    if ($(window).width()<700){
+                        let diff= ((830 -$(window).width())/100)*3;
+                        push_diag = push_diag - diff;
+                    }
+                    if ($(window).width()<605){
+                        let diff= ((500 -$(window).width())/100)*3;
+                        push_diag = push_diag - diff;
+                    }
+                    if (inRange($(window).width(),520,600)){
+                        push_diag = push_diag + 6;
+                    }
+                    if ($(window).width()<508){
+                        push_diag = push_diag - 4;
+                    }
+                    
+                    if ($(window).width()<440){
+                        let diff= ((720 -$(window).width())/100)*3;
+                        push_diag = push_diag - diff;
+                    }
+                    if (inRange($(window).width(),440,500)){
+                        push_diag = push_diag + 6;
+                    }
+                    if (inRange($(window).width(),394,439)){
+                        push_diag = push_diag + 6;
+                    }
+                    if ($(window).width()<370){
+                        push_diag = push_diag -0;
+                    }
+                    
 
-                console.log(push_diag);
-                $("#chord_diagram_container").css({"left":push_diag+"%"});
+                    console.log(push_diag);
+                    $("#chord_diagram_container").css({"left":push_diag+"%"});
 
-            }
-            else{
-                $("#chord_diagram_container").css({"left":"auto"});
-            }
+                }
+                else{
+                    $("#chord_diagram_container").css({"left":"auto"});
+                }
             
            
-            document.body.scrollTop = document.documentElement.scrollTop = 0;
-            let color = "var(--gray-hover)";
-            let clicked = "var(--black)";
-            if (inRange($(window).width(),584,800)){
-                
-                color = "var(--gray-hover)";
-                clicked = "var(--white)";
-            }
-            for (i=0;i<6;i++){
-                $('.chords.chord'+i).css({"color":color});
-                $('.chords.chord'+i).css({"opacity":"0.7"}); 
-            }
+            
+                let color = "var(--gray-hover)";
+                let clicked = "var(--black)";
+                if (inRange($(window).width(),584,800)){
+                    
+                    color = "var(--gray-hover)";
+                    clicked = "var(--white)";
+                }
+                for (i=0;i<6;i++){
+                    $('.chords.chord'+i).css({"color":color});
+                    $('.chords.chord'+i).css({"opacity":"0.7"}); 
+                }
 
-            $('.chords.chord'+chord_num_selected).css({"color":clicked});
-            $('.chords.chord'+chord_num_selected).css({"opacity":"1"});
-                ///alert("put up");
-                ///document.location.reload(true);
-                
-                ///alert("width"+$(window).width());
+                $('.chords.chord'+chord_num_selected).css({"color":clicked});
+                $('.chords.chord'+chord_num_selected).css({"opacity":"1"});
 
-
-                //alert($("#fret_full").css("height"));
-                //alert($("#fret_full").css("margin-left"));
 
                 let fret_right = parseInt($("#fret_full").css("margin-left").replace("px","")) + 196;
                 let width = $("#fretboard").css("width");
 
-                //alert("fret right"+ fret_right);
-                //alert("width"+ width);
-
-                //let curr_left = parseInt($("#chord_diagram_container").css("left").replace("px",""));
-                //alert(curr_left);
-
-                //let shift = (577 - $(window).width())/2;
-                //curr_left = curr_left - shift;
-
-                //$("#chord_diagram_container").css({"left":curr_left+"px"});
 
                 let size = 0;
                 for (i=0;i<matches.length;i++){
@@ -1883,7 +1867,9 @@
                     $('.chords').css({"font-size":"20px"});
 
                     }
-            }) 
+
+            })
+        
 
             window.onorientationchange = function() { 
             var orientation = window.orientation; 
@@ -1894,16 +1880,10 @@
                     break; } 
             };
 
-            // If the page has scrolling
-            /*
-            if ($('body').css('overflow').includes("scroll")){
-                let body_height = $(document).height();
-                $('body').css({"height":body_height+"px"});
-            }
-            */
+           
             
 
-            ///alert($(window).width());
+        
 
             function isMobile() {
                 try{ document.createEvent("TouchEvent"); return true; }
