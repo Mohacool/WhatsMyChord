@@ -111,8 +111,7 @@ html,body{
     left: 0;
     right: 0;
     bottom: 0;
-    position:fixed;
-    overflow-y:scroll;
+    
 }
 
 
@@ -1145,7 +1144,9 @@ and (orientation : portrait) {
            overflow-y:scroll;
            overflow-x:hidden;
            /* position fixed was here */
-           height:950px;
+
+           /*height:950px; */
+           height:100%;
            /* attempt to fix 
            height:890xp;
            */
