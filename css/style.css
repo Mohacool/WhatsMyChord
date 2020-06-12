@@ -106,6 +106,12 @@ html,body{
     height: 100%;
     margin:0;
     padding:0;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position:relative;
 }
 
 
@@ -735,7 +741,7 @@ b{
     font: 1em 'Gotham';
     
     line-height:26.5px;
-    margin-top:-9px;
+    margin-top:-10px;
     text-align:center;
     font-weight: bold;
     
@@ -1137,7 +1143,7 @@ and (orientation : portrait) {
        body{
            overflow-y:scroll;
            overflow-x:hidden;
-           
+           /* position fixed was here */
            height:950px;
            /* attempt to fix 
            height:890xp;
