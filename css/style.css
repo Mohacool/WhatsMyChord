@@ -112,6 +112,7 @@ html,body{
     right: 0;
     bottom: 0;
     position:fixed;
+    overflow-y:scroll;
 }
 
 
