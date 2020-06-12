@@ -1760,6 +1760,10 @@
                 $("#chord_diagram_container").css({"left":push_diag+"%"});
 
             }
+            else{
+                alert("push 0%");
+                $("#chord_diagram_container").css({"left":"0%"});
+            }
            
            
             
@@ -1888,7 +1892,7 @@
                 switch(orientation) { 
                     case 0:
                     case 90:
-                    case -90: window.location.reload();  $("#chord_diagram_container").css({"left":"-28px"}); alert("trying"); 
+                    case -90: window.location.reload(); 
                     break; } 
             };
 
