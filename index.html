@@ -98,6 +98,11 @@
         var note_matrix = math.zeros(6,16);
         var oct_matrix = math.zeros(6,16);
 
+
+
+        function byep(){
+            document.location="bindex.html";
+        }
         /* Take in a chord such as ["0","3","2","1","-1","-1"] -> ["E","C",'G','E']
 
             Also remove muted strings 
@@ -2069,7 +2074,7 @@
   
         <!-- <div class="bg"></div> !-->
         <div id="header">
-            <span class="page_title">[ ] WHATS MY CHORD</span> 
+            <span class="page_title" onclick="byep()">[ ] WHATS MY CHORD</span> 
             
             <!-- <div id="headerElements">[ ] WHATS MY CHORD</div> -->
             <!--
