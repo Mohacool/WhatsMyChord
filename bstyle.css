@@ -28,19 +28,23 @@ html,body{
 }
 
 .carousel-caption h1{
-    
+    font-size:1.5rem;
     text-transform:uppercase;
     text-shadow: 1px 1px 1px #000;
 }
 
 .carousel-caption h3{
     
-    font-weight:500;
+    
     text-shadow: 1px 1px 1px 10px #000;
     padding-bottom: 1rem;
 }
 
 
+.jumbotron{
+    padding:1rem;
+    border-radius:0;
+}
 .black{
     color:black;
 }
