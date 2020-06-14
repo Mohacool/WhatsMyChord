@@ -947,7 +947,10 @@ and (orientation : portrait) {
 
     /*pop*/
   @media only screen and (max-device-width:768){
-    
+
+    #fret_full{
+        visibility:hidden;
+    }
     .new{
         top:-621px;
         cursor:default;   
