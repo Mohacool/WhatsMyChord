@@ -906,6 +906,115 @@ and (max-device-width : 480px) {
     .open{
         cursor:default;
     }
+
+    .new{
+        top:-621px;
+        cursor:default;   
+        -webkit-tap-highlight-color: transparent;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .square {
+        
+        bottom:800px;
+        right:1px;
+        display:inline-block;
+        position:relative;
+        height: 25px;
+        width: 39px;
+        border: 1px solid transparent;
+        
+    }
+    .nudge{
+        visibility:hidden;
+        cursor: default;
+    }
+    .note_circle{
+        cursor:default;   
+        -webkit-tap-highlight-color: transparent;
+        -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+    }
+    
+    .open{
+        top:-436px;
+        cursor:default;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+    }
+    .round-button{
+        cursor:default;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+    }
+    .chord_diagram{
+        cursor:default;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+    }
+    .chords{
+        cursor:default;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+    }
+
+    .reset{
+        cursor:default;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+    }
+    .random{
+        cursor:default;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+    }
 /* Styles */
 }
 
@@ -948,9 +1057,7 @@ and (orientation : portrait) {
     /*pop*/
   @media only screen and (max-device-width:768){
 
-    #fret_full{
-        visibility:hidden;
-    }
+    
     .new{
         top:-621px;
         cursor:default;   
