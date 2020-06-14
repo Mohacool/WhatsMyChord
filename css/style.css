@@ -945,9 +945,21 @@ and (orientation : portrait) {
 }
 
 
-
+    /*pop*/
   @media only screen and (max-device-width:768){
     
+    .new{
+        left:-621px;
+        cursor:default;   
+        -webkit-tap-highlight-color: transparent;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
 
     .square {
         
@@ -977,6 +989,7 @@ and (orientation : portrait) {
     }
     
     .open{
+        left:-436px;
         cursor:default;
         -webkit-tap-highlight-color: transparent;
         -webkit-tap-highlight-color: transparent;
