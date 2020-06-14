@@ -949,7 +949,7 @@ and (orientation : portrait) {
   @media only screen and (max-device-width:768){
     
     .new{
-        left:-621px;
+        top:-621px;
         cursor:default;   
         -webkit-tap-highlight-color: transparent;
         -webkit-tap-highlight-color: transparent;
@@ -989,7 +989,7 @@ and (orientation : portrait) {
     }
     
     .open{
-        left:-436px;
+        top:-436px;
         cursor:default;
         -webkit-tap-highlight-color: transparent;
         -webkit-tap-highlight-color: transparent;
@@ -1071,8 +1071,12 @@ and (orientation : portrait) {
 
   @media only screen and (max-width:800px){
 
+
+        
         .new{
             transform:rotate(-90deg);
+            
+            
         }
 
        .page_title{
