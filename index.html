@@ -1832,7 +1832,7 @@
 
             }
             else{
-                alert("push 0%");
+                //alert("push 0%");
                 $("#chord_diagram_container").css({"left":"-28px"});
             }
            
@@ -1848,7 +1848,7 @@
 
                     
                 
-                    alert("resized new");
+                    //alert("resized new");
                     width_ = $(window).width(), height_ = $(window).height();
                     window.scrollBy(0, 0);
                     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -1866,7 +1866,7 @@
                     
             
                     if ($(window).width()<800){
-                        alert("smaller than 800");
+                        //alert("smaller than 800");
                         if ($(window).width()<700){
                             let diff= ((830 -$(window).width())/100)*3;
                             push_diag = push_diag - diff;
@@ -1902,10 +1902,10 @@
 
                     }
                     else{
-                        alert("bigger than 800");
+                        //alert("bigger than 800");
                         $("#chord_diagram_container").css({"left":"-28px"});
                        
-                        alert("setting back");
+                        //alert("setting back");
                     }
                 
             
@@ -2297,12 +2297,12 @@
                     <span class="open string5" onclick="clicky('95')"></span>
                     <span class="open string6" onclick="clicky('96')"></span>
 
-                    <img class="new string1" src="/notepics/e.png" onclick="notey(1)">
-                    <img class="new string2" src="/notepics/b.png" onclick="notey(2)">
-                    <img class="new string3" src="/notepics/g.png" onclick="notey(3)">
-                    <img class="new string4" src="/notepics/d.png" onclick="notey(4)">
-                    <img class="new string5" src="/notepics/a.png" onclick="notey(5)">
-                    <img class="new string6" src="/notepics/e.png" onclick="notey(6)">
+                    <img class="new string1" src="/notepics/E.png" onclick="notey(1)">
+                    <img class="new string2" src="/notepics/B.png" onclick="notey(2)">
+                    <img class="new string3" src="/notepics/G.png" onclick="notey(3)">
+                    <img class="new string4" src="/notepics/D.png" onclick="notey(4)">
+                    <img class="new string5" src="/notepics/A.png" onclick="notey(5)">
+                    <img class="new string6" src="/notepics/E.png" onclick="notey(6)">
                     <!--
                     <span class="note_circle string1" onclick="notey(1)">
                         <span class="text_circle string1">E</span>
