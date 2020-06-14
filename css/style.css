@@ -54,6 +54,7 @@ div.headerElements {
 }
 
 .page_title{
+    cursor:pointer;
     margin: auto 0;
     display: inline-block;
     vertical-align: middle;
@@ -779,7 +780,18 @@ b{
     border-radius: 50%;
     background-color: var(--gray-hover);
     
+}
+
+.new{
     
+    position:relative;
+    width:27px;
+    height:27px;
+    display:flex;
+    top:-617px;
+    left:-32px;
+    margin-top:4px;
+    cursor:pointer;
 }
 
 
@@ -1046,6 +1058,10 @@ and (orientation : portrait) {
 
   @media only screen and (max-width:800px){
 
+        .new{
+            transform:rotate(-90deg);
+        }
+
        .page_title{
 
          font-size:4.5vw;
@@ -1137,6 +1153,10 @@ and (orientation : portrait) {
         width: 185%;
         left:68%;
         top:-21.5%;
+
+        left:80%;
+        top:-5%;
+
         justify-content: left;
         
         
@@ -1169,7 +1189,7 @@ and (orientation : portrait) {
             
         
             margin:  0 auto;
-            transform: translateX(-3px);
+            transform: translateX(45px);
            
            
            
@@ -1232,7 +1252,9 @@ and (orientation : portrait) {
             justify-content: normal;
             background-color: var(--white);
            
+        
        }
+       
        .random{
         top:-13px;
         left:9px;
