@@ -67,7 +67,52 @@
         //alert("Your screen resolution is: " + window.screen.width * window.devicePixelRatio + "x" + window.screen.height * window.devicePixelRatio);
         //alert("True resoltuion" + window.screen.width + "by" +window.screen.height);
 
-        
+        // Preload note images
+        var C = new Image();
+        C.src = "/notepics/C.png";
+
+        var Csharp = new Image();
+        Csharp.src = "/notepics/Csharp.png";
+
+        var D = new Image();
+        D.src = "/notepics/D.png";
+
+        var Dsharp = new Image();
+        Dsharp.src = "/notepics/Dsharp.png";
+
+        var E = new Image();
+        E.src = "/notepics/E.png";
+
+        var Eflat = new Image();
+        Eflat.src = "/notepics/Eflat.png";
+
+        var F = new Image();
+        F.src = "/notepics/F.png";
+
+        var Fsharp = new Image();
+        Fsharp.src = "/notepics/Fsharp.png";
+
+        var G = new Image();
+        G.src = "/notepics/G.png";
+
+        var Gsharp = new Image();
+        Gsharp.src = "/notepics/Gsharp.png";
+
+        var A = new Image();
+        A.src = "/notepics/A.png";
+
+        var Aflat = new Image();
+        Aflat.src = "/notepics/Aflat.png";
+
+        var B = new Image();
+        B.src = "/notepics/B.png";
+
+        var Bflat = new Image();
+        Bflat.src = "/notepics/Bflat.png";
+
+
+
+        (new Image()).src = "/notepics/x.png";
 
         var curr_diag_clicked;
         var small_device = false;
@@ -222,6 +267,9 @@
 
             $(".text_circle.string"+string_num).text("X");
             $(".text_circle.string"+string_num).css({"color":"#3a3a3a"});
+
+            // ADD X 
+            $(".new.string"+string_num).attr("src","/notepics/x.png")
 
             notePaths[string_num-1] = "";
         }
@@ -506,27 +554,10 @@
             notePaths = ["/notes/E4.mp3", "/notes/B3.mp3", "/notes/G3.mp3", "/notes/D3.mp3", "/notes/A2.mp3", "/notes/E2.mp3"];
             
             for (var i = 1;i < 7; i++){
-                console.log("diag",i);
 
-                // Add note name to circle
-                $(".text_circle.string"+i).text(curr_notes[i-1]);
-
-                // Adjust size and aligning
-                $(".text_circle.string"+i).css({"font-size":"20px"});
-                $(".text_circle.string"+i).css({"font-size":"20px"});
-                $(".text_circle.string"+i).css({"margin-left":"-2px"});
-                $(".text_circle.string"+i).css({"line-height":"26.5px"});        
-                if (["A","D"].includes(curr_notes[i-1])){
-                    $(".text_circle.string"+i).css({"margin-left":"-3.3px"});
-                }
-                else if (curr_notes[i-1]=="G"){
-                    $(".text_circle.string"+i).css({"margin-left":"-3.5px"});
-                }
-
-                $(".note_circle.string"+i).css({"left":"-35px"});
-                
-                
-                //cat
+                // change the note images to open position and move them to start
+                $(".new.string"+i).attr("src","/notepics/"+curr_notes[i-1]+".png");
+                $(".new.string"+i).css({"left":"-32px"});
 
             }
             
@@ -1296,6 +1327,8 @@
         */ 
         function clicky(note_num,playsound=true,reset=false,refresh=true){
 
+            
+
             /*
             if (inRange(note_num),1,90){
                 let new_list = [];
@@ -1307,7 +1340,7 @@
                 }
                 console.log("pop: "+new_list);
                 console.log("pop check if"+note_num+"in"+ new_list);
-                alert(typeof(new_list));
+                
                 if (new_list.includes(parseInt(note_num))){
                     console.log("pop it has it");
 
@@ -1319,6 +1352,7 @@
                 }
             }
             */
+            
 
 
             //alert("clicked"+note_num);
@@ -1389,15 +1423,9 @@
             $(".input_msg").css({"display":"none"});
             
             
-            
-
-            //console.log(note_num);
-            //console.log("string",Math.floor(note_num/15));
             var string = Math.floor(note_num/15);
-            //console.log("fret",note_num - (string-1)*15);
             if (note_num>90){
                 var string = note_num - 90;
-                //console.log("string is now",string);
                 var fret = 0;
             }
             else{
@@ -1412,6 +1440,9 @@
             }
 
             // Make the notes visible 
+            $(".new.string"+string).css({"visibility":"hidden"});
+            
+
             $(".note_circle.string"+string).css({"visibility":"visible"});
             $(".open.string"+string).css({"background-color":"#595959"});
 
@@ -1420,7 +1451,6 @@
 
             
 
-            console.log("SHOWWWWWWWWWWWWWWWW",".note_circle.string"+string);
 
             // If same note clicked again
 
@@ -1434,20 +1464,36 @@
 
             let note = note_name + oct;
 
-            // Make the note smaller if its #/b
-
-            
-            
-            
-
             let string_name = "string"+ string;
 
-
-            
-            
             // Update current notes
             curr_notes[string-1] = note_name;
 
+            // Prepare the note for finding the picture
+            var note_name_clean = note_name.replace('b','flat');
+            note_name_clean = note_name.replace('#','sharp');
+            if (note_name=="Bb"){
+                note_name_clean = "Bflat";
+            }
+            note_name_clean +=".png";
+
+            //alert(note_name_clean);
+            
+
+            //$(".new."+string_name).attr("src","/notepics/"+note_name_clean);
+
+            var clean = note_name_clean.replace(".png","");
+
+            var new_img = new Image();
+            new_img.src = "/notepics/"+note_name_clean;
+
+            
+            
+            $(".new."+string_name).attr("src",eval(clean).src);
+            //alert(clean);
+            
+
+            /*
             // Change the note name on string
             if (note_name.endsWith('b')){
                 note_name = note_name.slice(0,-1)+'\u266D'
@@ -1455,7 +1501,9 @@
             if (note_name.endsWith('#')){
                 note_name = note_name.slice(0,-1)+'\u266F'
             }
-
+            */
+            
+            /*
             // Add note name to circle
             $(".text_circle."+string_name).text(note_name);
 
@@ -1469,6 +1517,7 @@
             else{
                 $(".text_circle."+string_name).css({"margin-left":"-2px"});
             }
+            
 
             // Change text size/aligning for # and b notes
             if (note_name.length == 2){
@@ -1484,19 +1533,27 @@
                 
                 
             }
+            */
             
 
             // Move the note circle to the correct spot
             let x_pos = 8 + (fret-1)*44.4;
             if (fret==0){
-                x_pos = -35;
+                x_pos = -32;
             }
 
-            // Move note circle
-            $(".note_circle."+string_name).css({"left":x_pos+"px"});
+            // Only if the image is loaded should you move
+            new_img.onload = function(){
+                
+ 
+            }
+            $(".new."+string_name).css({"left":x_pos+"px"});
+            
 
             // Show the note
             $(".note_circle."+string_name).css({"visibility":"visible"});
+            //$(".new."+string_name).css({"visibility":"visible"});
+
 
             console.log("made "+".note_circle."+string_name+"visible");
 
@@ -1517,6 +1574,7 @@
 
                     // Create the x
                     x_it(string_num+1);
+                    //alert("x clicked");
                    
                     x_clicked = true;
                 }
@@ -1599,13 +1657,8 @@
                 playNote(string,note);
             }
 
+            $(".new.string"+string).css({"visibility":"visible"});
             
-
-            
-            
-
-            
-
             
         }
 
@@ -1699,6 +1752,11 @@
         
 
         $(document).ready(function(){
+
+            
+
+
+
 
             /*
             $("body").bind('touchmove', function(event){
@@ -2228,6 +2286,10 @@
                     <span class="x string5" style="top:-433px" onclick="muted('5')">X</span>
                     <span class="x string6" style="top:-430px" onclick="muted('6')">X</span>
 
+
+                    
+                    
+
                     <span class="open string1" onclick="clicky('91')"></span>
                     <span class="open string2" onclick="clicky('92')"></span>
                     <span class="open string3" onclick="clicky('93')"></span>
@@ -2235,7 +2297,13 @@
                     <span class="open string5" onclick="clicky('95')"></span>
                     <span class="open string6" onclick="clicky('96')"></span>
 
-
+                    <img class="new string1" src="/notepics/e.png" onclick="notey(1)">
+                    <img class="new string2" src="/notepics/b.png" onclick="notey(2)">
+                    <img class="new string3" src="/notepics/g.png" onclick="notey(3)">
+                    <img class="new string4" src="/notepics/d.png" onclick="notey(4)">
+                    <img class="new string5" src="/notepics/a.png" onclick="notey(5)">
+                    <img class="new string6" src="/notepics/e.png" onclick="notey(6)">
+                    <!--
                     <span class="note_circle string1" onclick="notey(1)">
                         <span class="text_circle string1">E</span>
                     </span>
@@ -2254,6 +2322,7 @@
                     <span class="note_circle string6" onclick="notey(6)">
                         <span class="text_circle string6">E</span>
                     </span>
+                    -->
 
                     <div id="holder">
                         <div class="square" onclick="clicky('1')"></div>
