@@ -110,12 +110,16 @@
         var Bflat = new Image();
         Bflat.src = "/notepics/Bflat.png";
 
-
-
         (new Image()).src = "/notepics/x.png";
+
+        // Load the chord diagram lists
+
+
+        // Global variables
 
         var curr_diag_clicked;
         var small_device = false;
+        var curr_clicked = 0;
 
 
         var chord_num_selected = 0;
@@ -176,6 +180,7 @@
         function random(){
             
             $.getJSON("/notes/data.json", function(data) {
+                console.log("json loading..");
                 let len = Object.keys(data).length;
                 let rnd_chord_num = getRndInteger(0,len);
                 let chord = Object.keys(data)[rnd_chord_num];
@@ -321,6 +326,25 @@
         // Change the number of global variable to show which chord will be displayed
         function chord_display_change(num){
 
+            
+            //mok
+            //alert(matches[num]);
+            let chord_clicked = matches[num];
+            let index = curr_clicked[1];
+            if (true_match.includes(chord_clicked)){
+                //alert("the chord is in here at"+index);
+                
+                //$(".chord_diagram.chord"+index).css({"border":"5px solid red"});
+                $(".chord_diagram.chord"+index).css({"opacity":"1"});
+                //alert("chord_diagram.chord"+index);
+            }
+            else{
+                $(".chord_diagram.chord"+index).css({"border":"1px solid transparent"});
+                $(".chord_diagram.chord"+index).css({"opacity":"0.7"});
+            }
+
+
+
             /*
             $(".chords.chord0").addClass('anim');
             $(".chords.chord1").addClass('anim');
@@ -355,8 +379,13 @@
 
             var curr_state = curr_notes_num.slice().reverse();
 
+            //alert(curr_diag_clicked);
+            
+
+            // 2020 removal
+            /*
             $.getJSON("/notes/data.json", function(data) {
-                
+                console.log("json loading..");
 
                 let c_name = matches[chord_num_selected];
                 c_name = c_name.replace('ov','/');
@@ -371,23 +400,28 @@
                 //alert(chord_lst);
                 for (var i = 0;i < chord_lst.length; i++){
 
-                    console.log("nig"+ curr_state+"compare to",JSON.stringify(chord_lst[i]));
+                    console.log(curr_state+"compare to",JSON.stringify(chord_lst[i]));
                     if  (JSON.stringify(curr_state) == JSON.stringify(chord_lst[i])) {
                         //alert('found at '+i);
                         let index = i+1;
-                        console.log("nig GOTTT at "+i);
+                        console.log("GOTTT at "+i);
                         $(".chord_diagram.chord"+index).css({"opacity":"1"});
                     }
                 }
 
             }
+            
             )
+            */
+            
+            
 
 
 
 
             curr_diag_clicked=0;
 
+            /* 2020 removal
             for (var i = 1;i < 6; i++){
                 if (i!=temp){
                     $(".chord_diagram.chord"+i).css({"opacity":"0.7"});
@@ -395,6 +429,7 @@
                 
                 
             }
+            */
             //alert(curr_diag_clicked);
 
             $(".chord_diagram.chord"+num).css({"opacity":"0.7"});
@@ -413,10 +448,35 @@
 
         function diagramClick(diagnum){
 
+            //alert(matches);
+
+            //alert("switch to" + diagnum);
+
+            //clear black
+
+            for (i=1;i<6;i++){
+                
+                if(i!=diagnum){
+                    $(".chord_diagram.chord"+i).css({"border":"1px solid transparent"});
+                    $(".chord_diagram.chord"+i).css({"opacity":"0.7"});
+                }
+                
+            }
+
+            //$(".chord_diagram.chord"+diagnum).css({"border":"5px solid red"});
+            //alert("making"+diagnum+"black");
+            $(".chord_diagram.chord"+diagnum).css({"opacity":"1"});
+
            
             curr_diag_clicked = diagnum;
-            //alert(curr_diag_clicked);
 
+            true_match = [matches[chord_num_selected]];
+
+            //alert(curr_diag_clicked);
+            //alert("diagram click");
+            curr_clicked = [matches[chord_num_selected],curr_diag_clicked]
+
+            //alert(curr_clicked);
             $(".chord_diagram.chord"+diagnum).css({"opacity":"1"});
 
             $(".chord_diagram").css({"border-top":"0px solid var(--white)"});
@@ -445,6 +505,7 @@
             //alert(chord_index);
 
             $.getJSON("/notes/data.json", function(data) {
+                console.log("json loading..");
 
                 chord_name = chord_name.replace('ov','/');
 
@@ -644,6 +705,7 @@
 
         function fillDiagrams(){
             
+            
             console.log("LOL matches",matches);
 
             var all_notes = ['C','Csharp','D','Dsharp','E','F','Fsharp','G','Gsharp','A','Bb','B','Db','Eb','Gb','Ab','Asharp'];
@@ -668,11 +730,22 @@
                 var matches_fix = display_chord.replace(sharpRegExp,'sharp');
                 console.log("@@@@@@@@@ - IF all notes has ",matches_fix);
 
+
+                //jik
+
+                // Fix b/flat in chord identifying
+                if (matches_fix.includes('\u266D')){
+                    //second = second.replace('b','\u266D');
+                    matches_fix = matches_fix.split('\u266D').join('b');
+                    display_chord = display_chord.split('\u266D').join('b');
+                }
+
+
                 // If its simple A,B,C add major to it 
                 if (all_notes.includes(matches_fix)){
 
                     var note = display_chord+"major"; //Make it major
-                    
+                    //alert(note);
                     if (note.includes('/')){
                         note = note.replace('/','ov');
                     }
@@ -808,8 +881,19 @@
 
         function doStuff(input_chord,clear=true,reset=false){
 
+            for (i=1;i<6;i++){
+                
+                
+                    
+                $(".chord_diagram.chord"+i).css({"opacity":"0.7"});
+                
+                
+            }
+
             
-            
+            true_match = [];
+            curr_clicked = [[],[]];
+
             var all_notes = ['C','C#','D','D#','E','F','F#','G','G#','A','Bb','B','Db','Eb','Gb','Ab','A#'];
 
             // Set Manipulation functions
@@ -847,12 +931,13 @@
 
             // reset the opacity of the chords
             
-
+            /* 2020 removal
             for (var i = 1;i < 6; i++){
                 console.log("reset");
                 $(".chord_diagram.chord"+i).css({"opacity":"0.7"});
                 //$(".chord_diagram.chord"+i).css({"filter":"opacity(70%)"});
             }
+            */
 
             for (var i = 1;i < 6; i++){
                 console.log("opacity of"+i+" is"+ $(".chord_diagram.chord"+i).css("opacity"));
@@ -865,6 +950,7 @@
             
 
             $.getJSON("/notes/data.json", function(data) {
+                console.log("json loading do stuff..");
                 let count = 0;
 
 
@@ -951,7 +1037,7 @@
                                 console.log("?GADS?FS?D?D");
                                 temp_chord = temp_chord +"major";
                             }
-                            else if (regex.test(temp_chord)&& !note.includes('dim')){
+                            else if (regex.test(temp_chord)&& !temp_chord.includes('dim')){
                                 console.log("TRUE");
                                 temp_chord = temp_chord.replace('m','minor');
 
@@ -973,6 +1059,15 @@
                             
                             curr_diag_clicked = index;
                             $(".chord_diagram.chord"+index).css({"opacity":"1"});
+                            
+                            true_match.push(temp_chord);
+
+                            //curr_clicked = [temp_chord,index];
+                            curr_clicked = [true_match,index];
+
+                            //alert("true match"+true_match);
+
+
 
                             console.log(".chord_diagram.chord"+index);
                              
@@ -992,6 +1087,7 @@
                                     console.log(chordified);
                                     console.log(item);
                                 }
+                                
 
                             }
                             
@@ -1005,11 +1101,12 @@
 
                        
 
-
+                        
                         count +=1;
 
 
                     });
+                    
                 }
                 //console.log("went through",count,"chords");
 
@@ -1053,7 +1150,7 @@
 
 
 
-                    var to_super = ['9b5','add9','sus2sus4','b7b5','#7b5','b5','6','#9','aug9','9','69','11','13','sus4','sus2','dim','maj7#5','7b9','#m69'];
+                    var to_super = ['alt','9b5','add9','sus2sus4','Maj11','Maj13','b7b5','#7b5','b5','6','#9','aug9','9','69','11','13','sus4','sus2','dim','maj7#5','7b9','#m69','aug'];
 
 
                     var super_temp;
@@ -1081,6 +1178,8 @@
                                 else if (second=="7b9"){second="7(b9)";}
                                 else if (second=="#9"){second="(#9)";}
                                 else if (second=="b7b5"){second="b7(b5)";}
+                                else if (second=="b5"){second="(b5)";}
+                                else if (second=="69"){second="6/9";}
 
                                 if (second.includes('b')){
                                     //second = second.replace('b','\u266D');
@@ -1123,9 +1222,18 @@
                     //alert(matches[i] + super_detected());
                     if (super_detected()){
                         //alert("will put"+super_temp);
+
+                        if (super_temp.includes('b')){
+                            super_temp = super_temp.split('b').join('\u266D');
+
+                        }
                         $(name).html(super_temp);
                     }
                     else{
+                        if (matches[i].includes('b')){
+                            matches[i] = matches[i].split('b').join('\u266D');
+
+                        }
                         $(name).html(matches[i]);
 
                     }
@@ -1180,8 +1288,10 @@
                 }
                 
 
-                
+                //kik
                 fillDiagrams();
+
+                
 
                 //lolp
                 if (($(window).width() < 580)){
@@ -1223,11 +1333,12 @@
                 }  
                 */ 
                 
-
+                //curr_clicked = [matches[chord_num_selected],1];
                 
 
                 
             });
+           
         
 
         }
