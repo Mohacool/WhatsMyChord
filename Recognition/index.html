@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+      
+  </head>
+  <body>
+    <div class="container">
+        <h1>Recording Test</h1>
+
+        <button id="record">Record</button>
+        <button id="stoprec">Stop</button>
+        <div id="ok"></div>
+
+    </div>
+    <script>
+
+        // ------------------- RECORDING ------------------
+        var recordings = [];
+        
+        record.onclick = () =>{
+            navigator.mediaDevices.getUserMedia({audio:true})
+            .then(stream => {
+
+                mediaRecorder = new MediaRecorder(stream)
+                mediaRecorder.start()
+                chuck = []
+
+                mediaRecorder.addEventListener("dataavailable", e => {
+                    chuck.push(e.data);
+                })
+                mediaRecorder.addEventListener("stop", e =>{
+                    blob = new Blob(chuck, {'type': 'audio/wav;'})
+
+                    recordings.push(blob); // Add blob to list of recordings 
+
+                    audio_url = URL.createObjectURL(blob)
+                    audio = new Audio(audio_url)
+                    audio.setAttribute("controls",1)
+                    ok.appendChild(audio)
+                })
+
+
+
+
+            })
+
+
+        }
+
+        stoprec.onclick = () =>{
+            mediaRecorder.stop()
+        }
+
+        // ------------------- RECORDING ------------------
+
+
+        function sendToServer(){
+
+            
+            var form = new FormData();
+
+            var fileType="audio_data";
+            var fileName = "filename.wav";
+            var blob = recordings[0]; // use the first recording blob
+            
+            form.append(fileType, blob, fileName); 
+            
+
+            // Send 
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:5000/messages',
+                data: form,
+                cache: false,
+                processData: false,  // prevent jQuery from converting the data
+                contentType: false,  // prevent jQuery from overriding content type
+                success: function(response) {
+                    alert(response);
+                }
+            });
+            
+            
+        }
+        
+
+        
+
+    </script>
+    
+  </body>
+</html>
