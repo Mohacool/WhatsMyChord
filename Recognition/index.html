@@ -40,6 +40,21 @@
                     audio = new Audio(audio_url)
                     audio.setAttribute("controls",1)
                     ok.appendChild(audio)
+                    
+
+                    // NEW CODE STARTS HERE
+                    fileReader = new FileReader();
+                    audioContext = new AudioContext();
+                    let arrayBuffer;
+
+                    fileReader.onloadend = () => {
+                        arrayBuffer = fileReader.result;
+                        audioContext.decodeAudioData(arrayBuffer, (audioBuffer) => {
+                            console.log(audioBuffer)  //just displays the audioBuffer on the console
+                        })
+                    }
+
+                    fileReader.readAsArrayBuffer(blob) // NEW CODE ENDS HERE
                 })
 
 
