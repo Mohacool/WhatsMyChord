@@ -19,6 +19,7 @@
 
         // ------------------- RECORDING ------------------
         var recordings = [];
+        var myBuffer;
         
         record.onclick = () =>{
             navigator.mediaDevices.getUserMedia({audio:true})
@@ -51,6 +52,7 @@
                         arrayBuffer = fileReader.result;
                         audioContext.decodeAudioData(arrayBuffer, (audioBuffer) => {
                             console.log(audioBuffer)  //just displays the audioBuffer on the console
+                            myBuffer = audioBuffer;
                         })
                     }
 
@@ -69,9 +71,39 @@
             mediaRecorder.stop()
         }
 
-        // ------------------- RECORDING ------------------
+        // ------------------- RECORDING END ------------------
 
 
+        // USE THIS FUNCTION 
+        function sendBuffer(){
+            var form = new FormData();
+            
+            //form.append("buffer",myBuffer); 
+
+            var anotherArray = new Float32Array(myBuffer.length);
+            myBuffer.copyFromChannel(anotherArray, 0);
+
+
+            var fileType="float32"; // Arbitrarily named
+
+            form.append(fileType,anotherArray); 
+
+            // Send 
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:5000/messages',
+                data: form,
+                cache: false,
+                processData: false,  // prevent jQuery from converting the data
+                contentType: false,  // prevent jQuery from overriding content type
+                success: function(response) {
+                    alert(response);
+                }
+            });
+            
+        }
+
+        /*
         function sendToServer(){
 
             
@@ -99,6 +131,7 @@
             
             
         }
+        */
         
 
         
