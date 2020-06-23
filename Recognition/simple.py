@@ -9,14 +9,34 @@ from flask import Response
 
 app = Flask(__name__)
 
+sample_rate = 0
 
 @app.route('/')
 def hello_world():
     return 'hello world!'
 
+@app.route('/samplerate', methods = ['POST'])
+
+def get_rate():
+
+    """
+    my_buffer = request.get_data() # get buffer
+
+
+    print "length of buffer is "+ str(len(my_buffer))
+    """
+    print ("sample rate:")
+    length = request.headers["Content-Length"]
+    buffer = request.get_data(length)  
+
+    global sample_rate
+    sample_rate = buffer.decode("utf-8")
+    
+    return "Sample rate received!"
+
+
 @app.route('/messages', methods = ['POST'])
 def api_message():
-
 
     """
     my_buffer = request.get_data() # get buffer
@@ -28,12 +48,16 @@ def api_message():
     length = request.headers["Content-Length"]
     buffer = request.get_data(length)  
 
+    #print (buffer)
+    
+
    
     my_array = np.frombuffer(buffer,dtype="float32") # convert buffer to numpy (error is here)
 
+    global sample_rate
+    print (sample_rate)
 
     # to csv
-    
     a = np.asarray(my_array)
     np.savetxt("blah.csv", a, delimiter=",")
 
