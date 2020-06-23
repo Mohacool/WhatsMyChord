@@ -2,22 +2,10 @@ from flask import Flask, render_template, request, jsonify
 
 import io
 
-import soundfile as sf
 import numpy as np
-import sounddevice as sd
-
-import matplotlib.pyplot as plt
-from scipy.io.wavfile import write
 
 import random
 from flask import Response
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-from matplotlib.figure import Figure
-
-import sys
-
-import wave
-import struct
 
 app = Flask(__name__)
 
@@ -30,16 +18,34 @@ def hello_world():
 def api_message():
 
 
-
+    """
     my_buffer = request.get_data() # get buffer
 
-    my_array = np.frombuffer(my_buffer,dtype="float32") # convert buffer to numpy (error is here)
 
-    print "length of buffer is "+ str(len(my_array))
+    print "length of buffer is "+ str(len(my_buffer))
+    """
 
-    import numpy
-    a = numpy.asarray(my_array)
-    numpy.savetxt("blah.csv", a, delimiter=",")
+    length = request.headers["Content-Length"]
+    buffer = request.get_data(length)  
+
+   
+    my_array = np.frombuffer(buffer,dtype="float32") # convert buffer to numpy (error is here)
+
+
+    # to csv
+    
+    a = np.asarray(my_array)
+    np.savetxt("blah.csv", a, delimiter=",")
+
+    #my_array = np.frombuffer(my_buffer,dtype="float32") # convert buffer to numpy (error is here)
+
+
+    
+    #print "length of my_array is "+ str(len(my_array))
+
+    
+    
+    
 
 
 
@@ -95,4 +101,4 @@ def add_headers(response):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
