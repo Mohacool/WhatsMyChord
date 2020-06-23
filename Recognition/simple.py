@@ -28,32 +28,49 @@ def hello_world():
 
 @app.route('/messages', methods = ['POST'])
 def api_message():
-    # Open file and write binary (blob) data
-    f = open('./file.wav', 'wb')
-    f.write(request.get_data())
-    f.close()
 
+
+
+    my_buffer = request.get_data() # get buffer
+
+    my_array = np.frombuffer(my_buffer,dtype="float32") # convert buffer to numpy (error is here)
+
+    print "length of buffer is "+ str(len(my_array))
+
+    import numpy
+    a = numpy.asarray(my_array)
+    numpy.savetxt("blah.csv", a, delimiter=",")
+
+
+
+    """
     length = request.headers["Content-Length"]
     Binaryfile = request.get_data(length)  
 
-    print "Binaryfile is type:"+ str(type(Binaryfile))
+    #print "Binaryfile is type:"+ str(type(Binaryfile)) #bytestring 
 
-    binary = io.BytesIO(Binaryfile)
+    binary = io.BytesIO(Binaryfile) #bytestring -> IO.BYTE
 
-    print "Binary is type:"+ str(type(binary))
+    
+
+    #print "Binary is type:"+ str(type(binary))
 
     
     data, samplerate = sf.read(io.BytesIO(Binaryfile),format='RAW',samplerate=44100,channels=2,subtype='FLOAT')
 
-    
-    print(data.shape)
 
-
-    """
     import numpy
     a = numpy.asarray(data)
     numpy.savetxt("blah.csv", a, delimiter=",")
+
+    
+    print(data.shape)
     """
+
+
+    
+    
+    
 
 
     """
