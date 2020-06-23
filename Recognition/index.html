@@ -77,9 +77,22 @@
             myBuffer.copyFromChannel(anotherArray, 0);
             //console.log("rate"+ myBuffer.sampleRate);
 
-            //var send = [anotherArray,myBuffer.sampleRate];
+            var send = [anotherArray,myBuffer.sampleRate];
 
-            // Send 
+            // Send the sample rate
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:5000/samplerate',
+                data: myBuffer.sampleRate,
+                cache: false,
+                processData: false,  // prevent jQuery from converting the data
+                contentType: false,  // prevent jQuery from overriding content type
+                success: function(response) {
+                    alert(response);
+                }
+            });
+
+            // Send the audio message
             $.ajax({
                 type: 'POST',
                 url: 'http://localhost:5000/messages',
@@ -91,6 +104,10 @@
                     alert(response);
                 }
             });
+
+            
+
+
             
         }
 
