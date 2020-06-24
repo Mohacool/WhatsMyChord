@@ -13,6 +13,9 @@
         <button id="record">Record</button>
         <button id="stoprec">Stop</button>
         <div id="ok"></div>
+        <div id="plot" style="height:50px">
+            <img src="/mainFreqs.png">
+        </div>
 
     </div>
     <script>
@@ -102,6 +105,7 @@
                 contentType: false,  // prevent jQuery from overriding content type
                 success: function(response) {
                     alert(response);
+                    // get response
                 }
             });
 
@@ -123,7 +127,7 @@
             $.ajax({
                 data : {audio : signalArr, sampleRate : sampleRate},
                 type : 'POST',
-                url: 'http://localhost:5000/messages2'
+                url: 'http://35.229.35.35/messages2'
             })
 
 
