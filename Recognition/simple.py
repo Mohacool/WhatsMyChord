@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, jsonify
+from PlotSignal import plotSignal
+from Identify import Identify
 
 import io
 
@@ -48,8 +50,7 @@ def api_message():
     length = request.headers["Content-Length"]
     buffer = request.get_data(length)  
 
-    #print (buffer)
-    
+    #print (buffer) 
 
    
     my_array = np.frombuffer(buffer,dtype="float32") # convert buffer to numpy (error is here)
@@ -62,16 +63,8 @@ def api_message():
     np.savetxt("blah.csv", a, delimiter=",")
 
     #my_array = np.frombuffer(my_buffer,dtype="float32") # convert buffer to numpy (error is here)
-
-
     
     #print "length of my_array is "+ str(len(my_array))
-
-    
-    
-    
-
-
 
     return "Binary message written!"
 
@@ -82,13 +75,15 @@ def api_message():
 def api_message2():
 
     signal = request.form.getlist('audio[]')
-    sampleRate = request.form['sampleRate']
+    sampleRate = float(request.form['sampleRate'])
     if signal:
         signalArray = np.array(signal).astype(float)
         print("Success!")
         print(signalArray.shape)
         print(sampleRate)
-
+        
+        plotSignal(signalArray, sampleRate)
+        Identify(signalArray, sampleRate, drawPlots=True)
 
         return jsonify({'audio' : signal})
 
