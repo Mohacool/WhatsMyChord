@@ -110,37 +110,40 @@
 
             
         }
+        ////////////////////////////////////////////////////////////////////////////////
+        // CODE THAT SENDS SINGLE AJAX REQUEST
 
-        /*
-        function sendToServer(){
+        function sendBuffer2(){
 
-            
-            var form = new FormData();
+            signal = new Float32Array(myBuffer.length);
+            myBuffer.copyFromChannel(signal, 0, 0);
+            signalArr = Array.from(signal)
+            sampleRate = myBuffer.sampleRate
 
-            var fileType="audio_data";
-            var fileName = "filename.wav";
-            var blob = recordings[0]; // use the first recording blob
-            
-            form.append(fileType, blob, fileName); 
-            
-
-            // Send 
             $.ajax({
-                type: 'POST',
-                url: 'http://localhost:5000/messages',
-                data: form,
-                cache: false,
-                processData: false,  // prevent jQuery from converting the data
-                contentType: false,  // prevent jQuery from overriding content type
-                success: function(response) {
-                    alert(response);
+                data : {audio : signalArr, sampleRate : sampleRate},
+                type : 'POST',
+                url: 'http://localhost:5000/messages2'
+            })
+
+
+            
+            .done(function(data){
+                if (data.error){
+                    console.log("error")
                 }
-            });
-            
-            
+                else{
+                    console.log("success")
+                }
+            })
+
+
+
+
+
         }
-        */
-        
+        ////////////////////////////////////////////////////////////////////////////////
+    
 
         
 

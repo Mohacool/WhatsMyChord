@@ -73,48 +73,27 @@ def api_message():
 
 
 
-    """
-    length = request.headers["Content-Length"]
-    Binaryfile = request.get_data(length)  
-
-    #print "Binaryfile is type:"+ str(type(Binaryfile)) #bytestring 
-
-    binary = io.BytesIO(Binaryfile) #bytestring -> IO.BYTE
-
-    
-
-    #print "Binary is type:"+ str(type(binary))
-
-    
-    data, samplerate = sf.read(io.BytesIO(Binaryfile),format='RAW',samplerate=44100,channels=2,subtype='FLOAT')
-
-
-    import numpy
-    a = numpy.asarray(data)
-    numpy.savetxt("blah.csv", a, delimiter=",")
-
-    
-    print(data.shape)
-    """
-
-
-    
-    
-    
-
-
-    """
-    import numpy as np
-    from scipy.io.wavfile import write
-
-    data = np.random.uniform(-1,1,44100) # 44100 random samples between -1 and 1
-    scaled = np.int16(data/np.max(np.abs(data)) * 32767)
-    write('test.wav', 44100, scaled)
-    """
-
     return "Binary message written!"
 
 
+################################################################################
+# CODE WITH SINGLE AJAX REQUEST
+@app.route('/messages2', methods = ['POST'])
+def api_message2():
+
+    signal = request.form.getlist('audio[]')
+    sampleRate = request.form['sampleRate']
+    if signal:
+        signalArray = np.array(signal).astype(float)
+        print("Success!")
+        print(signalArray.shape)
+        print(sampleRate)
+
+
+        return jsonify({'audio' : signal})
+
+    return jsonify({'error' : 'no data'})
+################################################################################
 
 @app.after_request
 def add_headers(response):
