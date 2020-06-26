@@ -80,11 +80,9 @@ def api_message2():
         signalArray = np.array(signal).astype(float)
         print("Success!")
         print(signalArray.shape)
-        print(sampleRate)
-        
+
         plotSignal(signalArray, sampleRate)
         Identify(signalArray, sampleRate, drawPlots=True)
-
         return jsonify({'audio' : signal})
 
     return jsonify({'error' : 'no data'})

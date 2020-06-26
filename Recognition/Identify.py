@@ -38,7 +38,7 @@ def freqToNote(freq):
     return note
 
 
-def Identify(signal, sampFreq, thresh=3, drawPlots=False):
+def Identify(qwe, sampFreq, thresh=3, drawPlots=False):
     '''
     Identifies the chord in the file with name fileName using Fourier analysis.
     
@@ -46,9 +46,9 @@ def Identify(signal, sampFreq, thresh=3, drawPlots=False):
     '''
     
     # Find the amplitude of each frequency using fast fourier transform
-    fft_spectrum = np.fft.rfft(signal)
+    fft_spectrum = np.fft.rfft(qwe)
     amp = np.abs(fft_spectrum)
-    freq = np.fft.rfftfreq(signal.size, d=1./sampFreq)
+    freq = np.fft.rfftfreq(qwe.size, d=1./sampFreq)
     
     threshold = np.max(amp)/thresh
     

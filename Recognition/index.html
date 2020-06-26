@@ -13,8 +13,10 @@
         <button id="record">Record</button>
         <button id="stoprec">Stop</button>
         <div id="ok"></div>
-        <div id="plot" style="height:50px">
+        <div id="plot" style="height:1px">
             <img src="/mainFreqs.png">
+        <div id="plot" style="height:1px">
+            <img src="/audio.png">
         </div>
 
     </div>
@@ -39,7 +41,7 @@
                     blob = new Blob(chuck, {'type': 'audio/wav;'})
 
                     recordings.push(blob); // Add blob to list of recordings 
-
+                    chuck = [];
                   
 
                     // NEW CODE STARTS HERE
@@ -127,7 +129,7 @@
             $.ajax({
                 data : {audio : signalArr, sampleRate : sampleRate},
                 type : 'POST',
-                url: 'http://35.229.35.35/messages2'
+                url: 'http://localhost:5000/messages2'
             })
 
 
