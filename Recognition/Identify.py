@@ -55,12 +55,15 @@ def Identify(signal, sampFreq, thresh=3, drawPlots=False):
     # Plot the frequencies   
     if drawPlots:
         f1 = plt.figure()
-        plt.plot(freq[:3500], amp[:3500])
+        plt.plot(freq[:4500], amp[:4500])
         plt.xlabel("Frequency (Hz)")
         plt.ylabel("Amplitude")
         plt.title("Frequency spectrum")
-        plt.plot(np.arange(1000), np.ones(1000)*threshold, label="threshold")
+        plt.plot(np.arange(1200), np.ones(1200)*threshold, label="threshold")
         plt.legend(loc="upper right")
+        plt.xlim([0,1000])
+        for i, note in enumerate(freqToNote(freq[np.argwhere(amp>threshold/2)][:, 0][:])):
+            plt.annotate(note, (freq[np.argwhere(amp>threshold/2)][:, 0][i], amp[np.argwhere(amp>threshold/2)][:, 0][i]))
         plt.savefig('freqSpectrum.png')
     
     
@@ -75,10 +78,11 @@ def Identify(signal, sampFreq, thresh=3, drawPlots=False):
     # Plot the frequencies    
     if drawPlots:
         f2 = plt.figure()
-        plt.plot(freq[:3500], main_amp[:3500])
+        plt.plot(freq[:4500], main_amp[:4500])
         plt.xlabel("Frequency (Hz)")
         plt.ylabel("Amplitude")
         plt.title("Main frequencies in spectrum")
+        plt.xlim([0,1000])
         for i, note in enumerate(all_chord_notes):
             plt.annotate(note, (main_freqs[i], main_amp[np.argwhere(amp>threshold)][:, 0][i]))
         plt.savefig('mainFreqs.png')
