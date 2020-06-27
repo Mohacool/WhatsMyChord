@@ -38,7 +38,7 @@ def freqToNote(freq):
     return note
 
 
-def Identify(qwe, sampFreq, thresh=3, drawPlots=False):
+def Identify(signal, sampFreq, thresh=3, drawPlots=False):
     '''
     Identifies the chord in the file with name fileName using Fourier analysis.
     
@@ -46,9 +46,9 @@ def Identify(qwe, sampFreq, thresh=3, drawPlots=False):
     '''
     
     # Find the amplitude of each frequency using fast fourier transform
-    fft_spectrum = np.fft.rfft(qwe)
+    fft_spectrum = np.fft.rfft(signal)
     amp = np.abs(fft_spectrum)
-    freq = np.fft.rfftfreq(qwe.size, d=1./sampFreq)
+    freq = np.fft.rfftfreq(signal.size, d=1./sampFreq)
     
     threshold = np.max(amp)/thresh
     
@@ -68,20 +68,20 @@ def Identify(qwe, sampFreq, thresh=3, drawPlots=False):
     main_amp = np.where(amp>threshold, amp, 0)  # similar to amp, but amplitudes of all frequencies that are below the threshold are set to zero
     main_freqs = freq[np.argwhere(amp>threshold)][:, 0]
 
-    
+    all_chord_notes = freqToNote(main_freqs[:])
+    chord_notes = set(all_chord_notes)
     
     #mainAmp is for plotting purposes only, we really only care about the argwhere
     # Plot the frequencies    
     if drawPlots:
-        f1 = plt.figure()
+        f2 = plt.figure()
         plt.plot(freq[:3500], main_amp[:3500])
         plt.xlabel("Frequency (Hz)")
         plt.ylabel("Amplitude")
         plt.title("Main frequencies in spectrum")
+        for i, note in enumerate(all_chord_notes):
+            plt.annotate(note, (main_freqs[i], main_amp[np.argwhere(amp>threshold)][:, 0][i]))
         plt.savefig('mainFreqs.png')
-    
-    all_chord_notes = freqToNote(main_freqs[:])
-    chord_notes = set(all_chord_notes)
     
     
     return chord_notes

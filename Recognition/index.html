@@ -129,7 +129,9 @@
             $.ajax({
                 data : {audio : signalArr, sampleRate : sampleRate},
                 type : 'POST',
-                url: 'http://localhost:5000/messages2'
+                url: 'http://localhost:5000/messages2',
+                dataType: "json",
+                
             })
 
 
@@ -140,6 +142,9 @@
                 }
                 else{
                     console.log("success")
+                    $('notes').text(data.notes).show();
+                    alert("success")
+                    alert(data.notes)
                 }
             })
 

@@ -82,8 +82,9 @@ def api_message2():
         print(signalArray.shape)
 
         plotSignal(signalArray, sampleRate)
-        Identify(signalArray, sampleRate, drawPlots=True)
-        return jsonify({'audio' : signal})
+        notes = list(Identify(signalArray, sampleRate, drawPlots=True))
+
+        return jsonify({'notes' : notes})
 
     return jsonify({'error' : 'no data'})
 ################################################################################
