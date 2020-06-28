@@ -373,6 +373,22 @@
            
         }
         
+        function nameChord(notes){
+            
+            // TO IMRPOVE have a chordified JSON saved already and use instead
+
+            $.getJSON("/data.json", function(data){
+                for (var chord in data){
+                    console.log(chord);
+                    data[chord].forEach(function (item) {
+                        console.log(item);
+                    })
+                }
+
+                
+            })
+
+        }
 
 
         // ----------------------------- MAIN -----------------------------
@@ -380,6 +396,6 @@
         
 
     </script>
-    
+   
   </body>
 </html>
