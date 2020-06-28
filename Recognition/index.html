@@ -4,6 +4,8 @@
       <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
       <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js"></script>
+      <script src="https://pagecdn.io/lib/mathjs/7.0.1/math.min.js" crossorigin="anonymous"  ></script>
       
   </head>
   <body>
@@ -14,11 +16,9 @@
         <button id="stoprec">Stop</button>
         <div id="ok"></div>
         <div id="plot" style="height:1px">
-            <img src="/freqSpectrum.png">
+            <img src="/mainFreqs.png">
         <div id="plot" style="height:1px">
             <img src="/audio.png">
-        <div id="plot" style="height:1px">
-            <img src="/mainFreqs.png">
         </div>
 
     </div>
@@ -27,6 +27,8 @@
         // ------------------- RECORDING ------------------
         var recordings = [];
         var myBuffer;
+
+        var signal;
         
         record.onclick = () =>{
             navigator.mediaDevices.getUserMedia({audio:true})
@@ -56,6 +58,12 @@
                         audioContext.decodeAudioData(arrayBuffer, (audioBuffer) => {
                             console.log(audioBuffer)  //just displays the audioBuffer on the console
                             myBuffer = audioBuffer;
+                            signal = new Float32Array(myBuffer.length);
+                            myBuffer.copyFromChannel(signal, 0, 0);
+                            signalArr = Array.from(signal);
+                            signal = signalArr;
+                            sampleRate = myBuffer.sampleRate;
+                            
                         })
                     }
 
@@ -72,6 +80,7 @@
 
         stoprec.onclick = () =>{
             mediaRecorder.stop()
+
         }
 
         // ------------------- RECORDING END ------------------
@@ -121,11 +130,14 @@
         ////////////////////////////////////////////////////////////////////////////////
         // CODE THAT SENDS SINGLE AJAX REQUEST
 
+        
+        
         function sendBuffer2(){
 
             signal = new Float32Array(myBuffer.length);
             myBuffer.copyFromChannel(signal, 0, 0);
             signalArr = Array.from(signal)
+            signal = signalArr;
             sampleRate = myBuffer.sampleRate
 
             $.ajax({
@@ -156,8 +168,215 @@
 
         }
         ////////////////////////////////////////////////////////////////////////////////
-    
+        
+        var noteNames = [];
+        var noteFreqs = [];
 
+        
+        $(document).ready(function() {
+            
+            var all;
+            
+
+            $.ajax({
+                    type: "GET",
+                    url: "note_frequency_table.csv",
+                    dataType: "text",
+                    async: false,
+                    success: function(data) {
+                    all = data;
+                    
+                 }
+
+
+
+            });
+
+
+            var split = all.split(',');
+            split = split.slice(2,);
+
+            
+            for (i=0;i<120;i++){
+                split[i] = split[i].split(/(?:\r\n|\r|\n)/g);
+                noteFreqs.push(split[i][0]);
+                noteNames.push(split[i][1]);
+                
+            }
+
+
+
+            noteNames = noteNames;
+            noteFreqs = noteFreqs;
+            //console.log(noteNames);
+            //console.log(noteFreqs);
+
+            
+
+        });
+
+
+        function freqToNote(freq){
+            
+            var final_notes = [];
+            for (x=0;x<freq.length;x++){
+                
+
+                curr_freq = freq[x];
+                
+
+                var ratio = 1.0594634189848198;
+                var firstNote = 16.351;
+                var i = Math.log(curr_freq/firstNote)/Math.log(ratio);
+
+
+                var low = Math.abs(curr_freq-noteFreqs[Math.floor(i)]);
+                var high = Math.abs(curr_freq-noteFreqs[Math.floor(i)+1])
+
+                var freqDifferences = [low,high];
+                
+                //console.log("low-high"+low+"-> "+high);
+
+                var possible_notes = [noteNames[Math.floor(i)-1],noteNames[[Math.floor(i)]]];
+
+                //console.log("dif+"+ freqDifferences);
+
+
+                //console.log(possible_notes);
+
+                var min_index = freqDifferences.indexOf(Math.min(...freqDifferences));
+
+                //console.log(possible_notes[min_index]);
+
+                final_notes.push(possible_notes[min_index]);
+            
+            }
+            return final_notes
+
+        }
+
+        function spectrum_to_amp(spectrum){
+            var b = []
+            console.log(spectrum.length);
+            for (i=0;i<spectrum.length;i++){
+                var real = spectrum[i];
+                var complex = spectrum[i+1]
+                
+                var abs_value = math.abs(math.complex(real,complex));
+
+                b.push(abs_value);
+                i+=1;
+            }
+            return b;
+        }
+
+        /*
+
+        Give: lst  
+
+        Return: [ lst where all elements smaller than value2 (threshold) are set to 0
+                ,
+                the indices where this is true ] 
+
+        */
+        function whereBigger(lst,value2){
+            
+            var indices = [];
+
+            for (i=0;i<lst.length;i++){
+                if (lst[i]<=value2){
+                    lst[i] = 0;
+                }
+                else{
+                    indices.push(i)
+                }
+            }
+
+
+            return [lst,indices];
+            
+            
+        }
+
+        function Identify(signal, sampFreq=48000, thresh=3){
+
+
+            var signal_nj = nj.array(signal).reshape(signal.length,1);
+            var complex = nj.zeros([signal.length,1]);
+
+            //console.log(signal_nj.shape,complex.shape);
+
+            var pre_fft = nj.concatenate(signal_nj,complex);
+
+            
+
+            var fft_spectrum = nj.fft(pre_fft).selection.data;
+
+            //console.log('fft_spectrum'+fft_spectrum);
+
+            var amp = spectrum_to_amp(fft_spectrum);
+            //console.log(amp);
+
+            var signal_size = amp.length;
+            var d = 1/48000;
+
+            var spacing = (1/signal_size)*(1/d);
+
+            var length = (signal_size/2)+1;
+
+            var freq = nj.arange(0,length*spacing,spacing).selection.data.slice(0,length);
+
+            //console.log("freq===="+freq);
+
+            var threshold = math.max(amp)/thresh;
+
+            //console.log("Threshold is"+threshold);
+
+
+
+
+            var whereBigger_lst = whereBigger(amp,threshold);
+
+            //console.log("where bigger is length "+whereBigger_lst[0].length);
+
+
+            // The main amplitudes and their corresponding indices
+            var main_amp = whereBigger_lst[0];
+            var argwhere_main_amp = whereBigger_lst[1];
+            
+
+
+            // Create the main frequencies
+            var main_freqs = [];
+            for (i=0;i<argwhere_main_amp.length;i++){
+
+                var index = argwhere_main_amp[i];
+
+                // Filter out notes freqs that dont exist 
+                if (i< argwhere_main_amp.length/2){
+                    main_freqs.push(freq[index]);
+                }
+                
+            }
+
+            //console.log("main freqs==="+main_freqs);
+
+            
+            var all_chord_notes = freqToNote(main_freqs);
+
+            var chord_notes = new Set(all_chord_notes);
+
+            
+            
+
+            return chord_notes;
+           
+        }
+        
+
+
+        // ----------------------------- MAIN -----------------------------
+        
         
 
     </script>
