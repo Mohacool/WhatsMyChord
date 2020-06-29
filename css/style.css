@@ -151,9 +151,11 @@ html,body{
 }
 
 .random{
+    
     visibility:visible;
     position:absolute;
-    height:30px;
+    height:18px;
+   
     top:-13px;
     left:9px;
     
@@ -174,6 +176,7 @@ html,body{
     height:30px;
     top:0px;
     left:10px;
+    width:50px;
     
     color: var(--white);
     font: 14px 'Gotham';
@@ -234,7 +237,6 @@ html,body{
 }
 
 .chords{
-    border: 0px solid #fdf7e9;
     
 
     /*
@@ -256,9 +258,6 @@ html,body{
     color: var(--gray-hover);
     opacity:0.7;
     
-
-
-    -webkit-transition: -webkit-transform 2s ease-in-out;
 }
 
 .chords:hover{
@@ -327,6 +326,7 @@ html,body{
 
 
 .chord_diagram{
+
     display: inline-block;
     opacity:0.7;
 
@@ -796,7 +796,6 @@ b{
 
 
 .play-button{
-    
     position:relative;
     left:740px;
     top:110px;
@@ -819,7 +818,8 @@ b{
 	background-color: var(--white);
 	font-size:13px;
 	font-weight:bold;
-	transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    
 }
 
 
@@ -1223,6 +1223,8 @@ and (orientation : portrait) {
        
        .play-button{
         border: 1px solid transparent;
+        
+        z-index:-100;
         width: 50%;
         position:relative;
         left:125%;
@@ -1276,6 +1278,7 @@ and (orientation : portrait) {
            color:white;
        }
        #chord_name_container{
+        z-index:100;
         
         display: flex;
         
