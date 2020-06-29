@@ -2,7 +2,7 @@
 
 Input chords into the guitar fretboard. The website will identify the chord name and display different ways of playing it up and down the fretboard
 
-Random: Display a random chord
+Random: Displays a random chord from the database
 
 The chord detection algorithm currently detects 2000+ chords
 
