@@ -34,6 +34,8 @@ menu, nav, output, section, time {
     color: white;
     
     text-align: right;
+
+    
 }
 
 
@@ -939,7 +941,10 @@ and (max-device-width : 800px) {
         position:sticky;
         color:white;
         top:100%;
-        border:1px solid red;
+
+        text-align:left;
+        padding-left:5px;
+        
     }
     
     .nudge{
