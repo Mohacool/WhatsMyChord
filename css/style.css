@@ -1252,7 +1252,7 @@ and (orientation : portrait) {
         .footer{
             position:sticky;
             top:100%;
-            border:1px solid red;
+            
         }
         
         .new{
