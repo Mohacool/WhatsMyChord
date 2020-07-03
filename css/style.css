@@ -17,6 +17,43 @@ menu, nav, output, section, time {
     
 }
 
+.copyright{
+    font: 11px 'Arial';
+    opacity:100%;
+    cursor:pointer;
+
+}
+.footer {
+    position: fixed;
+    
+    bottom: 6px;
+    height:20px;
+    
+    width: 98%;
+    
+    color: white;
+    
+    text-align: right;
+}
+
+
+.beta{
+    cursor:pointer;
+    
+    white-space:nowrap;
+    color: var(--white);
+    font: 18px 'Gotham';
+    
+    float:right;
+    padding-right:15px;
+    font-style: italic;
+}
+
+.beta:hover{
+    color:gray;
+
+}
+
 footer{
     position:fixed;
     
@@ -54,13 +91,16 @@ div.headerElements {
 }
 
 .page_title{
+    
     cursor:pointer;
     margin: auto 0;
-    display: inline-block;
+    
     vertical-align: middle;
+    display:inline-block;
     
     padding:10px;
     line-height: 30px;
+    
 
   
     
@@ -894,6 +934,13 @@ b{
 @media only screen 
 and (min-device-width : 320px) 
 and (max-device-width : 800px) {
+
+    .footer{
+        position:sticky;
+        color:white;
+        top:100%;
+        border:1px solid red;
+    }
     
     .nudge{
         visibility:hidden;
@@ -1197,7 +1244,11 @@ and (orientation : portrait) {
 
   @media only screen and (max-width:800px){
 
-
+        .footer{
+            position:sticky;
+            top:100%;
+            border:1px solid red;
+        }
         
         .new{
             transform:rotate(-90deg);
