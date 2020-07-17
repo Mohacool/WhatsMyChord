@@ -17,6 +17,45 @@ menu, nav, output, section, time {
     
 }
 
+.copyright{
+    font: 11px 'Arial';
+    opacity:100%;
+    cursor:pointer;
+
+}
+.footer {
+    position: fixed;
+    
+    bottom: 6px;
+    height:20px;
+    
+    width: 98%;
+    
+    color: white;
+    
+    text-align: right;
+
+    
+}
+
+
+.beta{
+    cursor:pointer;
+    
+    white-space:nowrap;
+    color: var(--white);
+    font: 18px 'Gotham';
+    
+    float:right;
+    padding-right:15px;
+    font-style: italic;
+}
+
+.beta:hover{
+    color:gray;
+
+}
+
 footer{
     position:fixed;
     
@@ -54,13 +93,16 @@ div.headerElements {
 }
 
 .page_title{
+    
     cursor:pointer;
     margin: auto 0;
-    display: inline-block;
+    
     vertical-align: middle;
+    display:inline-block;
     
     padding:10px;
     line-height: 30px;
+    
 
   
     
@@ -151,9 +193,11 @@ html,body{
 }
 
 .random{
+    
     visibility:visible;
     position:absolute;
-    height:30px;
+    height:18px;
+   
     top:-13px;
     left:9px;
     
@@ -174,6 +218,7 @@ html,body{
     height:30px;
     top:0px;
     left:10px;
+    width:50px;
     
     color: var(--white);
     font: 14px 'Gotham';
@@ -234,7 +279,6 @@ html,body{
 }
 
 .chords{
-    border: 0px solid #fdf7e9;
     
 
     /*
@@ -256,9 +300,6 @@ html,body{
     color: var(--gray-hover);
     opacity:0.7;
     
-
-
-    -webkit-transition: -webkit-transform 2s ease-in-out;
 }
 
 .chords:hover{
@@ -327,6 +368,7 @@ html,body{
 
 
 .chord_diagram{
+
     display: inline-block;
     opacity:0.7;
 
@@ -796,7 +838,6 @@ b{
 
 
 .play-button{
-    
     position:relative;
     left:740px;
     top:110px;
@@ -819,7 +860,8 @@ b{
 	background-color: var(--white);
 	font-size:13px;
 	font-weight:bold;
-	transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    
 }
 
 
@@ -894,6 +936,16 @@ b{
 @media only screen 
 and (min-device-width : 320px) 
 and (max-device-width : 800px) {
+
+    .footer{
+        position:sticky;
+        color:white;
+        top:100%;
+
+        text-align:left;
+        padding-left:5px;
+        
+    }
     
     .nudge{
         visibility:hidden;
@@ -1197,7 +1249,11 @@ and (orientation : portrait) {
 
   @media only screen and (max-width:800px){
 
-
+        .footer{
+            position:sticky;
+            top:100%;
+            
+        }
         
         .new{
             transform:rotate(-90deg);
@@ -1223,6 +1279,8 @@ and (orientation : portrait) {
        
        .play-button{
         border: 1px solid transparent;
+        
+        z-index:-100;
         width: 50%;
         position:relative;
         left:125%;
@@ -1276,6 +1334,7 @@ and (orientation : portrait) {
            color:white;
        }
        #chord_name_container{
+        z-index:100;
         
         display: flex;
         

@@ -152,6 +152,10 @@
         function byep(){
             document.location="bindex.html";
         }
+
+        function github(){
+            window.location.href = 'https://github.com/Mohacool';
+        }
         /* Take in a chord such as ["0","3","2","1","-1","-1"] -> ["E","C",'G','E']
 
             Also remove muted strings 
@@ -2242,9 +2246,9 @@
     <body onkeydown='getKeyAndMove(event)'>
   
         <!-- <div class="bg"></div> !-->
-        <div id="header">
+        <div id="header" class="show">
             <span class="page_title" onclick="byep()">[ ] WHATS MY CHORD</span> 
-            
+            <!-- <span class="beta">Audio Input (BETA) </span> -->
             <!-- <div id="headerElements">[ ] WHATS MY CHORD</div> -->
             <!--
             <div class="logo_container">
@@ -2579,9 +2583,9 @@
         </div>
 
     
-        <footer>
-            
-        </footer>
+        <div class="footer">
+            <p onclick="github()" class="copyright">&copy; Mohamed Salama</p>
+        </div>
     </body>
 
 
