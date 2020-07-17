@@ -896,6 +896,7 @@ b{
     left:45%;
     position: absolute;
     margin: 40px auto;
+    visibility:hidden;
   }
   
   .double-bounce1, .double-bounce2 {

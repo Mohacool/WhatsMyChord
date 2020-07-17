@@ -634,7 +634,7 @@
             $(".input_msg").hide();
 
             // Show the spinner
-            $(".spinner").css({"visibility":"visible"});
+            //$(".spinner").css({"visibility":"visible"});
         }
 
         // Set the notes back to open 
@@ -1416,6 +1416,13 @@
             src5.src  = notePaths[5];
             snd5.appendChild(src5);
 
+            // Reduce volume
+            snd0.volume=0.4;
+            snd1.volume=0.4;
+            snd2.volume=0.4;
+            snd3.volume=0.4;
+            snd4.volume=0.4;
+            snd5.volume=0.4;
 
             function start1() { snd1.play();}
             function start2() {snd2.play();}
