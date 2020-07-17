@@ -16,7 +16,9 @@ def freqToNote(freq):
 
     Function is vectorized, so it can be provided an array of frequencies at once
     '''
-    
+
+    #print noteTable
+    #print ("frequency is "+str(freq))
     # mean ratio between consecutive notes (technically all are equal, but we only have up to 3 decimals in table so ratios aren't exact)
     ratio = 1.0594634189848198
     
@@ -32,6 +34,7 @@ def freqToNote(freq):
 
     indices = (np.arange(freqDifference.shape[1]), np.argmin(freqDifference, axis=0))    
 
+    #print(indices)
 
     note = possibleNotes[indices]
         
@@ -44,13 +47,33 @@ def Identify(signal, sampFreq, thresh=3, drawPlots=False):
     
     Returns the list of notes in the chord
     '''
+
+    print ("signal====="+ str(signal))
+
+    print ("signal[3000]=============="+ str(signal[3000]))
+
     
     # Find the amplitude of each frequency using fast fourier transform
     fft_spectrum = np.fft.rfft(signal)
+    print ("fft=============="+ str(fft_spectrum))
+
+    print ("fft[3000]=============="+ str(fft_spectrum[3000]))
+
+
     amp = np.abs(fft_spectrum)
+
+    print ("amp[3000]=============="+ str(amp[3000]))
+
+
     freq = np.fft.rfftfreq(signal.size, d=1./sampFreq)
+
+    print("freq======="+ str(freq))
+    print("freq[3000]======="+ str(freq[3000]))
+
     
     threshold = np.max(amp)/thresh
+
+    print ("threshold is "+ str(threshold))
     
     # Plot the frequencies   
     if drawPlots:
@@ -66,10 +89,21 @@ def Identify(signal, sampFreq, thresh=3, drawPlots=False):
     
     # amplitudes that are above the threshold
     main_amp = np.where(amp>threshold, amp, 0)  # similar to amp, but amplitudes of all frequencies that are below the threshold are set to zero
+
+    print ("argwhere[1] "+ str(np.argwhere(amp>threshold)))
     main_freqs = freq[np.argwhere(amp>threshold)][:, 0]
 
+    print("main_freqs =======" + str(main_freqs))
+
+    print ("main amp[310]====" +str(main_amp[310]))
+
+    #print ("pass  "+str(type(main_freqs[:])))
     all_chord_notes = freqToNote(main_freqs[:])
+
+    print ("all chord notes=====" + str(all_chord_notes))
     chord_notes = set(all_chord_notes)
+
+    
     
     #mainAmp is for plotting purposes only, we really only care about the argwhere
     # Plot the frequencies    

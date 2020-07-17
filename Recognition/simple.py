@@ -78,11 +78,12 @@ def api_message2():
     sampleRate = float(request.form['sampleRate'])
     if signal:
         signalArray = np.array(signal).astype(float)
+        #print ("signal array"+ str(len(signalArray)))
         print("Success!")
         print(signalArray.shape)
 
-        plotSignal(signalArray, sampleRate)
-        notes = list(Identify(signalArray, sampleRate, drawPlots=True))
+        #plotSignal(signalArray, sampleRate)
+        notes = list(Identify(signalArray, sampleRate, drawPlots=False))
 
         return jsonify({'notes' : notes})
 
