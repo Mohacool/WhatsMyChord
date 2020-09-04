@@ -1,5 +1,7 @@
 # WhatsMyChord.com | Guitar Chord Finder
 
+www.whatsmychord.com
+
 Input chords into the guitar fretboard. The website will identify the chord name and display different ways of playing it up and down the fretboard
 
 Random: Displays a random chord from the database
