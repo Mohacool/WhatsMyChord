@@ -2104,7 +2104,7 @@
             function myFunction() { 
                 if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ) 
                 {
-                    alert('Opera');
+                    // alert('Opera');
                 }
                 else if(navigator.userAgent.indexOf("Chrome") != -1 )
                 {
@@ -2112,14 +2112,19 @@
                 }
                 else if(navigator.userAgent.indexOf("Safari") != -1)
                 {
-                    alert('Safari');
+                    // alert('Safari');
                     $(".note_circle").css({"top":"-632px"});
-                    $(".open").css({"top":"-445px"});
-                    $(".text_circle").css({"margin-top":"-7px"});
+                    $(".open").css({"top":"-435px"});
+                    if (window.matchMedia("(orientation: landscape)").matches) {
+                        // alert('ladnscape ');
+                        $(".open").css({"top":"-430px"});
+
+                    }
+                    $(".text_circle").css({"margin-top":"-10px"});
                 }
                 else if(navigator.userAgent.indexOf("Firefox") != -1 ) 
                 {
-                    alert('Firefox');
+                    // alert('Firefox');
                     
                     //$("#nodegrid").css({"top":"5px"});
                     /*
@@ -2132,7 +2137,7 @@
                 }
                 else if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )) //IF IE > 10
                 {
-                alert('IE'); 
+                // alert('IE'); 
                 }  
                 else 
                 {

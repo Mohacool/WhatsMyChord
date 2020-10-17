@@ -1434,7 +1434,10 @@ and (orientation : portrait) {
     }
 
        
-       
+    .jumbotron {
+        background-image: url("img1.jpg");
+        background-size: cover;
+      }
         
 
     
