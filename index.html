@@ -681,7 +681,7 @@
                     let name = ".chords.chord"+i;
                     console.log("clearing",name);
                     
-//                     $(name).text("");
+                    $(name).text("");
                     
                 }
                 
@@ -1518,8 +1518,13 @@
             // Hide the chord names 
             if (refresh){
                 for (var i = 0;i<6;i++){
+			console.log('here');
+		    console.log(name);
+		    let name = ".chords.chord"+i;
+		    console.log(name);
+		    
                     $(".chords.chord"+i).text("");
-                    $(name).text("");
+//                     $(name).text("");
             	}
             }
             
