@@ -639,11 +639,13 @@
 
         // Set the notes back to open 
         function reset(refresh=true){
+		console.log('reset starting');
 
             
             console.log("RESET now with refresh=",refresh);
 
             if (refresh==true){
+		console.log('refresh_true');
                 // Reset all notes
                 clicky(91,false,true);
                 clicky(92,false,true);
@@ -654,6 +656,7 @@
                 
             }
             else{
+		console.log('refresh_false');
                 clicky(91,false,true,false);
                 clicky(92,false,true,false);
                 clicky(93,false,true,false);
@@ -674,10 +677,11 @@
                 //jil
                  // Hide chord names
                 for (var i = 0;i < 6; i++){
+		    console.log(".chords.chord"+i);
                     let name = ".chords.chord"+i;
                     console.log("clearing",name);
                     
-                    $(name).text("");
+//                     $(name).text("");
                     
                 }
                 
@@ -1516,7 +1520,7 @@
                 for (var i = 0;i<6;i++){
                     $(".chords.chord"+i).text("");
                     $(name).text("");
-            }
+            	}
             }
             
 
